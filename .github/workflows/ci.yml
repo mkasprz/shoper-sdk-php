@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.0', '8.1', '8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Install deps
+        run: composer install --prefer-dist --no-progress
+      - name: Validate composer.json
+        run: composer validate --strict
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse --no-progress
+      - name: PHPUnit unit suite
+        run: vendor/bin/phpunit --testsuite=unit
+
+  smoke:
+    runs-on: ubuntu-latest
+    services:
+      prism:
+        image: stoplight/prism:latest
+        ports: [4010:4010]
+        options: --health-cmd "curl -f http://localhost:4010/ 2>/dev/null; exit 0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - run: composer install --prefer-dist --no-progress
+      # Prism needs a spec. We fetch from shoper-openapi release assets later.
+      # For PR CI in this repo, smoke is best-effort (depends on external spec).
+      - name: Smoke test suite (informational)
+        run: vendor/bin/phpunit --testsuite=smoke || echo "Smoke test suite requires prism spec input; this PR only tests local changes."

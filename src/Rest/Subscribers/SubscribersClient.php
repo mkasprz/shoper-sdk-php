@@ -1,0 +1,304 @@
+<?php
+
+namespace Shoper\Sdk\Rest\Subscribers;
+
+use Psr\Http\Client\ClientInterface;
+use Shoper\Sdk\Rest\Core\Client\RawClient;
+use Shoper\Sdk\Rest\Subscribers\Requests\ListSubscribersRequest;
+use Shoper\Sdk\Rest\Subscribers\Types\ListSubscribersResponse;
+use Shoper\Sdk\Rest\Exceptions\ShoperException;
+use Shoper\Sdk\Rest\Exceptions\ShoperApiException;
+use Shoper\Sdk\Rest\Core\Json\JsonApiRequest;
+use Shoper\Sdk\Rest\Environments;
+use Shoper\Sdk\Rest\Core\Client\HttpMethod;
+use JsonException;
+use Psr\Http\Client\ClientExceptionInterface;
+use Shoper\Sdk\Rest\Subscribers\Requests\SubscriberInsert;
+use Shoper\Sdk\Rest\Types\Subscriber;
+use Shoper\Sdk\Rest\Core\Json\JsonDecoder;
+use Shoper\Sdk\Rest\Core\Types\Union;
+use Shoper\Sdk\Rest\Subscribers\Requests\SubscriberUpdate;
+
+class SubscribersClient
+{
+    /**
+     * @var array{
+     *   baseUrl?: string,
+     *   client?: ClientInterface,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     * } $options @phpstan-ignore-next-line Property is used in endpoint methods via HttpEndpointGenerator
+     */
+    private array $options;
+
+    /**
+     * @var RawClient $client
+     */
+    private RawClient $client;
+
+    /**
+     * @param RawClient $client
+     * @param ?array{
+     *   baseUrl?: string,
+     *   client?: ClientInterface,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     * } $options
+     */
+    public function __construct(
+        RawClient $client,
+        ?array $options = null,
+    ) {
+        $this->client = $client;
+        $this->options = $options ?? [];
+    }
+
+    /**
+     * @param ListSubscribersRequest $request
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return ?ListSubscribersResponse
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function listSubscribers(ListSubscribersRequest $request = new ListSubscribersRequest(), ?array $options = null): ?ListSubscribersResponse
+    {
+        $options = array_merge($this->options, $options ?? []);
+        $query = [];
+        if ($request->limit != null) {
+            $query['limit'] = $request->limit;
+        }
+        if ($request->page != null) {
+            $query['page'] = $request->page;
+        }
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/subscribers",
+                    method: HttpMethod::GET,
+                    query: $query,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return ListSubscribersResponse::fromJson($json);
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param SubscriberInsert $request
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return (
+     *    int
+     *   |Subscriber
+     * )|null
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function createSubscriber(SubscriberInsert $request, ?array $options = null): int|Subscriber|null
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/subscribers",
+                    method: HttpMethod::POST,
+                    body: $request,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeUnion($json, new Union('integer', Subscriber::class)); // @phpstan-ignore-line
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return ?Subscriber
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function getSubscriber(string $id, ?array $options = null): ?Subscriber
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/subscribers/{$id}",
+                    method: HttpMethod::GET,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return Subscriber::fromJson($json);
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id
+     * @param SubscriberUpdate $request
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return (
+     *    bool
+     *   |Subscriber
+     * )|null
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function updateSubscriber(string $id, SubscriberUpdate $request = new SubscriberUpdate(), ?array $options = null): bool|Subscriber|null
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/subscribers/{$id}",
+                    method: HttpMethod::PUT,
+                    body: $request,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeUnion($json, new Union('bool', Subscriber::class)); // @phpstan-ignore-line
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return ?bool
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function deleteSubscriber(string $id, ?array $options = null): ?bool
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/subscribers/{$id}",
+                    method: HttpMethod::DELETE,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeBool($json);
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+}
