@@ -6,6 +6,28 @@ breaking changes may land in minor bumps until 1.0.0).
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-05-04 (OpenAPI spec conformance)
+
+### Changed (breaking generated-code signatures)
+- `delete*()` methods now return `?int` (integer 1/0) instead of `?bool` — spec was aligned to actual server response. Affects ~53 delete operations across all sub-clients.
+- `update*()` methods returning `oneOf [bool, Resource]` now return `oneOf [int, Resource]` — same root cause. Affects ~55 update operations.
+- `*_id` properties on response types are now `string` (with numeric pattern) instead of `int` — server actually serializes ids as strings.
+- Boolean flag fields (`active`, `isdefault`, `bestseller`, `hidden`, etc.) on response types are now string enums (`"0"|"1"`) — Fern generates dedicated enum classes for each (e.g. `AboutpageActive`, `ProductBestseller`).
+- Pagination wrapper `count` field is now `string` (numeric pattern) instead of `int`.
+- `User::tags` is now `array<string>` instead of `?string`.
+- `Specialoffer::date_from` and `date_to` are now nullable.
+- `Category::category_id`, `Product::category_id` accept `oneOf [string, int]` for backward compat with edge-case server responses.
+- `CategoriesTrees::listCategoriesTrees`, `DashboardActivities::listDashboardActivities` now return bare arrays (no pagination wrapper).
+- `ApplicationLocks::create/update/deleteApplicationLock` return `bool` (this endpoint really returns boolean, unlike other delete*).
+- 4 missing 4xx/501 response codes added (Metafields, ObjectMtime).
+
+### Verified
+- 304 PHPUnit tests against live shop, **0 schema_violations** in conformance harness (down from 394 baseline = -100%).
+- Code samples and Scalar UI rendering re-verified in shoper-docs RC.
+
+### Migration
+Callers expecting `?bool` from `delete*()` should switch to `?int` (treat any non-zero as success). Boolean property reads on response types now return strings — cast/compare accordingly.
+
 ## [0.3.0] — 2026-04-29 (Faza 3 close)
 
 ### Added

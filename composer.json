@@ -1,37 +1,50 @@
 {
     "name": "shoper/sdk",
-    "type": "library",
-    "description": "Official PHP SDK for Shoper REST API",
-    "keywords": ["shoper", "sdk", "rest-api", "openapi", "ecommerce"],
-    "homepage": "https://github.com/dreamcommerce/shoper-sdk-php",
+    "version": "0.0.0",
+    "description": "Shoper\\Sdk\\Rest PHP Library",
+    "keywords": [
+        "shoper",
+        "api",
+        "sdk"
+    ],
     "license": "MIT",
-    "support": {
-        "docs": "https://developers.shoper.pl/",
-        "source": "https://github.com/dreamcommerce/shoper-sdk-php"
-    },
     "require": {
         "php": "^8.0",
-        "guzzlehttp/guzzle": "^7.5",
-        "php-http/discovery": "^1.16",
+        "ext-json": "*",
         "psr/http-client": "^1.0",
+        "psr/http-client-implementation": "^1.0",
         "psr/http-factory": "^1.0",
-        "psr/http-message": "^1.0 || ^2.0"
+        "psr/http-factory-implementation": "^1.0",
+        "psr/http-message": "^1.1 || ^2.0",
+        "php-http/discovery": "^1.0",
+        "php-http/multipart-stream-builder": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "3.5.0",
         "phpstan/phpstan": "^1.10",
+        "guzzlehttp/guzzle": "^7.4",
         "php-http/mock-client": "^1.6"
     },
     "autoload": {
         "psr-4": {
+            "Shoper\\Sdk\\Rest\\": "src/",
             "Shoper\\Sdk\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "Shoper\\Sdk\\Rest\\Tests\\": "tests/",
             "Shoper\\Sdk\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    "scripts": {
+        "build": [
+            "@php -l src",
+            "@php -l tests"
+        ],
+        "test": "phpunit",
+        "analyze": "phpstan analyze src tests --memory-limit=1G"
+    },
+    "type": "library"
 }
