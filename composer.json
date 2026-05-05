@@ -1,6 +1,5 @@
 {
     "name": "shoper/sdk",
-    "version": "0.0.0",
     "description": "Shoper\\Sdk\\Rest PHP Library",
     "keywords": [
         "shoper",
