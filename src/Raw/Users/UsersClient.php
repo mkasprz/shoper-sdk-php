@@ -190,7 +190,7 @@ class UsersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -236,7 +236,7 @@ class UsersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param UserUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -287,7 +287,7 @@ class UsersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,

@@ -55,7 +55,7 @@ class CollectionsProductsClient
     }
 
     /**
-     * @param string $collectionId
+     * @param string $collectionId `collection_id` identifier.
      * @param ListCollectionsProductsRequest $request
      * @param ?array{
      *   baseUrl?: string,
@@ -110,8 +110,8 @@ class CollectionsProductsClient
     }
 
     /**
-     * @param string $collectionId
-     * @param string $productId
+     * @param string $collectionId `collection_id` identifier.
+     * @param string $productId `product_id` identifier.
      * @param CollectionProductUpdate $request
      * @param ?array{
      *   baseUrl?: string,

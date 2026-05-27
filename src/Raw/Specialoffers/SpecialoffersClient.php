@@ -194,7 +194,7 @@ class SpecialoffersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param SpecialofferUpdate $request
      * @param ?array{
      *   baseUrl?: string,

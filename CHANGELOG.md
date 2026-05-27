@@ -1,3 +1,12 @@
+## [0.5.0] — 2026-05-27
+
+### Changes
+
+```
+(no API-level changes detected — SDK regeneration only)
+```
+
+
 # Changelog
 
 All notable changes to `shoper/sdk` will be documented in this file.

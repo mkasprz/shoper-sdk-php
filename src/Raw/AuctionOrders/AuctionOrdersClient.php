@@ -160,7 +160,7 @@ class AuctionOrdersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -206,7 +206,7 @@ class AuctionOrdersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AuctionOrderUpdate $request
      * @param ?array{
      *   baseUrl?: string,

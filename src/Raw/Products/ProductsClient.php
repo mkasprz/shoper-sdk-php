@@ -175,7 +175,7 @@ class ProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -221,7 +221,7 @@ class ProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ProductUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -272,7 +272,7 @@ class ProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,

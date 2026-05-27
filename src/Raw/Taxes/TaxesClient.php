@@ -106,7 +106,7 @@ class TaxesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,

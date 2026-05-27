@@ -160,7 +160,7 @@ class WarehousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -169,11 +169,14 @@ class WarehousesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?Warehouse
+     * @return (
+     *    Warehouse
+     *   |int
+     * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getWarehouse(string $id, ?array $options = null): ?Warehouse
+    public function getWarehouse(string $id, ?array $options = null): Warehouse|int|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -191,7 +194,7 @@ class WarehousesClient
                 if (empty($json)) {
                     return null;
                 }
-                return Warehouse::fromJson($json);
+                return JsonDecoder::decodeUnion($json, new Union(Warehouse::class, 'integer')); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -206,7 +209,7 @@ class WarehousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param WarehouseUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -257,7 +260,7 @@ class WarehousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,

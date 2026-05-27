@@ -56,7 +56,7 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
+     * @param string $paymentId `payment_id` identifier.
      * @param ListPaymentsChannelsRequest $request
      * @param ?array{
      *   baseUrl?: string,
@@ -111,7 +111,7 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
+     * @param string $paymentId `payment_id` identifier.
      * @param PaymentChannelInsert $request
      * @param ?array{
      *   baseUrl?: string,
@@ -162,8 +162,8 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
-     * @param string $id
+     * @param string $paymentId `payment_id` identifier.
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -209,8 +209,8 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
-     * @param string $id
+     * @param string $paymentId `payment_id` identifier.
+     * @param string $id Resource identifier.
      * @param PaymentChannelUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -261,8 +261,8 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
-     * @param string $id
+     * @param string $paymentId `payment_id` identifier.
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,

@@ -160,7 +160,7 @@ class ProductSafetyCertificatesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -206,7 +206,7 @@ class ProductSafetyCertificatesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ProductSafetyCertificateUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -257,7 +257,7 @@ class ProductSafetyCertificatesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,

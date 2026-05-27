@@ -56,7 +56,7 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
+     * @param string $object Metafield object type (e.g. product, category, order).
      * @param ListMetafieldsRequest $request
      * @param ?array{
      *   baseUrl?: string,
@@ -111,7 +111,7 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
+     * @param string $object Metafield object type (e.g. product, category, order).
      * @param MetafieldInsert $request
      * @param ?array{
      *   baseUrl?: string,
@@ -162,8 +162,8 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
-     * @param string $id
+     * @param string $object Metafield object type (e.g. product, category, order).
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -209,8 +209,8 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
-     * @param string $id
+     * @param string $object Metafield object type (e.g. product, category, order).
+     * @param string $id Resource identifier.
      * @param MetafieldUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -261,8 +261,8 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
-     * @param string $id
+     * @param string $object Metafield object type (e.g. product, category, order).
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,

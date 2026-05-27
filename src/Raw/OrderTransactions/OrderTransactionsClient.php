@@ -163,7 +163,7 @@ class OrderTransactionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -209,7 +209,7 @@ class OrderTransactionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param OrderTransactionUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -260,7 +260,7 @@ class OrderTransactionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
