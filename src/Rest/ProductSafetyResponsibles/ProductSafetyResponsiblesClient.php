@@ -69,7 +69,7 @@ class ProductSafetyResponsiblesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProductSafetyResponsibles(ListProductSafetyResponsiblesRequest $request = new ListProductSafetyResponsiblesRequest(), ?array $options = null): ?ListProductSafetyResponsiblesResponse
+    public function list(ListProductSafetyResponsiblesRequest $request = new ListProductSafetyResponsiblesRequest(), ?array $options = null): ?ListProductSafetyResponsiblesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProductSafetyResponsiblesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProductSafetyResponsible(ProductSafetyResponsibleInsert $request, ?array $options = null): int|ProductSafetyResponsible|null
+    public function create(ProductSafetyResponsibleInsert $request, ?array $options = null): int|ProductSafetyResponsible|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class ProductSafetyResponsiblesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class ProductSafetyResponsiblesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProductSafetyResponsible(string $id, ?array $options = null): ?ProductSafetyResponsible
+    public function get(string $id, ?array $options = null): ?ProductSafetyResponsible
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class ProductSafetyResponsiblesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ProductSafetyResponsibleUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class ProductSafetyResponsiblesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |ProductSafetyResponsible
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProductSafetyResponsible(string $id, ProductSafetyResponsibleUpdate $request = new ProductSafetyResponsibleUpdate(), ?array $options = null): bool|ProductSafetyResponsible|null
+    public function update(string $id, ProductSafetyResponsibleUpdate $request = new ProductSafetyResponsibleUpdate(), ?array $options = null): int|ProductSafetyResponsible|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class ProductSafetyResponsiblesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', ProductSafetyResponsible::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', ProductSafetyResponsible::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class ProductSafetyResponsiblesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class ProductSafetyResponsiblesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProductSafetyResponsible(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class ProductSafetyResponsiblesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

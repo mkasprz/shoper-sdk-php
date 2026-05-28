@@ -69,7 +69,7 @@ class UsersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listUsers(ListUsersRequest $request = new ListUsersRequest(), ?array $options = null): ?ListUsersResponse
+    public function list(ListUsersRequest $request = new ListUsersRequest(), ?array $options = null): ?ListUsersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -156,7 +156,7 @@ class UsersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createUser(UserInsert $request, ?array $options = null): int|User|null
+    public function create(UserInsert $request, ?array $options = null): int|User|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -203,7 +203,7 @@ class UsersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getUser(string $id, ?array $options = null): ?User
+    public function get(string $id, ?array $options = null): ?User
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -253,7 +253,7 @@ class UsersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateUser(string $id, UserUpdate $request = new UserUpdate(), ?array $options = null): int|User|null
+    public function update(string $id, UserUpdate $request = new UserUpdate(), ?array $options = null): int|User|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -300,7 +300,7 @@ class UsersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteUser(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

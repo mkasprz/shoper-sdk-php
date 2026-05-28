@@ -25,10 +25,10 @@ class Zone extends JsonSerializableType
     public ?array $countries;
 
     /**
-     * @var ?int $countryId [country](#tag/GeolocationCountries) identifier (returned only if mode is 2)
+     * @var ?string $countryId [country](#tag/GeolocationCountries) identifier (returned only if mode is 2)
      */
     #[JsonProperty('country_id')]
-    public ?int $countryId;
+    public ?string $countryId;
 
     /**
      * zone mode:
@@ -38,10 +38,10 @@ class Zone extends JsonSerializableType
      *     <li>3 - post codes</li>
      * </ul>
      *
-     * @var int $mode
+     * @var string $mode
      */
     #[JsonProperty('mode')]
-    public int $mode;
+    public string $mode;
 
     /**
      * @var string $name zone name
@@ -56,20 +56,20 @@ class Zone extends JsonSerializableType
     public ?array $regions;
 
     /**
-     * @var ?int $zoneId resource identifier
+     * @var ?string $zoneId resource identifier
      */
     #[JsonProperty('zone_id')]
-    public ?int $zoneId;
+    public ?string $zoneId;
 
     /**
      * @param array{
-     *   mode: int,
+     *   mode: string,
      *   name: string,
      *   codes?: ?array<string, ?string>,
      *   countries?: ?array<int>,
-     *   countryId?: ?int,
+     *   countryId?: ?string,
      *   regions?: ?array<int>,
-     *   zoneId?: ?int,
+     *   zoneId?: ?string,
      * } $values
      */
     public function __construct(

@@ -69,7 +69,7 @@ class OptionGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOptionGroups(ListOptionGroupsRequest $request = new ListOptionGroupsRequest(), ?array $options = null): ?ListOptionGroupsResponse
+    public function list(ListOptionGroupsRequest $request = new ListOptionGroupsRequest(), ?array $options = null): ?ListOptionGroupsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class OptionGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOptionGroup(OptionGroupInsert $request = new OptionGroupInsert(), ?array $options = null): int|OptionGroup|null
+    public function create(OptionGroupInsert $request = new OptionGroupInsert(), ?array $options = null): int|OptionGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class OptionGroupsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class OptionGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOptionGroup(string $id, ?array $options = null): ?OptionGroup
+    public function get(string $id, ?array $options = null): ?OptionGroup
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class OptionGroupsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param OptionGroupUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class OptionGroupsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |OptionGroup
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOptionGroup(string $id, OptionGroupUpdate $request = new OptionGroupUpdate(), ?array $options = null): bool|OptionGroup|null
+    public function update(string $id, OptionGroupUpdate $request = new OptionGroupUpdate(), ?array $options = null): int|OptionGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class OptionGroupsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', OptionGroup::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', OptionGroup::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class OptionGroupsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class OptionGroupsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOptionGroup(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class OptionGroupsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

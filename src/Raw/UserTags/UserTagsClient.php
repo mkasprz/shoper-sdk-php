@@ -69,7 +69,7 @@ class UserTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listUserTags(ListUserTagsRequest $request = new ListUserTagsRequest(), ?array $options = null): ?ListUserTagsResponse
+    public function list(ListUserTagsRequest $request = new ListUserTagsRequest(), ?array $options = null): ?ListUserTagsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class UserTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createUserTag(UserTagInsert $request, ?array $options = null): int|UserTag|null
+    public function create(UserTagInsert $request, ?array $options = null): int|UserTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class UserTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getUserTag(string $id, ?array $options = null): ?UserTag
+    public function get(string $id, ?array $options = null): ?UserTag
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class UserTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateUserTag(string $id, UserTagUpdate $request = new UserTagUpdate(), ?array $options = null): int|UserTag|null
+    public function update(string $id, UserTagUpdate $request = new UserTagUpdate(), ?array $options = null): int|UserTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class UserTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteUserTag(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

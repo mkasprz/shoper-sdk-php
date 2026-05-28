@@ -18,10 +18,10 @@ class Producer extends JsonSerializableType
     public ?string $gfx;
 
     /**
-     * @var ?bool $isdefault has been this object added during the install?
+     * @var ?value-of<ProducerIsdefault> $isdefault has been this object added during the install?
      */
     #[JsonProperty('isdefault')]
-    public ?bool $isdefault;
+    public ?string $isdefault;
 
     /**
      * @var string $name producer name
@@ -30,10 +30,10 @@ class Producer extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $producerId producer identifier
+     * @var ?string $producerId producer identifier
      */
     #[JsonProperty('producer_id')]
-    public ?int $producerId;
+    public ?string $producerId;
 
     /**
      * @var ?array<string, ProducerTranslationsValue> $translations an associative array with object translations
@@ -51,8 +51,8 @@ class Producer extends JsonSerializableType
      * @param array{
      *   name: string,
      *   gfx?: ?string,
-     *   isdefault?: ?bool,
-     *   producerId?: ?int,
+     *   isdefault?: ?value-of<ProducerIsdefault>,
+     *   producerId?: ?string,
      *   translations?: ?array<string, ProducerTranslationsValue>,
      *   web?: ?string,
      * } $values

@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class WarehouseRelocation extends JsonSerializableType
 {
     /**
-     * @var ?float $quantity quantity to relocate
+     * @var ?string $quantity quantity to relocate
      */
     #[JsonProperty('quantity')]
-    public ?float $quantity;
+    public ?string $quantity;
 
     /**
      * @var ?int $relocationId relocation identifier
@@ -23,10 +23,10 @@ class WarehouseRelocation extends JsonSerializableType
     public ?int $relocationId;
 
     /**
-     * @var ?int $stockId stock identifier
+     * @var ?string $stockId stock identifier
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @var ?int $warehouseFromId warehouse from identifier
@@ -42,9 +42,9 @@ class WarehouseRelocation extends JsonSerializableType
 
     /**
      * @param array{
-     *   quantity?: ?float,
+     *   quantity?: ?string,
      *   relocationId?: ?int,
-     *   stockId?: ?int,
+     *   stockId?: ?string,
      *   warehouseFromId?: ?int,
      *   warehouseToId?: ?int,
      * } $values

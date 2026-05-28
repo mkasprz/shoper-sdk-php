@@ -66,7 +66,7 @@ class SpecialoffersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getSpecialoffer(?array $options = null): ?Specialoffer
+    public function get(?array $options = null): ?Specialoffer
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -115,7 +115,7 @@ class SpecialoffersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createSpecialoffer(SpecialofferInsert $request, ?array $options = null): int|Specialoffer|null
+    public function create(SpecialofferInsert $request, ?array $options = null): int|Specialoffer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -157,11 +157,11 @@ class SpecialoffersClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteSpecialoffer(?array $options = null): ?bool
+    public function delete(?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -179,7 +179,7 @@ class SpecialoffersClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -194,7 +194,7 @@ class SpecialoffersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param SpecialofferUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -205,13 +205,13 @@ class SpecialoffersClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Specialoffer
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateSpecialoffer(string $id, SpecialofferUpdate $request = new SpecialofferUpdate(), ?array $options = null): bool|Specialoffer|null
+    public function update(string $id, SpecialofferUpdate $request = new SpecialofferUpdate(), ?array $options = null): int|Specialoffer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -230,7 +230,7 @@ class SpecialoffersClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Specialoffer::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Specialoffer::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

@@ -36,6 +36,12 @@ class ProductImage extends JsonSerializableType
     public ?int $main;
 
     /**
+     * @var ?string $name Legacy top-level photo name (SHOPER-123489). Use translations[locale].name instead.
+     */
+    #[JsonProperty('name')]
+    public ?string $name;
+
+    /**
      * @var ?string $order photo order
      */
     #[JsonProperty('order')]
@@ -65,6 +71,7 @@ class ProductImage extends JsonSerializableType
      *   gfxId?: ?string,
      *   hidden?: ?value-of<ProductImageHidden>,
      *   main?: ?int,
+     *   name?: ?string,
      *   order?: ?string,
      *   productId?: ?string,
      *   translations?: ?array<string, ProductImageTranslationsValue>,
@@ -78,6 +85,7 @@ class ProductImage extends JsonSerializableType
         $this->gfxId = $values['gfxId'] ?? null;
         $this->hidden = $values['hidden'] ?? null;
         $this->main = $values['main'] ?? null;
+        $this->name = $values['name'] ?? null;
         $this->order = $values['order'] ?? null;
         $this->productId = $values['productId'] ?? null;
         $this->translations = $values['translations'] ?? null;

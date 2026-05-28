@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class AuctionOrder extends JsonSerializableType
 {
     /**
-     * @var ?int $auctionHouseId auction house identifier
+     * @var ?string $auctionHouseId auction house identifier
      */
     #[JsonProperty('auction_house_id')]
-    public ?int $auctionHouseId;
+    public ?string $auctionHouseId;
 
     /**
      * @var ?int $auctionId [auction](#tag/Auctions) identifier
@@ -23,16 +23,16 @@ class AuctionOrder extends JsonSerializableType
     public ?int $auctionId;
 
     /**
-     * @var ?int $auctionOrderId auction order identifier
+     * @var ?string $auctionOrderId auction order identifier
      */
     #[JsonProperty('auction_order_id')]
-    public ?int $auctionOrderId;
+    public ?string $auctionOrderId;
 
     /**
-     * @var ?int $buyerId auction system buyer identifier
+     * @var ?string $buyerId auction system buyer identifier
      */
     #[JsonProperty('buyer_id')]
-    public ?int $buyerId;
+    public ?string $buyerId;
 
     /**
      * @var ?string $buyerLogin buyer login
@@ -47,10 +47,10 @@ class AuctionOrder extends JsonSerializableType
     public ?string $dealId;
 
     /**
-     * @var int $orderId [order](#tag/Orders) identifier
+     * @var string $orderId [order](#tag/Orders) identifier
      */
     #[JsonProperty('order_id')]
-    public int $orderId;
+    public string $orderId;
 
     /**
      * @var ?string $paymentMethod payment method format
@@ -90,11 +90,11 @@ class AuctionOrder extends JsonSerializableType
 
     /**
      * @param array{
-     *   orderId: int,
-     *   auctionHouseId?: ?int,
+     *   orderId: string,
+     *   auctionHouseId?: ?string,
      *   auctionId?: ?int,
-     *   auctionOrderId?: ?int,
-     *   buyerId?: ?int,
+     *   auctionOrderId?: ?string,
+     *   buyerId?: ?string,
      *   buyerLogin?: ?string,
      *   dealId?: ?string,
      *   paymentMethod?: ?string,

@@ -69,7 +69,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listNewsCategories(ListNewsCategoriesRequest $request = new ListNewsCategoriesRequest(), ?array $options = null): ?ListNewsCategoriesResponse
+    public function list(ListNewsCategoriesRequest $request = new ListNewsCategoriesRequest(), ?array $options = null): ?ListNewsCategoriesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createNewsCategory(NewsCategoryInsert $request, ?array $options = null): int|NewsCategory|null
+    public function create(NewsCategoryInsert $request, ?array $options = null): int|NewsCategory|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getNewsCategory(string $id, ?array $options = null): ?NewsCategory
+    public function get(string $id, ?array $options = null): ?NewsCategory
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateNewsCategory(string $id, NewsCategoryUpdate $request = new NewsCategoryUpdate(), ?array $options = null): int|NewsCategory|null
+    public function update(string $id, NewsCategoryUpdate $request = new NewsCategoryUpdate(), ?array $options = null): int|NewsCategory|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteNewsCategory(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

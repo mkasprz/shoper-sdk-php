@@ -18,10 +18,10 @@ class ProductSpecialOffer extends JsonSerializableType
      *     <li>2 - just defined options
      * </ul>
      *
-     * @var ?int $conditionType
+     * @var ?string $conditionType
      */
     #[JsonProperty('condition_type')]
-    public ?int $conditionType;
+    public ?string $conditionType;
 
     /**
      * @var ?string $dateFrom start of product promotion in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -36,16 +36,16 @@ class ProductSpecialOffer extends JsonSerializableType
     public ?string $dateTo;
 
     /**
-     * @var ?float $discount discount for the product
+     * @var ?string $discount discount for the product
      */
     #[JsonProperty('discount')]
-    public ?float $discount;
+    public ?string $discount;
 
     /**
-     * @var ?float $discountSpecial discount for the product (special)
+     * @var ?string $discountSpecial discount for the product (special)
      */
     #[JsonProperty('discount_special')]
-    public ?float $discountSpecial;
+    public ?string $discountSpecial;
 
     /**
      * a method of special offer calculation:
@@ -54,22 +54,22 @@ class ProductSpecialOffer extends JsonSerializableType
      *     <li>2 - discount by amount, applies for all types of variants (with dedicated price also), does not change on prices changes</li>
      * </ul>
      *
-     * @var ?int $discountType
+     * @var ?string $discountType
      */
     #[JsonProperty('discount_type')]
-    public ?int $discountType;
+    public ?string $discountType;
 
     /**
-     * @var ?float $discountWholesale discount for the product (wholesale)
+     * @var ?string $discountWholesale discount for the product (wholesale)
      */
     #[JsonProperty('discount_wholesale')]
-    public ?float $discountWholesale;
+    public ?string $discountWholesale;
 
     /**
-     * @var ?int $promoId promotion identifier
+     * @var ?string $promoId promotion identifier
      */
     #[JsonProperty('promo_id')]
-    public ?int $promoId;
+    public ?string $promoId;
 
     /**
      * array of [stock](#tag/ProductStocks) identifiers
@@ -85,14 +85,14 @@ class ProductSpecialOffer extends JsonSerializableType
 
     /**
      * @param array{
-     *   conditionType?: ?int,
+     *   conditionType?: ?string,
      *   dateFrom?: ?string,
      *   dateTo?: ?string,
-     *   discount?: ?float,
-     *   discountSpecial?: ?float,
-     *   discountType?: ?int,
-     *   discountWholesale?: ?float,
-     *   promoId?: ?int,
+     *   discount?: ?string,
+     *   discountSpecial?: ?string,
+     *   discountType?: ?string,
+     *   discountWholesale?: ?string,
+     *   promoId?: ?string,
      *   stocks?: ?array<int>,
      * } $values
      */

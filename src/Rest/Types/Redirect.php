@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class Redirect extends JsonSerializableType
 {
     /**
-     * @var ?int $langId [language](#tag/Languages) language identifier
+     * @var ?string $langId [language](#tag/Languages) language identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?int $objectId related object identifier
@@ -23,10 +23,10 @@ class Redirect extends JsonSerializableType
     public ?int $objectId;
 
     /**
-     * @var ?int $redirectId redirect identifier
+     * @var ?string $redirectId redirect identifier
      */
     #[JsonProperty('redirect_id')]
-    public ?int $redirectId;
+    public ?string $redirectId;
 
     /**
      * @var ?string $route relative redirect URL
@@ -52,19 +52,19 @@ class Redirect extends JsonSerializableType
      *     <li>6 - category news</li>
      * </ul>
      *
-     * @var ?int $type
+     * @var ?string $type
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
      * @param array{
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   objectId?: ?int,
-     *   redirectId?: ?int,
+     *   redirectId?: ?string,
      *   route?: ?string,
      *   target?: ?string,
-     *   type?: ?int,
+     *   type?: ?string,
      * } $values
      */
     public function __construct(

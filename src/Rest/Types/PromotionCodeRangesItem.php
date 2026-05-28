@@ -8,22 +8,22 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class PromotionCodeRangesItem extends JsonSerializableType
 {
     /**
-     * @var ?float $discount discount amount or percent for this range
+     * @var ?string $discount discount amount or percent for this range
      */
     #[JsonProperty('discount')]
-    public ?float $discount;
+    public ?string $discount;
 
     /**
-     * @var ?float $from lower range value
+     * @var ?string $from lower range value
      */
     #[JsonProperty('from')]
-    public ?float $from;
+    public ?string $from;
 
     /**
-     * @var ?int $id range identifier
+     * @var ?string $id range identifier
      */
     #[JsonProperty('id')]
-    public ?int $id;
+    public ?string $id;
 
     /**
      * @var ?string $shippingId
@@ -32,18 +32,18 @@ class PromotionCodeRangesItem extends JsonSerializableType
     public ?string $shippingId;
 
     /**
-     * @var ?float $to upper range value (<code>0</code> means an infinity)
+     * @var ?string $to upper range value (<code>0</code> means an infinity)
      */
     #[JsonProperty('to')]
-    public ?float $to;
+    public ?string $to;
 
     /**
      * @param array{
-     *   discount?: ?float,
-     *   from?: ?float,
-     *   id?: ?int,
+     *   discount?: ?string,
+     *   from?: ?string,
+     *   id?: ?string,
      *   shippingId?: ?string,
-     *   to?: ?float,
+     *   to?: ?string,
      * } $values
      */
     public function __construct(

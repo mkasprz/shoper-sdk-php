@@ -69,7 +69,7 @@ class ProductTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProductTags(ListProductTagsRequest $request = new ListProductTagsRequest(), ?array $options = null): ?ListProductTagsResponse
+    public function list(ListProductTagsRequest $request = new ListProductTagsRequest(), ?array $options = null): ?ListProductTagsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProductTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProductTag(ProductTagInsert $request, ?array $options = null): int|ProductTag|null
+    public function create(ProductTagInsert $request, ?array $options = null): int|ProductTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class ProductTagsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class ProductTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProductTag(string $id, ?array $options = null): ?ProductTag
+    public function get(string $id, ?array $options = null): ?ProductTag
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class ProductTagsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ProductTagUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class ProductTagsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |ProductTag
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProductTag(string $id, ProductTagUpdate $request = new ProductTagUpdate(), ?array $options = null): bool|ProductTag|null
+    public function update(string $id, ProductTagUpdate $request = new ProductTagUpdate(), ?array $options = null): int|ProductTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class ProductTagsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', ProductTag::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', ProductTag::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class ProductTagsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class ProductTagsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProductTag(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class ProductTagsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

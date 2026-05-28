@@ -69,7 +69,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCategories(ListCategoriesRequest $request = new ListCategoriesRequest(), ?array $options = null): ?ListCategoriesResponse
+    public function list(ListCategoriesRequest $request = new ListCategoriesRequest(), ?array $options = null): ?ListCategoriesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createCategory(CategoryInsert $request, ?array $options = null): int|Category|null
+    public function create(CategoryInsert $request, ?array $options = null): int|Category|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class CategoriesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getCategory(string $id, ?array $options = null): ?Category
+    public function get(string $id, ?array $options = null): ?Category
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class CategoriesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param CategoryUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class CategoriesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Category
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateCategory(string $id, CategoryUpdate $request = new CategoryUpdate(), ?array $options = null): bool|Category|null
+    public function update(string $id, CategoryUpdate $request = new CategoryUpdate(), ?array $options = null): int|Category|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class CategoriesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Category::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Category::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class CategoriesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class CategoriesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteCategory(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class CategoriesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

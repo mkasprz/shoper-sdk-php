@@ -17,10 +17,10 @@ class NewsCategory extends JsonSerializableType
     public ?string $active;
 
     /**
-     * @var ?int $categoryId ID category
+     * @var ?string $categoryId ID category
      */
     #[JsonProperty('category_id')]
-    public ?int $categoryId;
+    public ?string $categoryId;
 
     /**
      * @var ?string $langId ID category language
@@ -68,7 +68,7 @@ class NewsCategory extends JsonSerializableType
      * @param array{
      *   name: string,
      *   active?: ?string,
-     *   categoryId?: ?int,
+     *   categoryId?: ?string,
      *   langId?: ?string,
      *   order?: ?string,
      *   seoDescription?: ?string,

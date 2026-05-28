@@ -10,10 +10,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class ListProducersResponse extends JsonSerializableType
 {
     /**
-     * @var ?int $count
+     * @var ?string $count
      */
     #[JsonProperty('count')]
-    public ?int $count;
+    public ?string $count;
 
     /**
      * @var ?array<Producer> $list
@@ -35,7 +35,7 @@ class ListProducersResponse extends JsonSerializableType
 
     /**
      * @param array{
-     *   count?: ?int,
+     *   count?: ?string,
      *   list?: ?array<Producer>,
      *   page?: ?int,
      *   pages?: ?int,

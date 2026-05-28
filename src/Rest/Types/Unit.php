@@ -12,10 +12,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Unit extends JsonSerializableType
 {
     /**
-     * @var bool $floatingPoint is the unit floating point? (otherwise - integer)
+     * @var value-of<UnitFloatingPoint> $floatingPoint is the unit floating point? (otherwise - integer)
      */
     #[JsonProperty('floating_point')]
-    public bool $floatingPoint;
+    public string $floatingPoint;
 
     /**
      * @var ?array<string, UnitTranslationsValue> $translations an associative array with object translations
@@ -24,16 +24,16 @@ class Unit extends JsonSerializableType
     public ?array $translations;
 
     /**
-     * @var ?int $unitId measurement unit identifier
+     * @var ?string $unitId measurement unit identifier
      */
     #[JsonProperty('unit_id')]
-    public ?int $unitId;
+    public ?string $unitId;
 
     /**
      * @param array{
-     *   floatingPoint: bool,
+     *   floatingPoint: value-of<UnitFloatingPoint>,
      *   translations?: ?array<string, UnitTranslationsValue>,
-     *   unitId?: ?int,
+     *   unitId?: ?string,
      * } $values
      */
     public function __construct(

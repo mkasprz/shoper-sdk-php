@@ -65,7 +65,7 @@ class DashboardActivitiesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listDashboardActivities(ListDashboardActivitiesRequest $request = new ListDashboardActivitiesRequest(), ?array $options = null): ?array
+    public function list(ListDashboardActivitiesRequest $request = new ListDashboardActivitiesRequest(), ?array $options = null): ?array
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];

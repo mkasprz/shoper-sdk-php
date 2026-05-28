@@ -69,7 +69,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listRedirects(ListRedirectsRequest $request = new ListRedirectsRequest(), ?array $options = null): ?ListRedirectsResponse
+    public function list(ListRedirectsRequest $request = new ListRedirectsRequest(), ?array $options = null): ?ListRedirectsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createRedirect(RedirectInsert $request = new RedirectInsert(), ?array $options = null): int|Redirect|null
+    public function create(RedirectInsert $request = new RedirectInsert(), ?array $options = null): int|Redirect|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class RedirectsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getRedirect(string $id, ?array $options = null): ?Redirect
+    public function get(string $id, ?array $options = null): ?Redirect
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class RedirectsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param RedirectUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class RedirectsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Redirect
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateRedirect(string $id, RedirectUpdate $request = new RedirectUpdate(), ?array $options = null): bool|Redirect|null
+    public function update(string $id, RedirectUpdate $request = new RedirectUpdate(), ?array $options = null): int|Redirect|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class RedirectsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Redirect::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Redirect::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class RedirectsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class RedirectsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteRedirect(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class RedirectsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

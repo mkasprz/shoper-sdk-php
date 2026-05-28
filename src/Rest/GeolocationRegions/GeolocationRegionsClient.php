@@ -65,7 +65,7 @@ class GeolocationRegionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listGeolocationRegions(ListGeolocationRegionsRequest $request = new ListGeolocationRegionsRequest(), ?array $options = null): ?ListGeolocationRegionsResponse
+    public function list(ListGeolocationRegionsRequest $request = new ListGeolocationRegionsRequest(), ?array $options = null): ?ListGeolocationRegionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -106,7 +106,7 @@ class GeolocationRegionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -119,7 +119,7 @@ class GeolocationRegionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getGeolocationRegion(string $id, ?array $options = null): ?GeolocationRegion
+    public function get(string $id, ?array $options = null): ?GeolocationRegion
     {
         $options = array_merge($this->options, $options ?? []);
         try {

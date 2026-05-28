@@ -12,19 +12,19 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Collection extends JsonSerializableType
 {
     /**
-     * @var ?int $collectionId collection identifier
+     * @var ?string $collectionId collection identifier
      */
     #[JsonProperty('collection_id')]
-    public ?int $collectionId;
+    public ?string $collectionId;
 
     /**
-     * @var ?string $imageBackground background image filename
+     * @var ?string $imageBackground Background image URL/filename
      */
     #[JsonProperty('image_background')]
     public ?string $imageBackground;
 
     /**
-     * @var ?string $imageThumbnail thumbnail image filename
+     * @var ?string $imageThumbnail Thumbnail image URL/filename
      */
     #[JsonProperty('image_thumbnail')]
     public ?string $imageThumbnail;
@@ -33,10 +33,10 @@ class Collection extends JsonSerializableType
      * Collection sort strategy identifier. Changing this value triggers an asynchronous
      * resort job — the new ordering may not be visible immediately after the response.
      *
-     * @var ?int $sortType
+     * @var ?string $sortType
      */
     #[JsonProperty('sort_type')]
-    public ?int $sortType;
+    public ?string $sortType;
 
     /**
      * @var ?array<string, CollectionTranslationsValue> $translations an associative array with object translations; if you want to filter things - you can skip locale subkey
@@ -46,10 +46,10 @@ class Collection extends JsonSerializableType
 
     /**
      * @param array{
-     *   collectionId?: ?int,
+     *   collectionId?: ?string,
      *   imageBackground?: ?string,
      *   imageThumbnail?: ?string,
-     *   sortType?: ?int,
+     *   sortType?: ?string,
      *   translations?: ?array<string, CollectionTranslationsValue>,
      * } $values
      */

@@ -22,10 +22,10 @@ class Order extends JsonSerializableType
     public ?array $additionalFields;
 
     /**
-     * @var ?string $auction an associative array with auction information (present only if order has been added using auction house)
+     * @var ?array<string, mixed> $auction an associative array with auction information (present only if order has been added using auction house)
      */
-    #[JsonProperty('auction')]
-    public ?string $auction;
+    #[JsonProperty('auction'), ArrayType(['string' => 'mixed'])]
+    public ?array $auction;
 
     /**
      * @var ?OrderBillingAddress $billingAddress an associative array with payment address
@@ -34,22 +34,28 @@ class Order extends JsonSerializableType
     public ?OrderBillingAddress $billingAddress;
 
     /**
+     * @var ?array<int> $children identifiers of sub-orders (used in combined/grouped orders)
+     */
+    #[JsonProperty('children'), ArrayType(['integer'])]
+    public ?array $children;
+
+    /**
      * @var ?string $code order confirmation code
      */
     #[JsonProperty('code')]
     public ?string $code;
 
     /**
-     * @var ?int $codeId discount code identifier
+     * @var ?string $codeId discount code identifier
      */
     #[JsonProperty('code_id')]
-    public ?int $codeId;
+    public ?string $codeId;
 
     /**
-     * @var ?bool $confirm is the order confirmed
+     * @var ?value-of<OrderConfirm> $confirm is the order confirmed
      */
     #[JsonProperty('confirm')]
-    public ?bool $confirm;
+    public ?string $confirm;
 
     /**
      * @var ?string $confirmDate order confirmation date <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -58,16 +64,16 @@ class Order extends JsonSerializableType
     public ?string $confirmDate;
 
     /**
-     * @var ?int $currencyId [currency](#tag/Currencies) identifier
+     * @var ?string $currencyId [currency](#tag/Currencies) identifier
      */
     #[JsonProperty('currency_id')]
-    public ?int $currencyId;
+    public ?string $currencyId;
 
     /**
-     * @var ?float $currencyRate currency rate, for default currency always 1
+     * @var ?string $currencyRate currency rate, for default currency always 1
      */
     #[JsonProperty('currency_rate')]
-    public ?float $currencyRate;
+    public ?string $currencyRate;
 
     /**
      * @var ?string $date order creation date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -100,28 +106,28 @@ class Order extends JsonSerializableType
     public ?string $deliveryEmail;
 
     /**
-     * @var ?float $discountClient client's discount (in percent)
+     * @var ?string $discountClient client's discount (in percent)
      */
     #[JsonProperty('discount_client')]
-    public ?float $discountClient;
+    public ?string $discountClient;
 
     /**
-     * @var ?float $discountCode amount of discount code (in percent)
+     * @var ?string $discountCode amount of discount code (in percent)
      */
     #[JsonProperty('discount_code')]
-    public ?float $discountCode;
+    public ?string $discountCode;
 
     /**
-     * @var ?float $discountGroup group discount (in percent)
+     * @var ?string $discountGroup group discount (in percent)
      */
     #[JsonProperty('discount_group')]
-    public ?float $discountGroup;
+    public ?string $discountGroup;
 
     /**
-     * @var ?float $discountLevels order discount based on defined discount levels (Admin &raquo; Marketing &raquo; Discounts &raquo; Discounts thresholds)
+     * @var ?string $discountLevels order discount based on defined discount levels (Admin &raquo; Marketing &raquo; Discounts &raquo; Discounts thresholds)
      */
     #[JsonProperty('discount_levels')]
-    public ?float $discountLevels;
+    public ?string $discountLevels;
 
     /**
      * @var string $email client 's e-mail address
@@ -160,10 +166,10 @@ class Order extends JsonSerializableType
     public ?bool $isUnderpayment;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier chosen during ordering
+     * @var ?string $langId [language](#tag/Languages) identifier chosen during ordering
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?int $loyaltyCost loyalty points used for products exchange
@@ -196,10 +202,10 @@ class Order extends JsonSerializableType
     public ?string $notesPub;
 
     /**
-     * @var ?int $orderId order identifier
+     * @var ?string $orderId order identifier
      */
     #[JsonProperty('order_id')]
-    public ?int $orderId;
+    public ?string $orderId;
 
     /**
      * @var ?string $orderUrl link to the order preview
@@ -221,16 +227,16 @@ class Order extends JsonSerializableType
      *     <li>100-111 - Apilo</li>
      * </ul>
      *
-     * @var ?int $origin
+     * @var ?string $origin
      */
     #[JsonProperty('origin')]
-    public ?int $origin;
+    public ?string $origin;
 
     /**
-     * @var ?float $paid paid amount
+     * @var ?string $paid paid amount
      */
     #[JsonProperty('paid')]
-    public ?float $paid;
+    public ?string $paid;
 
     /**
      * @var ?array<string, string> $paymentAdditionalFields additional field value - key is name; value - value: keys depends on plugins enabled
@@ -239,10 +245,10 @@ class Order extends JsonSerializableType
     public ?array $paymentAdditionalFields;
 
     /**
-     * @var int $paymentId [payment](#tag/Payments) method identifier
+     * @var string $paymentId [payment](#tag/Payments) method identifier
      */
     #[JsonProperty('payment_id')]
-    public int $paymentId;
+    public string $paymentId;
 
     /**
      * @var ?string $paymentUrl link to pay the order
@@ -279,6 +285,12 @@ class Order extends JsonSerializableType
     public ?OrderPickupPointData $pickupPointData;
 
     /**
+     * @var ?array<string, string> $properties custom order properties as key-value pairs (key is property name, value is property value)
+     */
+    #[JsonProperty('properties'), ArrayType(['string' => 'string'])]
+    public ?array $properties;
+
+    /**
      * @var ?string $promoCode promotion code; if empty - no code
      */
     #[JsonProperty('promo_code')]
@@ -291,22 +303,22 @@ class Order extends JsonSerializableType
     public ?array $shippingAdditionalFields;
 
     /**
-     * @var ?float $shippingCost shipping cost
+     * @var ?string $shippingCost shipping cost
      */
     #[JsonProperty('shipping_cost')]
-    public ?float $shippingCost;
+    public ?string $shippingCost;
 
     /**
-     * @var int $shippingId [shipping](#tag/Shippings) identifier
+     * @var string $shippingId [shipping](#tag/Shippings) identifier
      */
     #[JsonProperty('shipping_id')]
-    public int $shippingId;
+    public string $shippingId;
 
     /**
-     * @var int $shippingTaxId shipping [tax](#tag/Taxes) identifier
+     * @var string $shippingTaxId shipping [tax](#tag/Taxes) identifier
      */
     #[JsonProperty('shipping_tax_id')]
-    public int $shippingTaxId;
+    public string $shippingTaxId;
 
     /**
      * @var ?string $shippingTaxName shipping tax name
@@ -315,10 +327,10 @@ class Order extends JsonSerializableType
     public ?string $shippingTaxName;
 
     /**
-     * @var ?float $shippingTaxValue shipping tax value
+     * @var ?string $shippingTaxValue shipping tax value
      */
     #[JsonProperty('shipping_tax_value')]
-    public ?float $shippingTaxValue;
+    public ?string $shippingTaxValue;
 
     /**
      * @var ?OrderStatus $status order [status](#tag/Statuses) data
@@ -333,16 +345,16 @@ class Order extends JsonSerializableType
     public ?string $statusDate;
 
     /**
-     * @var int $statusId order [status](#tag/Statuses) identifier
+     * @var string $statusId order [status](#tag/Statuses) identifier
      */
     #[JsonProperty('status_id')]
-    public int $statusId;
+    public string $statusId;
 
     /**
-     * @var ?float $sum order sum
+     * @var ?string $sum order sum
      */
     #[JsonProperty('sum')]
-    public ?float $sum;
+    public ?string $sum;
 
     /**
      * @var ?int $totalParcels total parcels count
@@ -351,10 +363,22 @@ class Order extends JsonSerializableType
     public ?int $totalParcels;
 
     /**
+     * @var ?array<int> $tags identifiers of order tags assigned to this order
+     */
+    #[JsonProperty('tags'), ArrayType(['integer'])]
+    public ?array $tags;
+
+    /**
      * @var ?int $totalProducts total products count
      */
     #[JsonProperty('total_products')]
     public ?int $totalProducts;
+
+    /**
+     * @var ?OrderUtms $utms UTM tracking parameters associated with this order (utm_source, utm_medium, utm_campaign, utm_content)
+     */
+    #[JsonProperty('utms')]
+    public ?OrderUtms $utms;
 
     /**
      * should the default address be used for delivery if `billing_address`,
@@ -367,16 +391,16 @@ class Order extends JsonSerializableType
     public ?bool $useShippingAddress;
 
     /**
-     * @var ?int $userId [client](#tag/Users) identifier
+     * @var ?string $userId [client](#tag/Users) identifier
      */
     #[JsonProperty('user_id')]
-    public ?int $userId;
+    public ?string $userId;
 
     /**
-     * @var ?bool $userOrder has the order been created by registered user?
+     * @var ?value-of<OrderUserOrder> $userOrder has the order been created by registered user?
      */
     #[JsonProperty('user_order')]
-    public ?bool $userOrder;
+    public ?string $userOrder;
 
     /**
      * @var ?bool $vatEu is B2B order within the Intra-Community Supply of Goods (EU VAT)?
@@ -387,60 +411,64 @@ class Order extends JsonSerializableType
     /**
      * @param array{
      *   email: string,
-     *   paymentId: int,
-     *   shippingId: int,
-     *   shippingTaxId: int,
-     *   statusId: int,
+     *   paymentId: string,
+     *   shippingId: string,
+     *   shippingTaxId: string,
+     *   statusId: string,
      *   additionalFields?: ?array<OrderAdditionalFieldsItem>,
-     *   auction?: ?string,
+     *   auction?: ?array<string, mixed>,
      *   billingAddress?: ?OrderBillingAddress,
+     *   children?: ?array<int>,
      *   code?: ?string,
-     *   codeId?: ?int,
-     *   confirm?: ?bool,
+     *   codeId?: ?string,
+     *   confirm?: ?value-of<OrderConfirm>,
      *   confirmDate?: ?string,
-     *   currencyId?: ?int,
-     *   currencyRate?: ?float,
+     *   currencyId?: ?string,
+     *   currencyRate?: ?string,
      *   date?: ?string,
      *   deliveryAddress?: ?OrderDeliveryAddress,
      *   deliveryCode?: ?string,
      *   deliveryDate?: ?string,
      *   deliveryEmail?: ?string,
-     *   discountClient?: ?float,
-     *   discountCode?: ?float,
-     *   discountGroup?: ?float,
-     *   discountLevels?: ?float,
+     *   discountClient?: ?string,
+     *   discountCode?: ?string,
+     *   discountGroup?: ?string,
+     *   discountLevels?: ?string,
      *   ipAddress?: ?string,
      *   isCashOnDelivery?: ?bool,
      *   isOverpayment?: ?bool,
      *   isPaid?: ?bool,
      *   isUnderpayment?: ?bool,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   loyaltyCost?: ?int,
      *   loyaltyScore?: ?int,
      *   notes?: ?string,
      *   notesPriv?: ?string,
      *   notesPub?: ?string,
-     *   orderId?: ?int,
+     *   orderId?: ?string,
      *   orderUrl?: ?string,
-     *   origin?: ?int,
-     *   paid?: ?float,
+     *   origin?: ?string,
+     *   paid?: ?string,
      *   paymentAdditionalFields?: ?array<string, string>,
      *   paymentUrl?: ?string,
      *   pickupPoint?: ?string,
      *   pickupPointData?: ?OrderPickupPointData,
+     *   properties?: ?array<string, string>,
      *   promoCode?: ?string,
      *   shippingAdditionalFields?: ?array<string, string>,
-     *   shippingCost?: ?float,
+     *   shippingCost?: ?string,
      *   shippingTaxName?: ?string,
-     *   shippingTaxValue?: ?float,
+     *   shippingTaxValue?: ?string,
      *   status?: ?OrderStatus,
      *   statusDate?: ?string,
-     *   sum?: ?float,
+     *   sum?: ?string,
      *   totalParcels?: ?int,
+     *   tags?: ?array<int>,
      *   totalProducts?: ?int,
+     *   utms?: ?OrderUtms,
      *   useShippingAddress?: ?bool,
-     *   userId?: ?int,
-     *   userOrder?: ?bool,
+     *   userId?: ?string,
+     *   userOrder?: ?value-of<OrderUserOrder>,
      *   vatEu?: ?bool,
      * } $values
      */
@@ -450,6 +478,7 @@ class Order extends JsonSerializableType
         $this->additionalFields = $values['additionalFields'] ?? null;
         $this->auction = $values['auction'] ?? null;
         $this->billingAddress = $values['billingAddress'] ?? null;
+        $this->children = $values['children'] ?? null;
         $this->code = $values['code'] ?? null;
         $this->codeId = $values['codeId'] ?? null;
         $this->confirm = $values['confirm'] ?? null;
@@ -486,6 +515,7 @@ class Order extends JsonSerializableType
         $this->paymentUrl = $values['paymentUrl'] ?? null;
         $this->pickupPoint = $values['pickupPoint'] ?? null;
         $this->pickupPointData = $values['pickupPointData'] ?? null;
+        $this->properties = $values['properties'] ?? null;
         $this->promoCode = $values['promoCode'] ?? null;
         $this->shippingAdditionalFields = $values['shippingAdditionalFields'] ?? null;
         $this->shippingCost = $values['shippingCost'] ?? null;
@@ -498,7 +528,9 @@ class Order extends JsonSerializableType
         $this->statusId = $values['statusId'];
         $this->sum = $values['sum'] ?? null;
         $this->totalParcels = $values['totalParcels'] ?? null;
+        $this->tags = $values['tags'] ?? null;
         $this->totalProducts = $values['totalProducts'] ?? null;
+        $this->utms = $values['utms'] ?? null;
         $this->useShippingAddress = $values['useShippingAddress'] ?? null;
         $this->userId = $values['userId'] ?? null;
         $this->userOrder = $values['userOrder'] ?? null;

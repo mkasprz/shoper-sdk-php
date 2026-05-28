@@ -18,10 +18,10 @@ class Warehouse extends JsonSerializableType
     public ?bool $acceptsReturns;
 
     /**
-     * @var ?bool $active active
+     * @var ?value-of<WarehouseActive> $active active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $city contact details - city
@@ -48,10 +48,10 @@ class Warehouse extends JsonSerializableType
     public ?string $countryCode;
 
     /**
-     * @var ?bool $default default warehouse
+     * @var ?value-of<WarehouseDefault> $default default warehouse
      */
     #[JsonProperty('default')]
-    public ?bool $default;
+    public ?string $default;
 
     /**
      * @var ?string $email contact details - phone
@@ -172,12 +172,12 @@ class Warehouse extends JsonSerializableType
      *   name: string,
      *   shortName: string,
      *   acceptsReturns?: ?bool,
-     *   active?: ?bool,
+     *   active?: ?value-of<WarehouseActive>,
      *   city?: ?string,
      *   companyName?: ?string,
      *   country?: ?string,
      *   countryCode?: ?string,
-     *   default?: ?bool,
+     *   default?: ?value-of<WarehouseDefault>,
      *   email?: ?string,
      *   fulfilment?: ?bool,
      *   online?: ?int,

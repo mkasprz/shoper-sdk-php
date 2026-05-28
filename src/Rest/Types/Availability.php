@@ -12,28 +12,28 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Availability extends JsonSerializableType
 {
     /**
-     * @var ?int $availabilityId availability identifier
+     * @var ?string $availabilityId availability identifier
      */
     #[JsonProperty('availability_id')]
-    public ?int $availabilityId;
+    public ?string $availabilityId;
 
     /**
-     * @var ?bool $canBuy can the product with this availability be bought?
+     * @var ?value-of<AvailabilityCanBuy> $canBuy can the product with this availability be bought?
      */
     #[JsonProperty('can_buy')]
-    public ?bool $canBuy;
+    public ?string $canBuy;
 
     /**
-     * @var ?int $from a minimal amount required for availability to be enabled
+     * @var ?string $from a minimal amount required for availability to be enabled
      */
     #[JsonProperty('from')]
-    public ?int $from;
+    public ?string $from;
 
     /**
-     * @var ?bool $notifier notify user on status change by e-mail
+     * @var ?value-of<AvailabilityNotifier> $notifier notify user on status change by e-mail
      */
     #[JsonProperty('notifier')]
-    public ?bool $notifier;
+    public ?string $notifier;
 
     /**
      * @var ?string $photo availability icon file name
@@ -42,10 +42,10 @@ class Availability extends JsonSerializableType
     public ?string $photo;
 
     /**
-     * @var ?bool $ranges if enabled, availability is determined by availabilities; disabled - manually
+     * @var ?value-of<AvailabilityRanges> $ranges if enabled, availability is determined by availabilities; disabled - manually
      */
     #[JsonProperty('ranges')]
-    public ?bool $ranges;
+    public ?string $ranges;
 
     /**
      * @var ?array<string, AvailabilityTranslationsValue> $translations an associative array with object translations
@@ -55,12 +55,12 @@ class Availability extends JsonSerializableType
 
     /**
      * @param array{
-     *   availabilityId?: ?int,
-     *   canBuy?: ?bool,
-     *   from?: ?int,
-     *   notifier?: ?bool,
+     *   availabilityId?: ?string,
+     *   canBuy?: ?value-of<AvailabilityCanBuy>,
+     *   from?: ?string,
+     *   notifier?: ?value-of<AvailabilityNotifier>,
      *   photo?: ?string,
-     *   ranges?: ?bool,
+     *   ranges?: ?value-of<AvailabilityRanges>,
      *   translations?: ?array<string, AvailabilityTranslationsValue>,
      * } $values
      */

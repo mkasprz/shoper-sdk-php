@@ -14,10 +14,10 @@ class OptionGroupTranslationsValue extends JsonSerializableType
     public ?string $groupId;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var string $name name of options group
@@ -26,17 +26,17 @@ class OptionGroupTranslationsValue extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $transId translation identifier
+     * @var ?string $transId translation identifier
      */
     #[JsonProperty('trans_id')]
-    public ?int $transId;
+    public ?string $transId;
 
     /**
      * @param array{
      *   name: string,
      *   groupId?: ?string,
-     *   langId?: ?int,
-     *   transId?: ?int,
+     *   langId?: ?string,
+     *   transId?: ?string,
      * } $values
      */
     public function __construct(

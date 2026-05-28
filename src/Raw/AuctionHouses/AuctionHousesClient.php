@@ -69,7 +69,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAuctionHouses(ListAuctionHousesRequest $request = new ListAuctionHousesRequest(), ?array $options = null): ?ListAuctionHousesResponse
+    public function list(ListAuctionHousesRequest $request = new ListAuctionHousesRequest(), ?array $options = null): ?ListAuctionHousesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAuctionHouse(AuctionHouseInsert $request, ?array $options = null): int|AuctionHouse|null
+    public function create(AuctionHouseInsert $request, ?array $options = null): int|AuctionHouse|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAuctionHouse(string $id, ?array $options = null): ?AuctionHouse
+    public function get(string $id, ?array $options = null): ?AuctionHouse
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAuctionHouse(string $id, AuctionHouseUpdate $request = new AuctionHouseUpdate(), ?array $options = null): int|AuctionHouse|null
+    public function update(string $id, AuctionHouseUpdate $request = new AuctionHouseUpdate(), ?array $options = null): int|AuctionHouse|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAuctionHouse(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

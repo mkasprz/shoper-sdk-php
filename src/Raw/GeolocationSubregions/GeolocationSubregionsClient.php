@@ -65,7 +65,7 @@ class GeolocationSubregionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listGeolocationSubregions(ListGeolocationSubregionsRequest $request = new ListGeolocationSubregionsRequest(), ?array $options = null): ?ListGeolocationSubregionsResponse
+    public function list(ListGeolocationSubregionsRequest $request = new ListGeolocationSubregionsRequest(), ?array $options = null): ?ListGeolocationSubregionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -119,7 +119,7 @@ class GeolocationSubregionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getGeolocationSubregion(string $id, ?array $options = null): ?GeolocationSubregion
+    public function get(string $id, ?array $options = null): ?GeolocationSubregion
     {
         $options = array_merge($this->options, $options ?? []);
         try {

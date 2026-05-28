@@ -69,7 +69,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listNewsCategories(ListNewsCategoriesRequest $request = new ListNewsCategoriesRequest(), ?array $options = null): ?ListNewsCategoriesResponse
+    public function list(ListNewsCategoriesRequest $request = new ListNewsCategoriesRequest(), ?array $options = null): ?ListNewsCategoriesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createNewsCategory(NewsCategoryInsert $request, ?array $options = null): int|NewsCategory|null
+    public function create(NewsCategoryInsert $request, ?array $options = null): int|NewsCategory|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class NewsCategoriesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class NewsCategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getNewsCategory(string $id, ?array $options = null): ?NewsCategory
+    public function get(string $id, ?array $options = null): ?NewsCategory
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class NewsCategoriesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param NewsCategoryUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class NewsCategoriesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |NewsCategory
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateNewsCategory(string $id, NewsCategoryUpdate $request = new NewsCategoryUpdate(), ?array $options = null): bool|NewsCategory|null
+    public function update(string $id, NewsCategoryUpdate $request = new NewsCategoryUpdate(), ?array $options = null): int|NewsCategory|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class NewsCategoriesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', NewsCategory::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', NewsCategory::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class NewsCategoriesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class NewsCategoriesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteNewsCategory(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class NewsCategoriesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

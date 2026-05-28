@@ -18,34 +18,34 @@ class Specialoffer extends JsonSerializableType
      *     <li>2 - just defined options
      * </ul>
      *
-     * @var ?int $conditionType
+     * @var ?string $conditionType
      */
     #[JsonProperty('condition_type')]
-    public ?int $conditionType;
+    public ?string $conditionType;
 
     /**
-     * @var string $dateFrom start of product promotion
+     * @var ?string $dateFrom start of product promotion
      */
     #[JsonProperty('date_from')]
-    public string $dateFrom;
+    public ?string $dateFrom;
 
     /**
-     * @var string $dateTo end of product promotion
+     * @var ?string $dateTo end of product promotion
      */
     #[JsonProperty('date_to')]
-    public string $dateTo;
+    public ?string $dateTo;
 
     /**
-     * @var float $discount discount for the product
+     * @var ?string $discount discount for the product
      */
     #[JsonProperty('discount')]
-    public float $discount;
+    public ?string $discount;
 
     /**
-     * @var ?float $discountSpecial discount for the product (special)
+     * @var ?string $discountSpecial discount for the product (special)
      */
     #[JsonProperty('discount_special')]
-    public ?float $discountSpecial;
+    public ?string $discountSpecial;
 
     /**
      * a method of special offer calculation:
@@ -55,34 +55,34 @@ class Specialoffer extends JsonSerializableType
      *     <li>3 - percentage discount, applies for all types of variants (with dedicated price also)</li>
      * </ul>
      *
-     * @var int $discountType
+     * @var ?string $discountType
      */
     #[JsonProperty('discount_type')]
-    public int $discountType;
+    public ?string $discountType;
 
     /**
-     * @var ?float $discountWholesale discount for the product (wholesale)
+     * @var ?string $discountWholesale discount for the product (wholesale)
      */
     #[JsonProperty('discount_wholesale')]
-    public ?float $discountWholesale;
+    public ?string $discountWholesale;
 
     /**
-     * @var int $productId product identifier
+     * @var ?string $productId product identifier
      */
     #[JsonProperty('product_id')]
-    public int $productId;
+    public ?string $productId;
 
     /**
-     * @var ?int $promoId promotion identifier
+     * @var ?string $promoId promotion identifier
      */
     #[JsonProperty('promo_id')]
-    public ?int $promoId;
+    public ?string $promoId;
 
     /**
-     * @var ?int $stockId stock identifier
+     * @var ?string $stockId stock identifier
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * array of [stock](#tag/ProductStocks) identifiers
@@ -98,30 +98,30 @@ class Specialoffer extends JsonSerializableType
 
     /**
      * @param array{
-     *   dateFrom: string,
-     *   dateTo: string,
-     *   discount: float,
-     *   discountType: int,
-     *   productId: int,
-     *   conditionType?: ?int,
-     *   discountSpecial?: ?float,
-     *   discountWholesale?: ?float,
-     *   promoId?: ?int,
-     *   stockId?: ?int,
+     *   conditionType?: ?string,
+     *   dateFrom?: ?string,
+     *   dateTo?: ?string,
+     *   discount?: ?string,
+     *   discountSpecial?: ?string,
+     *   discountType?: ?string,
+     *   discountWholesale?: ?string,
+     *   productId?: ?string,
+     *   promoId?: ?string,
+     *   stockId?: ?string,
      *   stocks?: ?array<int>,
      * } $values
      */
     public function __construct(
-        array $values,
+        array $values = [],
     ) {
         $this->conditionType = $values['conditionType'] ?? null;
-        $this->dateFrom = $values['dateFrom'];
-        $this->dateTo = $values['dateTo'];
-        $this->discount = $values['discount'];
+        $this->dateFrom = $values['dateFrom'] ?? null;
+        $this->dateTo = $values['dateTo'] ?? null;
+        $this->discount = $values['discount'] ?? null;
         $this->discountSpecial = $values['discountSpecial'] ?? null;
-        $this->discountType = $values['discountType'];
+        $this->discountType = $values['discountType'] ?? null;
         $this->discountWholesale = $values['discountWholesale'] ?? null;
-        $this->productId = $values['productId'];
+        $this->productId = $values['productId'] ?? null;
         $this->promoId = $values['promoId'] ?? null;
         $this->stockId = $values['stockId'] ?? null;
         $this->stocks = $values['stocks'] ?? null;

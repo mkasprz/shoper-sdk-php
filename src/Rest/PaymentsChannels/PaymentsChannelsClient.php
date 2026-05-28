@@ -56,7 +56,7 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
+     * @param string $paymentId `payment_id` identifier.
      * @param ListPaymentsChannelsRequest $request
      * @param ?array{
      *   baseUrl?: string,
@@ -70,7 +70,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listPaymentsChannels(string $paymentId, ListPaymentsChannelsRequest $request = new ListPaymentsChannelsRequest(), ?array $options = null): ?ListPaymentsChannelsResponse
+    public function list(string $paymentId, ListPaymentsChannelsRequest $request = new ListPaymentsChannelsRequest(), ?array $options = null): ?ListPaymentsChannelsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -111,7 +111,7 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
+     * @param string $paymentId `payment_id` identifier.
      * @param PaymentChannelInsert $request
      * @param ?array{
      *   baseUrl?: string,
@@ -128,7 +128,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createPaymentChannel(string $paymentId, PaymentChannelInsert $request, ?array $options = null): int|PaymentChannel|null
+    public function create(string $paymentId, PaymentChannelInsert $request, ?array $options = null): int|PaymentChannel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -162,8 +162,8 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
-     * @param string $id
+     * @param string $paymentId `payment_id` identifier.
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -176,7 +176,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getPaymentChannel(string $paymentId, string $id, ?array $options = null): ?PaymentChannel
+    public function get(string $paymentId, string $id, ?array $options = null): ?PaymentChannel
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -209,8 +209,8 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
-     * @param string $id
+     * @param string $paymentId `payment_id` identifier.
+     * @param string $id Resource identifier.
      * @param PaymentChannelUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -221,13 +221,13 @@ class PaymentsChannelsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |PaymentChannel
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updatePaymentChannel(string $paymentId, string $id, PaymentChannelUpdate $request = new PaymentChannelUpdate(), ?array $options = null): bool|PaymentChannel|null
+    public function update(string $paymentId, string $id, PaymentChannelUpdate $request = new PaymentChannelUpdate(), ?array $options = null): int|PaymentChannel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -246,7 +246,7 @@ class PaymentsChannelsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', PaymentChannel::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', PaymentChannel::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -261,8 +261,8 @@ class PaymentsChannelsClient
     }
 
     /**
-     * @param string $paymentId
-     * @param string $id
+     * @param string $paymentId `payment_id` identifier.
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -271,11 +271,11 @@ class PaymentsChannelsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deletePaymentChannel(string $paymentId, string $id, ?array $options = null): ?bool
+    public function delete(string $paymentId, string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -293,7 +293,7 @@ class PaymentsChannelsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

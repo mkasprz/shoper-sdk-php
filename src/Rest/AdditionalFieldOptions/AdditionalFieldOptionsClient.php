@@ -69,7 +69,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAdditionalFieldOptions(ListAdditionalFieldOptionsRequest $request = new ListAdditionalFieldOptionsRequest(), ?array $options = null): ?ListAdditionalFieldOptionsResponse
+    public function list(ListAdditionalFieldOptionsRequest $request = new ListAdditionalFieldOptionsRequest(), ?array $options = null): ?ListAdditionalFieldOptionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAdditionalFieldOption(AdditionalFieldOptionInsert $request, ?array $options = null): int|AdditionalFieldOption|null
+    public function create(AdditionalFieldOptionInsert $request, ?array $options = null): int|AdditionalFieldOption|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class AdditionalFieldOptionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAdditionalFieldOption(string $id, ?array $options = null): ?AdditionalFieldOption
+    public function get(string $id, ?array $options = null): ?AdditionalFieldOption
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class AdditionalFieldOptionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AdditionalFieldOptionUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class AdditionalFieldOptionsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |AdditionalFieldOption
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAdditionalFieldOption(string $id, AdditionalFieldOptionUpdate $request = new AdditionalFieldOptionUpdate(), ?array $options = null): bool|AdditionalFieldOption|null
+    public function update(string $id, AdditionalFieldOptionUpdate $request = new AdditionalFieldOptionUpdate(), ?array $options = null): int|AdditionalFieldOption|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class AdditionalFieldOptionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', AdditionalFieldOption::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', AdditionalFieldOption::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class AdditionalFieldOptionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class AdditionalFieldOptionsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAdditionalFieldOption(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class AdditionalFieldOptionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

@@ -69,7 +69,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listNewsTags(ListNewsTagsRequest $request = new ListNewsTagsRequest(), ?array $options = null): ?ListNewsTagsResponse
+    public function list(ListNewsTagsRequest $request = new ListNewsTagsRequest(), ?array $options = null): ?ListNewsTagsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createNewsTag(NewsTagInsert $request, ?array $options = null): int|NewsTag|null
+    public function create(NewsTagInsert $request, ?array $options = null): int|NewsTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getNewsTag(string $id, ?array $options = null): ?NewsTag
+    public function get(string $id, ?array $options = null): ?NewsTag
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateNewsTag(string $id, NewsTagUpdate $request = new NewsTagUpdate(), ?array $options = null): int|NewsTag|null
+    public function update(string $id, NewsTagUpdate $request = new NewsTagUpdate(), ?array $options = null): int|NewsTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteNewsTag(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

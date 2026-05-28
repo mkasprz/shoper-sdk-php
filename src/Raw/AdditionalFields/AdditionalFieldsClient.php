@@ -69,7 +69,7 @@ class AdditionalFieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAdditionalFields(ListAdditionalFieldsRequest $request = new ListAdditionalFieldsRequest(), ?array $options = null): ?ListAdditionalFieldsResponse
+    public function list(ListAdditionalFieldsRequest $request = new ListAdditionalFieldsRequest(), ?array $options = null): ?ListAdditionalFieldsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AdditionalFieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAdditionalField(AdditionalFieldInsert $request, ?array $options = null): int|AdditionalField|null
+    public function create(AdditionalFieldInsert $request, ?array $options = null): int|AdditionalField|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class AdditionalFieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAdditionalField(string $id, ?array $options = null): ?AdditionalField
+    public function get(string $id, ?array $options = null): ?AdditionalField
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class AdditionalFieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAdditionalField(string $id, AdditionalFieldUpdate $request = new AdditionalFieldUpdate(), ?array $options = null): int|AdditionalField|null
+    public function update(string $id, AdditionalFieldUpdate $request = new AdditionalFieldUpdate(), ?array $options = null): int|AdditionalField|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class AdditionalFieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAdditionalField(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

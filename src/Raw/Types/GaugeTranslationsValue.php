@@ -26,17 +26,17 @@ class GaugeTranslationsValue extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?string $transId translation identifier
+     * @var ?string $translationId translation identifier
      */
-    #[JsonProperty('trans_id')]
-    public ?string $transId;
+    #[JsonProperty('translation_id')]
+    public ?string $translationId;
 
     /**
      * @param array{
      *   gaugeId?: ?string,
      *   langId?: ?string,
      *   name?: ?string,
-     *   transId?: ?string,
+     *   translationId?: ?string,
      * } $values
      */
     public function __construct(
@@ -45,7 +45,7 @@ class GaugeTranslationsValue extends JsonSerializableType
         $this->gaugeId = $values['gaugeId'] ?? null;
         $this->langId = $values['langId'] ?? null;
         $this->name = $values['name'] ?? null;
-        $this->transId = $values['transId'] ?? null;
+        $this->translationId = $values['translationId'] ?? null;
     }
 
     /**

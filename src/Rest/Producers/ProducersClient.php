@@ -69,7 +69,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProducers(ListProducersRequest $request = new ListProducersRequest(), ?array $options = null): ?ListProducersResponse
+    public function list(ListProducersRequest $request = new ListProducersRequest(), ?array $options = null): ?ListProducersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProducer(ProducerInsert $request, ?array $options = null): int|Producer|null
+    public function create(ProducerInsert $request, ?array $options = null): int|Producer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class ProducersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProducer(string $id, ?array $options = null): ?Producer
+    public function get(string $id, ?array $options = null): ?Producer
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class ProducersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ProducerUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class ProducersClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Producer
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProducer(string $id, ProducerUpdate $request = new ProducerUpdate(), ?array $options = null): bool|Producer|null
+    public function update(string $id, ProducerUpdate $request = new ProducerUpdate(), ?array $options = null): int|Producer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class ProducersClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Producer::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Producer::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class ProducersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class ProducersClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProducer(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class ProducersClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

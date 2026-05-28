@@ -69,7 +69,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAdditionalFieldOptions(ListAdditionalFieldOptionsRequest $request = new ListAdditionalFieldOptionsRequest(), ?array $options = null): ?ListAdditionalFieldOptionsResponse
+    public function list(ListAdditionalFieldOptionsRequest $request = new ListAdditionalFieldOptionsRequest(), ?array $options = null): ?ListAdditionalFieldOptionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAdditionalFieldOption(AdditionalFieldOptionInsert $request, ?array $options = null): int|AdditionalFieldOption|null
+    public function create(AdditionalFieldOptionInsert $request, ?array $options = null): int|AdditionalFieldOption|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAdditionalFieldOption(string $id, ?array $options = null): ?AdditionalFieldOption
+    public function get(string $id, ?array $options = null): ?AdditionalFieldOption
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAdditionalFieldOption(string $id, AdditionalFieldOptionUpdate $request = new AdditionalFieldOptionUpdate(), ?array $options = null): int|AdditionalFieldOption|null
+    public function update(string $id, AdditionalFieldOptionUpdate $request = new AdditionalFieldOptionUpdate(), ?array $options = null): int|AdditionalFieldOption|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class AdditionalFieldOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAdditionalFieldOption(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

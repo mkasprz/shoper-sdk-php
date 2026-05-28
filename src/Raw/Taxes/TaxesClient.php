@@ -65,7 +65,7 @@ class TaxesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listTaxes(ListTaxesRequest $request = new ListTaxesRequest(), ?array $options = null): ?ListTaxesResponse
+    public function list(ListTaxesRequest $request = new ListTaxesRequest(), ?array $options = null): ?ListTaxesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -119,7 +119,7 @@ class TaxesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getTax(string $id, ?array $options = null): ?Tax
+    public function get(string $id, ?array $options = null): ?Tax
     {
         $options = array_merge($this->options, $options ?? []);
         try {

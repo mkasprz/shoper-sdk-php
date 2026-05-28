@@ -160,10 +160,10 @@ class Product extends JsonSerializableType
     public ?string $editDate;
 
     /**
-     * @var ?array<int> $feedsExludes array of product feed identifiers
+     * @var ?array<int> $feedsExcludes array of product feed identifiers
      */
-    #[JsonProperty('feeds_exludes'), ArrayType(['integer'])]
-    public ?array $feedsExludes;
+    #[JsonProperty('feeds_excludes'), ArrayType(['integer'])]
+    public ?array $feedsExcludes;
 
     /**
      * @var ?int $gaugeId [gauge](#tag/Gauges) identifier
@@ -172,7 +172,11 @@ class Product extends JsonSerializableType
     public ?int $gaugeId;
 
     /**
-     * @var ?string $groupId [option group](#tag/OptionGroups) identifier the product is bound to
+     * [option group](#tag/OptionGroups) identifier the product is bound to.
+     * When parent option_group has `denomination=1`, this option behaves as a gift card denomination —
+     * `amount` field becomes mandatory, option_values cannot be modified directly.
+     *
+     * @var ?string $groupId
      */
     #[JsonProperty('group_id')]
     public ?string $groupId;
@@ -214,10 +218,25 @@ class Product extends JsonSerializableType
     public ?string $newproduct;
 
     /**
-     * @var ?array<int> $options array of product [stock](#tag/ProductStocks) identifiers
+     * Array of product option assignments.
+     *
+     * Behavior depends on option type:
+     * - **Options WITH children** (select/radio): returns ONLY active assigned values
+     *   (active=true). Inactive assignments are filtered out.
+     * - **Options WITHOUT children** (checkbox/text/file): always returns an entry
+     *   with `active=false` when no value is assigned, to signal the option exists
+     *   but has no assignment. Use `active=true` to filter actually-assigned ones.
+     *
+     * @var ?array<int> $options
      */
     #[JsonProperty('options'), ArrayType(['integer'])]
     public ?array $options;
+
+    /**
+     * @var ?array<array<string, mixed>> $optionsNonStock array of non-stock product option assignments
+     */
+    #[JsonProperty('options_non_stock'), ArrayType([['string' => 'mixed']])]
+    public ?array $optionsNonStock;
 
     /**
      * @var ?string $otherPrice price of product in other shops
@@ -358,7 +377,7 @@ class Product extends JsonSerializableType
      *   dimensionW?: ?string,
      *   ean?: ?string,
      *   editDate?: ?string,
-     *   feedsExludes?: ?array<int>,
+     *   feedsExcludes?: ?array<int>,
      *   gaugeId?: ?int,
      *   groupId?: ?string,
      *   inLoyalty?: ?value-of<ProductInLoyalty>,
@@ -368,6 +387,7 @@ class Product extends JsonSerializableType
      *   mainImage?: ?ProductMainImage,
      *   newproduct?: ?value-of<ProductNewproduct>,
      *   options?: ?array<int>,
+     *   optionsNonStock?: ?array<array<string, mixed>>,
      *   otherPrice?: ?string,
      *   producerId?: ?string,
      *   productId?: ?string,
@@ -410,7 +430,7 @@ class Product extends JsonSerializableType
         $this->dimensionW = $values['dimensionW'] ?? null;
         $this->ean = $values['ean'] ?? null;
         $this->editDate = $values['editDate'] ?? null;
-        $this->feedsExludes = $values['feedsExludes'] ?? null;
+        $this->feedsExcludes = $values['feedsExcludes'] ?? null;
         $this->gaugeId = $values['gaugeId'] ?? null;
         $this->groupId = $values['groupId'] ?? null;
         $this->inLoyalty = $values['inLoyalty'] ?? null;
@@ -420,6 +440,7 @@ class Product extends JsonSerializableType
         $this->mainImage = $values['mainImage'] ?? null;
         $this->newproduct = $values['newproduct'] ?? null;
         $this->options = $values['options'] ?? null;
+        $this->optionsNonStock = $values['optionsNonStock'] ?? null;
         $this->otherPrice = $values['otherPrice'] ?? null;
         $this->pkwiu = $values['pkwiu'];
         $this->producerId = $values['producerId'] ?? null;

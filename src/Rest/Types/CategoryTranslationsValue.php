@@ -9,10 +9,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class CategoryTranslationsValue extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is translation active
+     * @var ?value-of<CategoryTranslationsValueActive> $active is translation active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $categoryId
@@ -33,10 +33,10 @@ class CategoryTranslationsValue extends JsonSerializableType
     public ?string $descriptionBottom;
 
     /**
-     * @var ?bool $isdefault is category added during installation
+     * @var ?value-of<CategoryTranslationsValueIsdefault> $isdefault is category added during installation
      */
     #[JsonProperty('isdefault')]
-    public ?bool $isdefault;
+    public ?string $isdefault;
 
     /**
      * @var ?int $items count of active products of language bound to this category
@@ -45,10 +45,10 @@ class CategoryTranslationsValue extends JsonSerializableType
     public ?int $items;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?string $name category name
@@ -93,20 +93,20 @@ class CategoryTranslationsValue extends JsonSerializableType
     public ?string $seoUrl;
 
     /**
-     * @var ?int $transId translation identifier
+     * @var ?string $transId translation identifier
      */
     #[JsonProperty('trans_id')]
-    public ?int $transId;
+    public ?string $transId;
 
     /**
      * @param array{
-     *   active?: ?bool,
+     *   active?: ?value-of<CategoryTranslationsValueActive>,
      *   categoryId?: ?string,
      *   description?: ?string,
      *   descriptionBottom?: ?string,
-     *   isdefault?: ?bool,
+     *   isdefault?: ?value-of<CategoryTranslationsValueIsdefault>,
      *   items?: ?int,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   name?: ?string,
      *   permalink?: ?string,
      *   presentations?: ?array<int>,
@@ -114,7 +114,7 @@ class CategoryTranslationsValue extends JsonSerializableType
      *   seoKeywords?: ?string,
      *   seoTitle?: ?string,
      *   seoUrl?: ?string,
-     *   transId?: ?int,
+     *   transId?: ?string,
      * } $values
      */
     public function __construct(

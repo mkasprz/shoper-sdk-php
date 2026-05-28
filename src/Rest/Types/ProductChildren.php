@@ -17,43 +17,43 @@ class ProductChildren extends JsonSerializableType
     public ?int $bundleId;
 
     /**
-     * @var ?int $id child identifier
+     * @var ?string $id child identifier
      */
     #[JsonProperty('id')]
-    public ?int $id;
+    public ?string $id;
 
     /**
-     * @var ?int $order child order
+     * @var ?string $order child order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?int $productId [product](#tag/Products) identifier
+     * @var ?string $productId [product](#tag/Products) identifier
      */
     #[JsonProperty('product_id')]
-    public ?int $productId;
+    public ?string $productId;
 
     /**
-     * @var ?float $stock stock availability
+     * @var ?string $stock stock availability
      */
     #[JsonProperty('stock')]
-    public ?float $stock;
+    public ?string $stock;
 
     /**
-     * @var ?int $stockId [stock](#tag/ProductStocks) identifier
+     * @var ?string $stockId [stock](#tag/ProductStocks) identifier
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @param array{
      *   bundleId?: ?int,
-     *   id?: ?int,
-     *   order?: ?int,
-     *   productId?: ?int,
-     *   stock?: ?float,
-     *   stockId?: ?int,
+     *   id?: ?string,
+     *   order?: ?string,
+     *   productId?: ?string,
+     *   stock?: ?string,
+     *   stockId?: ?string,
      * } $values
      */
     public function __construct(

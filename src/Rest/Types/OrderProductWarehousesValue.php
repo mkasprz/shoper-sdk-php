@@ -8,10 +8,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class OrderProductWarehousesValue extends JsonSerializableType
 {
     /**
-     * @var float $quantity qunatity
+     * @var string $quantity qunatity
      */
     #[JsonProperty('quantity')]
-    public float $quantity;
+    public string $quantity;
 
     /**
      * @var int $shippingWarehouseId shipping warehouse
@@ -27,7 +27,7 @@ class OrderProductWarehousesValue extends JsonSerializableType
 
     /**
      * @param array{
-     *   quantity: float,
+     *   quantity: string,
      *   shippingWarehouseId: int,
      *   sourceWarehouseId: int,
      * } $values

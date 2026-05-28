@@ -12,6 +12,16 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class OptionValue extends JsonSerializableType
 {
     /**
+     * Denomination amount (value of a gift card variant). Set only for denomination
+     * option values (when parent option_group has `denomination=1`). Read-only —
+     * cannot be modified via REST API. SHOPAPI-780.
+     *
+     * @var ?string $amount
+     */
+    #[JsonProperty('amount')]
+    public ?string $amount;
+
+    /**
      * <ul>
      *     <li>-1 - decrease price by `change_price_value`,</li>
      *     <li>0 - keep price unchanged,</li>
@@ -36,22 +46,22 @@ class OptionValue extends JsonSerializableType
     public ?string $color;
 
     /**
-     * @var ?int $optionId [option](#tag/Options) identifier this value is bound to
+     * @var ?string $optionId [option](#tag/Options) identifier this value is bound to
      */
     #[JsonProperty('option_id')]
-    public ?int $optionId;
+    public ?string $optionId;
 
     /**
-     * @var ?int $order priority of sorting options order
+     * @var ?string $order priority of sorting options order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?int $ovalueId option value identifier
+     * @var ?string $ovalueId option value identifier
      */
     #[JsonProperty('ovalue_id')]
-    public ?int $ovalueId;
+    public ?string $ovalueId;
 
     /**
      * should price be changed by percent?
@@ -60,10 +70,10 @@ class OptionValue extends JsonSerializableType
      *     <li>1 - yes (change by percent)</li>
      * </ul>
      *
-     * @var ?int $percent
+     * @var ?string $percent
      */
     #[JsonProperty('percent')]
-    public ?int $percent;
+    public ?string $percent;
 
     /**
      * @var ?int $totalProducts amount of products this option value is bound to
@@ -85,13 +95,14 @@ class OptionValue extends JsonSerializableType
 
     /**
      * @param array{
+     *   amount?: ?string,
      *   changePriceType?: ?int,
      *   changePriceValue?: ?float,
      *   color?: ?string,
-     *   optionId?: ?int,
-     *   order?: ?int,
-     *   ovalueId?: ?int,
-     *   percent?: ?int,
+     *   optionId?: ?string,
+     *   order?: ?string,
+     *   ovalueId?: ?string,
+     *   percent?: ?string,
      *   totalProducts?: ?int,
      *   totalStocks?: ?int,
      *   translations?: ?array<string, OptionValueTranslationsValue>,
@@ -100,6 +111,7 @@ class OptionValue extends JsonSerializableType
     public function __construct(
         array $values = [],
     ) {
+        $this->amount = $values['amount'] ?? null;
         $this->changePriceType = $values['changePriceType'] ?? null;
         $this->changePriceValue = $values['changePriceValue'] ?? null;
         $this->color = $values['color'] ?? null;

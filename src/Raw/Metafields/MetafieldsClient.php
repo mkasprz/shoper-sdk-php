@@ -70,7 +70,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listMetafields(string $object, ListMetafieldsRequest $request = new ListMetafieldsRequest(), ?array $options = null): ?ListMetafieldsResponse
+    public function list(string $object, ListMetafieldsRequest $request = new ListMetafieldsRequest(), ?array $options = null): ?ListMetafieldsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -128,7 +128,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createMetafield(string $object, MetafieldInsert $request = new MetafieldInsert(), ?array $options = null): int|Metafield|null
+    public function create(string $object, MetafieldInsert $request = new MetafieldInsert(), ?array $options = null): int|Metafield|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -176,7 +176,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getMetafield(string $object, string $id, ?array $options = null): ?Metafield
+    public function get(string $object, string $id, ?array $options = null): ?Metafield
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -227,7 +227,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateMetafield(string $object, string $id, MetafieldUpdate $request = new MetafieldUpdate(), ?array $options = null): int|Metafield|null
+    public function update(string $object, string $id, MetafieldUpdate $request = new MetafieldUpdate(), ?array $options = null): int|Metafield|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -275,7 +275,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteMetafield(string $object, string $id, ?array $options = null): ?int
+    public function delete(string $object, string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

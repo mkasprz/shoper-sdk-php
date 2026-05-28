@@ -12,24 +12,24 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Shipping extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is shipping method active
+     * @var ?value-of<ShippingActive> $active is shipping method active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
-     * @var ?float $cost fixed delivery cost or <code>0</code> if weight/contents-dependent
+     * @var ?string $cost fixed delivery cost or <code>0</code> if weight/contents-dependent
      */
     #[JsonProperty('cost')]
-    public ?float $cost;
+    public ?string $cost;
 
     /**
      * an array of <a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">country codes</a>
      * supported by this shipping method
      *
-     * @var ?array<string> $countries
+     * @var ?array<string, string> $countries
      */
-    #[JsonProperty('countries'), ArrayType(['string'])]
+    #[JsonProperty('countries'), ArrayType(['string' => 'string'])]
     public ?array $countries;
 
     /**
@@ -42,10 +42,10 @@ class Shipping extends JsonSerializableType
      *     <li data-since="5.7.0">4 - package gauge weight</li>
      * </ul>
      *
-     * @var ?int $dependOnW
+     * @var ?string $dependOnW
      */
     #[JsonProperty('depend_on_w')]
-    public ?int $dependOnW;
+    public ?string $dependOnW;
 
     /**
      * @var ?string $description shipping description
@@ -69,10 +69,10 @@ class Shipping extends JsonSerializableType
     public ?string $engine;
 
     /**
-     * @var ?float $freeShipping a minimum value of order for free delivery or <code>if there's no free shipping option
+     * @var ?string $freeShipping a minimum value of order for free delivery or <code>if there's no free shipping option
      */
     #[JsonProperty('free_shipping')]
-    public ?float $freeShipping;
+    public ?string $freeShipping;
 
     /**
      * <ul>
@@ -87,40 +87,40 @@ class Shipping extends JsonSerializableType
     public ?array $gauges;
 
     /**
-     * @var ?bool $isDefault is default shipping method?
+     * @var ?value-of<ShippingIsDefault> $isDefault is default shipping method?
      */
     #[JsonProperty('is_default')]
-    public ?bool $isDefault;
+    public ?string $isDefault;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) language identifier
+     * @var ?string $langId [language](#tag/Languages) language identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
-     * @var ?float $maxCost max order amount supported by this shipping method or <code>0</code> if unrestricted
+     * @var ?string $maxCost max order amount supported by this shipping method or <code>0</code> if unrestricted
      */
     #[JsonProperty('max_cost')]
-    public ?float $maxCost;
+    public ?string $maxCost;
 
     /**
-     * @var ?float $maxWeight max weight of products the shipping supports
+     * @var ?string $maxWeight max weight of products the shipping supports
      */
     #[JsonProperty('max_weight')]
-    public ?float $maxWeight;
+    public ?string $maxWeight;
 
     /**
-     * @var ?float $minCost min order amount supported by this shipping method or <code>0</code> if unrestricted
+     * @var ?string $minCost min order amount supported by this shipping method or <code>0</code> if unrestricted
      */
     #[JsonProperty('min_cost')]
-    public ?float $minCost;
+    public ?string $minCost;
 
     /**
-     * @var ?float $minWeight minimal weight of products required for the shipping
+     * @var ?string $minWeight minimal weight of products required for the shipping
      */
     #[JsonProperty('min_weight')]
-    public ?float $minWeight;
+    public ?string $minWeight;
 
     /**
      * @var ?string $name shipping name
@@ -129,10 +129,10 @@ class Shipping extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?float $order priority used to calculate display order
+     * @var ?string $order priority used to calculate display order
      */
     #[JsonProperty('order')]
-    public ?float $order;
+    public ?string $order;
 
     /**
      * @var array<ShippingPaymentsItem> $payments [payments](#tag/Payments) assigned to this shipping
@@ -141,10 +141,10 @@ class Shipping extends JsonSerializableType
     public array $payments;
 
     /**
-     * @var ?float $pkwiu PKWiU (product quantifier) of shipping
+     * @var ?string $pkwiu PKWiU (product quantifier) of shipping
      */
     #[JsonProperty('pkwiu')]
-    public ?float $pkwiu;
+    public ?string $pkwiu;
 
     /**
      * @var ?array<ShippingRangesItem> $ranges an array of weight/price ranges
@@ -153,16 +153,16 @@ class Shipping extends JsonSerializableType
     public ?array $ranges;
 
     /**
-     * @var ?int $shippingId shipping identifier
+     * @var ?string $shippingId shipping identifier
      */
     #[JsonProperty('shipping_id')]
-    public ?int $shippingId;
+    public ?string $shippingId;
 
     /**
-     * @var int $taxId [tax](#tag/Taxes) identifier
+     * @var string $taxId [tax](#tag/Taxes) identifier
      */
     #[JsonProperty('tax_id')]
-    public int $taxId;
+    public string $taxId;
 
     /**
      * @var ?array<string, ShippingTranslationsValue> $translations an associative array with object translations
@@ -189,35 +189,35 @@ class Shipping extends JsonSerializableType
     public ?array $warehouses;
 
     /**
-     * @var int $zoneId [zone](#tag/Zones) identifier
+     * @var string $zoneId [zone](#tag/Zones) identifier
      */
     #[JsonProperty('zone_id')]
-    public int $zoneId;
+    public string $zoneId;
 
     /**
      * @param array{
      *   payments: array<ShippingPaymentsItem>,
-     *   taxId: int,
-     *   zoneId: int,
-     *   active?: ?bool,
-     *   cost?: ?float,
-     *   countries?: ?array<string>,
-     *   dependOnW?: ?int,
+     *   taxId: string,
+     *   zoneId: string,
+     *   active?: ?value-of<ShippingActive>,
+     *   cost?: ?string,
+     *   countries?: ?array<string, string>,
+     *   dependOnW?: ?string,
      *   description?: ?string,
      *   engine?: ?string,
-     *   freeShipping?: ?float,
+     *   freeShipping?: ?string,
      *   gauges?: ?array<int>,
-     *   isDefault?: ?bool,
-     *   langId?: ?int,
-     *   maxCost?: ?float,
-     *   maxWeight?: ?float,
-     *   minCost?: ?float,
-     *   minWeight?: ?float,
+     *   isDefault?: ?value-of<ShippingIsDefault>,
+     *   langId?: ?string,
+     *   maxCost?: ?string,
+     *   maxWeight?: ?string,
+     *   minCost?: ?string,
+     *   minWeight?: ?string,
      *   name?: ?string,
-     *   order?: ?float,
-     *   pkwiu?: ?float,
+     *   order?: ?string,
+     *   pkwiu?: ?string,
      *   ranges?: ?array<ShippingRangesItem>,
-     *   shippingId?: ?int,
+     *   shippingId?: ?string,
      *   translations?: ?array<string, ShippingTranslationsValue>,
      *   url?: ?string,
      *   vendorDescription?: ?string,

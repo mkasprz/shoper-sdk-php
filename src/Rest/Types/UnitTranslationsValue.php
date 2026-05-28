@@ -8,10 +8,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class UnitTranslationsValue extends JsonSerializableType
 {
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var string $name unit name
@@ -20,10 +20,10 @@ class UnitTranslationsValue extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $transId translation identifier
+     * @var ?string $transId translation identifier
      */
     #[JsonProperty('trans_id')]
-    public ?int $transId;
+    public ?string $transId;
 
     /**
      * @var ?string $unitId
@@ -34,8 +34,8 @@ class UnitTranslationsValue extends JsonSerializableType
     /**
      * @param array{
      *   name: string,
-     *   langId?: ?int,
-     *   transId?: ?int,
+     *   langId?: ?string,
+     *   transId?: ?string,
      *   unitId?: ?string,
      * } $values
      */

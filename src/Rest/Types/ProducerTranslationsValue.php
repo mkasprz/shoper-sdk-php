@@ -14,10 +14,10 @@ class ProducerTranslationsValue extends JsonSerializableType
     public ?string $description;
 
     /**
-     * @var ?int $langId
+     * @var ?string $langId
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?string $permalink full producer link
@@ -26,10 +26,10 @@ class ProducerTranslationsValue extends JsonSerializableType
     public ?string $permalink;
 
     /**
-     * @var ?int $producerId [producer](#tag/Producers) identifier
+     * @var ?string $producerId [producer](#tag/Producers) identifier
      */
     #[JsonProperty('producer_id')]
-    public ?int $producerId;
+    public ?string $producerId;
 
     /**
      * @var ?string $seoDescription description displayed in meta description tag
@@ -56,22 +56,22 @@ class ProducerTranslationsValue extends JsonSerializableType
     public ?string $seoUrl;
 
     /**
-     * @var ?int $translationId translation identifier
+     * @var ?string $translationId translation identifier
      */
     #[JsonProperty('translation_id')]
-    public ?int $translationId;
+    public ?string $translationId;
 
     /**
      * @param array{
      *   description?: ?string,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   permalink?: ?string,
-     *   producerId?: ?int,
+     *   producerId?: ?string,
      *   seoDescription?: ?string,
      *   seoKeywords?: ?string,
      *   seoTitle?: ?string,
      *   seoUrl?: ?string,
-     *   translationId?: ?int,
+     *   translationId?: ?string,
      * } $values
      */
     public function __construct(

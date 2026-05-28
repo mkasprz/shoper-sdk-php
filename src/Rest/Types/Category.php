@@ -4,6 +4,7 @@ namespace Shoper\Sdk\Rest\Types;
 
 use Shoper\Sdk\Rest\Core\Json\JsonSerializableType;
 use Shoper\Sdk\Rest\Core\Json\JsonProperty;
+use Shoper\Sdk\Rest\Core\Types\Union;
 use Shoper\Sdk\Rest\Core\Types\ArrayType;
 
 /**
@@ -12,34 +13,37 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Category extends JsonSerializableType
 {
     /**
-     * @var ?int $categoryId category identifier
+     * @var (
+     *    string
+     *   |int
+     * )|null $categoryId category identifier
      */
-    #[JsonProperty('category_id')]
-    public ?int $categoryId;
+    #[JsonProperty('category_id'), Union('string', 'integer', 'null')]
+    public string|int|null $categoryId;
 
     /**
-     * @var ?string $imageBackground background image filename
+     * @var ?string $imageBackground Background image URL/filename
      */
     #[JsonProperty('image_background')]
     public ?string $imageBackground;
 
     /**
-     * @var ?string $imageThumbnail thumbnail image filename
+     * @var ?string $imageThumbnail Thumbnail image URL/filename
      */
     #[JsonProperty('image_thumbnail')]
     public ?string $imageThumbnail;
 
     /**
-     * @var ?int $order priority used to determine categories displaying order
+     * @var ?string $order priority used to determine categories displaying order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?bool $root if enabled, sets category as root (otherwise - child)
+     * @var ?value-of<CategoryRoot> $root if enabled, sets category as root (otherwise - child)
      */
     #[JsonProperty('root')]
-    public ?bool $root;
+    public ?string $root;
 
     /**
      * @var ?array<string, CategoryTranslationsValue> $translations an associative array with object translations; if you want to filter things - you can skip locale subkey
@@ -49,11 +53,14 @@ class Category extends JsonSerializableType
 
     /**
      * @param array{
-     *   categoryId?: ?int,
+     *   categoryId?: (
+     *    string
+     *   |int
+     * )|null,
      *   imageBackground?: ?string,
      *   imageThumbnail?: ?string,
-     *   order?: ?int,
-     *   root?: ?bool,
+     *   order?: ?string,
+     *   root?: ?value-of<CategoryRoot>,
      *   translations?: ?array<string, CategoryTranslationsValue>,
      * } $values
      */

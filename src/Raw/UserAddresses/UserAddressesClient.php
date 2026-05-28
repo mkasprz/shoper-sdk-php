@@ -69,7 +69,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listUserAddresses(ListUserAddressesRequest $request = new ListUserAddressesRequest(), ?array $options = null): ?ListUserAddressesResponse
+    public function list(ListUserAddressesRequest $request = new ListUserAddressesRequest(), ?array $options = null): ?ListUserAddressesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createUserAddress(UserAddressInsert $request, ?array $options = null): int|UserAddress|null
+    public function create(UserAddressInsert $request, ?array $options = null): int|UserAddress|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getUserAddress(string $id, ?array $options = null): ?UserAddress
+    public function get(string $id, ?array $options = null): ?UserAddress
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateUserAddress(string $id, UserAddressUpdate $request = new UserAddressUpdate(), ?array $options = null): int|UserAddress|null
+    public function update(string $id, UserAddressUpdate $request = new UserAddressUpdate(), ?array $options = null): int|UserAddress|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteUserAddress(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

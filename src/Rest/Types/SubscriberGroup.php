@@ -11,16 +11,16 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class SubscriberGroup extends JsonSerializableType
 {
     /**
-     * @var ?bool $autoAdd should subscribers be automatically added to this group?
+     * @var ?int $autoAdd should subscribers be automatically added to this group?
      */
     #[JsonProperty('auto_add')]
-    public ?bool $autoAdd;
+    public ?int $autoAdd;
 
     /**
-     * @var ?int $groupId group identifier
+     * @var ?string $groupId group identifier
      */
     #[JsonProperty('group_id')]
-    public ?int $groupId;
+    public ?string $groupId;
 
     /**
      * @var string $name group name
@@ -31,8 +31,8 @@ class SubscriberGroup extends JsonSerializableType
     /**
      * @param array{
      *   name: string,
-     *   autoAdd?: ?bool,
-     *   groupId?: ?int,
+     *   autoAdd?: ?int,
+     *   groupId?: ?string,
      * } $values
      */
     public function __construct(

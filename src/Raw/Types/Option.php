@@ -92,11 +92,12 @@ class Option extends JsonSerializableType
      *     <li>radio,</li>
      *     <li>select,</li>
      *     <li>checkbox,</li>
-     *     <li>color</li>
+     *     <li>color,</li>
+     *     <li>denomination</li>
      * </ul>
      * default: <code>select</code>
      *
-     * @var ?string $type
+     * @var ?value-of<OptionType> $type
      */
     #[JsonProperty('type')]
     public ?string $type;
@@ -113,7 +114,7 @@ class Option extends JsonSerializableType
      *   required?: ?value-of<OptionRequired>,
      *   stock?: ?value-of<OptionStock>,
      *   translations?: ?array<string, OptionTranslationsValue>,
-     *   type?: ?string,
+     *   type?: ?value-of<OptionType>,
      * } $values
      */
     public function __construct(

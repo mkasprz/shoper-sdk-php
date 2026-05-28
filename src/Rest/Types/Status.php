@@ -12,10 +12,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Status extends JsonSerializableType
 {
     /**
-     * @var ?int $active is status enabled
+     * @var ?string $active is status enabled
      */
     #[JsonProperty('active')]
-    public ?int $active;
+    public ?string $active;
 
     /**
      * @var ?string $color status color (hex)
@@ -24,28 +24,28 @@ class Status extends JsonSerializableType
     public ?string $color;
 
     /**
-     * @var ?int $default is status default
+     * @var ?string $default is status default
      */
     #[JsonProperty('default')]
-    public ?int $default;
+    public ?string $default;
 
     /**
-     * @var ?bool $emailChange notify on status change using e-mail?
+     * @var ?value-of<StatusEmailChange> $emailChange notify on status change using e-mail?
      */
     #[JsonProperty('email_change')]
-    public ?bool $emailChange;
+    public ?string $emailChange;
 
     /**
-     * @var ?int $order status order
+     * @var ?string $order status order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?int $statusId status identifier
+     * @var ?string $statusId status identifier
      */
     #[JsonProperty('status_id')]
-    public ?int $statusId;
+    public ?string $statusId;
 
     /**
      * @var ?array<string, StatusTranslationsValue> $translations an associative array with object translations
@@ -62,21 +62,21 @@ class Status extends JsonSerializableType
      *     <li>4 - not completed</li>
      * </ul>
      *
-     * @var ?int $type
+     * @var ?string $type
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
      * @param array{
-     *   active?: ?int,
+     *   active?: ?string,
      *   color?: ?string,
-     *   default?: ?int,
-     *   emailChange?: ?bool,
-     *   order?: ?int,
-     *   statusId?: ?int,
+     *   default?: ?string,
+     *   emailChange?: ?value-of<StatusEmailChange>,
+     *   order?: ?string,
+     *   statusId?: ?string,
      *   translations?: ?array<string, StatusTranslationsValue>,
-     *   type?: ?int,
+     *   type?: ?string,
      * } $values
      */
     public function __construct(

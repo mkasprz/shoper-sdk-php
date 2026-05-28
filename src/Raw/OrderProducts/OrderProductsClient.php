@@ -69,7 +69,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOrderProducts(ListOrderProductsRequest $request = new ListOrderProductsRequest(), ?array $options = null): ?ListOrderProductsResponse
+    public function list(ListOrderProductsRequest $request = new ListOrderProductsRequest(), ?array $options = null): ?ListOrderProductsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -129,7 +129,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOrderProduct(OrderProductInsert $request, ?array $options = null): int|OrderProduct|null
+    public function create(OrderProductInsert $request, ?array $options = null): int|OrderProduct|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -176,7 +176,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOrderProduct(string $id, ?array $options = null): ?OrderProduct
+    public function get(string $id, ?array $options = null): ?OrderProduct
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -226,7 +226,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOrderProduct(string $id, OrderProductUpdate $request = new OrderProductUpdate(), ?array $options = null): int|OrderProduct|null
+    public function update(string $id, OrderProductUpdate $request = new OrderProductUpdate(), ?array $options = null): int|OrderProduct|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -273,7 +273,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOrderProduct(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

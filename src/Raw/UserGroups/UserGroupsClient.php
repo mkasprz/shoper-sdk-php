@@ -69,7 +69,7 @@ class UserGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listUserGroups(ListUserGroupsRequest $request = new ListUserGroupsRequest(), ?array $options = null): ?ListUserGroupsResponse
+    public function list(ListUserGroupsRequest $request = new ListUserGroupsRequest(), ?array $options = null): ?ListUserGroupsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class UserGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createUserGroup(UserGroupInsert $request, ?array $options = null): int|UserGroup|null
+    public function create(UserGroupInsert $request, ?array $options = null): int|UserGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class UserGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getUserGroup(string $id, ?array $options = null): ?UserGroup
+    public function get(string $id, ?array $options = null): ?UserGroup
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class UserGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateUserGroup(string $id, UserGroupUpdate $request = new UserGroupUpdate(), ?array $options = null): int|UserGroup|null
+    public function update(string $id, UserGroupUpdate $request = new UserGroupUpdate(), ?array $options = null): int|UserGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class UserGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteUserGroup(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

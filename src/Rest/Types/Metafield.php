@@ -49,10 +49,10 @@ class Metafield extends JsonSerializableType
      *     <li>4 - blog (binary objects - you won't be able to filter or sort objects using this metafield type)</li>
      * </ul>
      *
-     * @var ?int $type
+     * @var ?string $type
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
      * @param array{
@@ -61,7 +61,7 @@ class Metafield extends JsonSerializableType
      *   metafieldId?: ?int,
      *   namespace?: ?string,
      *   object?: ?string,
-     *   type?: ?int,
+     *   type?: ?string,
      * } $values
      */
     public function __construct(

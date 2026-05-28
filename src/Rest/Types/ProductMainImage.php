@@ -17,16 +17,16 @@ class ProductMainImage extends JsonSerializableType
     public ?string $extension;
 
     /**
-     * @var ?int $gfxId asset identifier
+     * @var ?string $gfxId asset identifier
      */
     #[JsonProperty('gfx_id')]
-    public ?int $gfxId;
+    public ?string $gfxId;
 
     /**
-     * @var ?bool $hidden is the photo hidden?
+     * @var ?value-of<ProductMainImageHidden> $hidden is the photo hidden?
      */
     #[JsonProperty('hidden')]
-    public ?bool $hidden;
+    public ?string $hidden;
 
     /**
      * @var ?string $name photo description
@@ -35,10 +35,10 @@ class ProductMainImage extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?int $order photo order
+     * @var ?string $order photo order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
      * @var ?string $unicName unique photo name, pointing to a file in filesystem
@@ -49,10 +49,10 @@ class ProductMainImage extends JsonSerializableType
     /**
      * @param array{
      *   extension?: ?string,
-     *   gfxId?: ?int,
-     *   hidden?: ?bool,
+     *   gfxId?: ?string,
+     *   hidden?: ?value-of<ProductMainImageHidden>,
      *   name?: ?string,
-     *   order?: ?int,
+     *   order?: ?string,
      *   unicName?: ?string,
      * } $values
      */

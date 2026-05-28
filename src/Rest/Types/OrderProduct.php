@@ -24,10 +24,10 @@ class OrderProduct extends JsonSerializableType
     public ?string $code;
 
     /**
-     * @var ?float $deliveryTime **Deprecated since 5.20.14.** delivery time in days
+     * @var ?string $deliveryTime **Deprecated since 5.20.14.** delivery time in days (server returns it as a numeric string)
      */
     #[JsonProperty('delivery_time')]
-    public ?float $deliveryTime;
+    public ?string $deliveryTime;
 
     /**
      * @var ?string $deliveryTimeHours delivery time in hours
@@ -36,10 +36,10 @@ class OrderProduct extends JsonSerializableType
     public ?string $deliveryTimeHours;
 
     /**
-     * @var ?float $discountPerc percent of discount
+     * @var ?string $discountPerc percent of discount
      */
     #[JsonProperty('discount_perc')]
-    public ?float $discountPerc;
+    public ?string $discountPerc;
 
     /**
      * array of objects with values entered in particular [options](#tag/Options), type: text
@@ -51,10 +51,10 @@ class OrderProduct extends JsonSerializableType
     public ?array $fileOptions;
 
     /**
-     * @var ?int $id identifier
+     * @var ?string $id identifier
      */
     #[JsonProperty('id')]
-    public ?int $id;
+    public ?string $id;
 
     /**
      * @var ?OrderProductLoyalty $loyalty an associative array with loyalty exchange data, null if not exchanged
@@ -75,10 +75,10 @@ class OrderProduct extends JsonSerializableType
     public ?string $option;
 
     /**
-     * @var int $orderId [order](#tag/Orders) identifier
+     * @var string $orderId [order](#tag/Orders) identifier
      */
     #[JsonProperty('order_id')]
-    public int $orderId;
+    public string $orderId;
 
     /**
      * @var string $pkwiu PKWiU (product quantifier)
@@ -87,26 +87,26 @@ class OrderProduct extends JsonSerializableType
     public string $pkwiu;
 
     /**
-     * @var ?float $price product price
+     * @var ?string $price product price
      */
     #[JsonProperty('price')]
-    public ?float $price;
+    public ?string $price;
 
     /**
      * [product](#tag/Products) identifier. Value <code>0</code> means the product has never existed
      * in catalog and has been added in different way (eg. using API). Attention: it may point on non-existing
      * or an invalid product. You need to add a main product first before you can add a product variant.
      *
-     * @var int $productId
+     * @var string $productId
      */
     #[JsonProperty('product_id')]
-    public int $productId;
+    public string $productId;
 
     /**
-     * @var float $quantity quantity - if warehouses is enabled field is read only
+     * @var string $quantity quantity - if warehouses is enabled field is read only
      */
     #[JsonProperty('quantity')]
-    public float $quantity;
+    public string $quantity;
 
     /**
      * should price be affected by a special offer? - only if either `product_id`
@@ -122,10 +122,10 @@ class OrderProduct extends JsonSerializableType
      * in catalog and has been added in different way (eg. using API). Attention: it may point on non-existing
      * or an invalid product. You don't need to add a main product, but you must add a product variant.
      *
-     * @var ?int $stockId
+     * @var ?string $stockId
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @var ?string $tax tax rate name
@@ -134,10 +134,10 @@ class OrderProduct extends JsonSerializableType
     public ?string $tax;
 
     /**
-     * @var ?float $taxValue tax rate value
+     * @var ?string $taxValue tax rate value
      */
     #[JsonProperty('tax_value')]
-    public ?float $taxValue;
+    public ?string $taxValue;
 
     /**
      * array of objects with values entered in particular [options](#tag/Options), type: text
@@ -155,10 +155,10 @@ class OrderProduct extends JsonSerializableType
     public ?string $unit;
 
     /**
-     * @var ?bool $unitFp determines if unit is floating point
+     * @var ?value-of<OrderProductUnitFp> $unitFp determines if unit is floating point
      */
     #[JsonProperty('unit_fp')]
-    public ?bool $unitFp;
+    public ?string $unitFp;
 
     /**
      * @var ?int $unitId [unit](#tag/Units) identifier
@@ -173,38 +173,38 @@ class OrderProduct extends JsonSerializableType
     public ?array $warehouses;
 
     /**
-     * @var ?float $weight product weight
+     * @var ?string $weight product weight
      */
     #[JsonProperty('weight')]
-    public ?float $weight;
+    public ?string $weight;
 
     /**
      * @param array{
-     *   orderId: int,
+     *   orderId: string,
      *   pkwiu: string,
-     *   productId: int,
-     *   quantity: float,
+     *   productId: string,
+     *   quantity: string,
      *   children?: ?array<OrderProductChildrenItem>,
      *   code?: ?string,
-     *   deliveryTime?: ?float,
+     *   deliveryTime?: ?string,
      *   deliveryTimeHours?: ?string,
-     *   discountPerc?: ?float,
+     *   discountPerc?: ?string,
      *   fileOptions?: ?array<OrderProductFileOptionsItem>,
-     *   id?: ?int,
+     *   id?: ?string,
      *   loyalty?: ?OrderProductLoyalty,
      *   name?: ?string,
      *   option?: ?string,
-     *   price?: ?float,
+     *   price?: ?string,
      *   specialOfferPrice?: ?bool,
-     *   stockId?: ?int,
+     *   stockId?: ?string,
      *   tax?: ?string,
-     *   taxValue?: ?float,
+     *   taxValue?: ?string,
      *   textOptions?: ?array<OrderProductTextOptionsItem>,
      *   unit?: ?string,
-     *   unitFp?: ?bool,
+     *   unitFp?: ?value-of<OrderProductUnitFp>,
      *   unitId?: ?int,
      *   warehouses?: ?array<string, OrderProductWarehousesValue>,
-     *   weight?: ?float,
+     *   weight?: ?string,
      * } $values
      */
     public function __construct(

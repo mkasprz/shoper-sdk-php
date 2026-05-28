@@ -69,7 +69,7 @@ class CollectionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCollections(ListCollectionsRequest $request = new ListCollectionsRequest(), ?array $options = null): ?ListCollectionsResponse
+    public function list(ListCollectionsRequest $request = new ListCollectionsRequest(), ?array $options = null): ?ListCollectionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class CollectionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createCollection(CollectionInsert $request = new CollectionInsert(), ?array $options = null): int|Collection|null
+    public function create(CollectionInsert $request = new CollectionInsert(), ?array $options = null): int|Collection|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class CollectionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getCollection(string $id, ?array $options = null): ?Collection
+    public function get(string $id, ?array $options = null): ?Collection
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class CollectionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateCollection(string $id, CollectionUpdate $request = new CollectionUpdate(), ?array $options = null): int|Collection|null
+    public function update(string $id, CollectionUpdate $request = new CollectionUpdate(), ?array $options = null): int|Collection|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class CollectionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteCollection(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

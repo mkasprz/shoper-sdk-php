@@ -35,10 +35,10 @@ class ProductSafetyProducer extends JsonSerializableType
     public ?string $email;
 
     /**
-     * @var ?int $gpsrProducerId identifier
+     * @var ?string $gpsrProducerId identifier
      */
     #[JsonProperty('gpsr_producer_id')]
-    public ?int $gpsrProducerId;
+    public ?string $gpsrProducerId;
 
     /**
      * @var string $internalName producer internal name
@@ -86,7 +86,7 @@ class ProductSafetyProducer extends JsonSerializableType
      *   street1: string,
      *   contactFormUrl?: ?string,
      *   email?: ?string,
-     *   gpsrProducerId?: ?int,
+     *   gpsrProducerId?: ?string,
      *   phone?: ?string,
      *   street2?: ?string,
      * } $values

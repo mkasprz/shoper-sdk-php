@@ -8,16 +8,16 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class ShippingPaymentsItem extends JsonSerializableType
 {
     /**
-     * @var ?float $cost payment method cost within this shipping method
+     * @var ?int $cost payment method cost within this shipping method
      */
     #[JsonProperty('cost')]
-    public ?float $cost;
+    public ?int $cost;
 
     /**
-     * @var ?int $paymentId payment identifier
+     * @var ?string $paymentId payment identifier
      */
     #[JsonProperty('payment_id')]
-    public ?int $paymentId;
+    public ?string $paymentId;
 
     /**
      * @var ?bool $percent is the cost percent based? (if <code>false</code> - fixed)
@@ -27,8 +27,8 @@ class ShippingPaymentsItem extends JsonSerializableType
 
     /**
      * @param array{
-     *   cost?: ?float,
-     *   paymentId?: ?int,
+     *   cost?: ?int,
+     *   paymentId?: ?string,
      *   percent?: ?bool,
      * } $values
      */

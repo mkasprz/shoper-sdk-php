@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class ProductFile extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is file enabled?
+     * @var ?value-of<ProductFileActive> $active is file enabled?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $addDate product addition date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -29,10 +29,10 @@ class ProductFile extends JsonSerializableType
     public ?string $description;
 
     /**
-     * @var ?int $fileId file identifier
+     * @var ?string $fileId file identifier
      */
     #[JsonProperty('file_id')]
-    public ?int $fileId;
+    public ?string $fileId;
 
     /**
      * @var string $fileName unique (within system scope) filename
@@ -41,10 +41,10 @@ class ProductFile extends JsonSerializableType
     public string $fileName;
 
     /**
-     * @var ?int $fileSize file size in bytes
+     * @var ?string $fileSize file size in bytes
      */
     #[JsonProperty('file_size')]
-    public ?int $fileSize;
+    public ?string $fileSize;
 
     /**
      * @var ?string $name filename
@@ -53,16 +53,16 @@ class ProductFile extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?int $order file order
+     * @var ?string $order file order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var int $translationId [product](#tag/Products) translation identifier
+     * @var string $translationId [product](#tag/Products) translation identifier
      */
     #[JsonProperty('translation_id')]
-    public int $translationId;
+    public string $translationId;
 
     /**
      * file type (default set to 0):
@@ -71,23 +71,23 @@ class ProductFile extends JsonSerializableType
      *     <li>1 - file containing product safety information</li>
      * </ul>
      *
-     * @var ?int $type
+     * @var ?string $type
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
      * @param array{
      *   fileName: string,
-     *   translationId: int,
-     *   active?: ?bool,
+     *   translationId: string,
+     *   active?: ?value-of<ProductFileActive>,
      *   addDate?: ?string,
      *   description?: ?string,
-     *   fileId?: ?int,
-     *   fileSize?: ?int,
+     *   fileId?: ?string,
+     *   fileSize?: ?string,
      *   name?: ?string,
-     *   order?: ?int,
-     *   type?: ?int,
+     *   order?: ?string,
+     *   type?: ?string,
      * } $values
      */
     public function __construct(

@@ -11,16 +11,16 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class Language extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is language active
+     * @var ?value-of<LanguageActive> $active is language active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
-     * @var ?int $currencyId an identifier of [currency](#tag/Currencies) bound as default to this language
+     * @var ?string $currencyId an identifier of [currency](#tag/Currencies) bound as default to this language
      */
     #[JsonProperty('currency_id')]
-    public ?int $currencyId;
+    public ?string $currencyId;
 
     /**
      * @var ?string $langId
@@ -35,18 +35,18 @@ class Language extends JsonSerializableType
     public ?string $locale;
 
     /**
-     * @var ?int $order language order
+     * @var ?string $order language order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
      * @param array{
-     *   active?: ?bool,
-     *   currencyId?: ?int,
+     *   active?: ?value-of<LanguageActive>,
+     *   currencyId?: ?string,
      *   langId?: ?string,
      *   locale?: ?string,
-     *   order?: ?int,
+     *   order?: ?string,
      * } $values
      */
     public function __construct(

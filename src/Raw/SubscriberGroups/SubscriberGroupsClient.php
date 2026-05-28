@@ -69,7 +69,7 @@ class SubscriberGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listSubscriberGroups(ListSubscriberGroupsRequest $request = new ListSubscriberGroupsRequest(), ?array $options = null): ?ListSubscriberGroupsResponse
+    public function list(ListSubscriberGroupsRequest $request = new ListSubscriberGroupsRequest(), ?array $options = null): ?ListSubscriberGroupsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class SubscriberGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createSubscriberGroup(SubscriberGroupInsert $request, ?array $options = null): int|SubscriberGroup|null
+    public function create(SubscriberGroupInsert $request, ?array $options = null): int|SubscriberGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class SubscriberGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getSubscriberGroup(string $id, ?array $options = null): ?SubscriberGroup
+    public function get(string $id, ?array $options = null): ?SubscriberGroup
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class SubscriberGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateSubscriberGroup(string $id, SubscriberGroupUpdate $request = new SubscriberGroupUpdate(), ?array $options = null): int|SubscriberGroup|null
+    public function update(string $id, SubscriberGroupUpdate $request = new SubscriberGroupUpdate(), ?array $options = null): int|SubscriberGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class SubscriberGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteSubscriberGroup(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

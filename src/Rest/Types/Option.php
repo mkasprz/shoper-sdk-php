@@ -31,28 +31,28 @@ class Option extends JsonSerializableType
     public ?float $changePriceValue;
 
     /**
-     * @var ?bool $filters show in filters (only for <code>select</code>, <code>radio</code>, <code>color</code>)
+     * @var ?value-of<OptionFilters> $filters show in filters (only for <code>select</code>, <code>radio</code>, <code>color</code>) — server delivers as "0"/"1" string
      */
     #[JsonProperty('filters')]
-    public ?bool $filters;
+    public ?string $filters;
 
     /**
-     * @var int $groupId [option group](#tag/OptionGroups) identifier option is bound to
+     * @var ?string $groupId [option group](#tag/OptionGroups) identifier option is bound to
      */
     #[JsonProperty('group_id')]
-    public int $groupId;
+    public ?string $groupId;
 
     /**
-     * @var ?int $optionId option identifier
+     * @var ?string $optionId option identifier
      */
     #[JsonProperty('option_id')]
-    public ?int $optionId;
+    public ?string $optionId;
 
     /**
-     * @var ?int $order priority of sorting options order
+     * @var ?string $order priority of sorting options order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
      * should price be changed by percent (only for <code>select</code>, <code>radio</code>, <code>color</code>)?
@@ -61,22 +61,22 @@ class Option extends JsonSerializableType
      *     <li>1 - yes (change by percent)</li>
      * </ul>
      *
-     * @var ?int $percent
+     * @var ?string $percent
      */
     #[JsonProperty('percent')]
-    public ?int $percent;
+    public ?string $percent;
 
     /**
-     * @var ?bool $required is option required
+     * @var ?value-of<OptionRequired> $required is option required
      */
     #[JsonProperty('required')]
-    public ?bool $required;
+    public ?string $required;
 
     /**
-     * @var ?bool $stock stock modifier (only for <code>select</code>, <code>radio</code>, <code>color</code>; default: <code>false</code>)
+     * @var ?value-of<OptionStock> $stock stock modifier (only for <code>select</code>, <code>radio</code>, <code>color</code>; default: <code>false</code>)
      */
     #[JsonProperty('stock')]
-    public ?bool $stock;
+    public ?string $stock;
 
     /**
      * @var ?array<string, OptionTranslationsValue> $translations an associative array with object translations
@@ -92,37 +92,38 @@ class Option extends JsonSerializableType
      *     <li>radio,</li>
      *     <li>select,</li>
      *     <li>checkbox,</li>
-     *     <li>color</li>
+     *     <li>color,</li>
+     *     <li>denomination</li>
      * </ul>
      * default: <code>select</code>
      *
-     * @var ?string $type
+     * @var ?value-of<OptionType> $type
      */
     #[JsonProperty('type')]
     public ?string $type;
 
     /**
      * @param array{
-     *   groupId: int,
      *   changePriceType?: ?int,
      *   changePriceValue?: ?float,
-     *   filters?: ?bool,
-     *   optionId?: ?int,
-     *   order?: ?int,
-     *   percent?: ?int,
-     *   required?: ?bool,
-     *   stock?: ?bool,
+     *   filters?: ?value-of<OptionFilters>,
+     *   groupId?: ?string,
+     *   optionId?: ?string,
+     *   order?: ?string,
+     *   percent?: ?string,
+     *   required?: ?value-of<OptionRequired>,
+     *   stock?: ?value-of<OptionStock>,
      *   translations?: ?array<string, OptionTranslationsValue>,
-     *   type?: ?string,
+     *   type?: ?value-of<OptionType>,
      * } $values
      */
     public function __construct(
-        array $values,
+        array $values = [],
     ) {
         $this->changePriceType = $values['changePriceType'] ?? null;
         $this->changePriceValue = $values['changePriceValue'] ?? null;
         $this->filters = $values['filters'] ?? null;
-        $this->groupId = $values['groupId'];
+        $this->groupId = $values['groupId'] ?? null;
         $this->optionId = $values['optionId'] ?? null;
         $this->order = $values['order'] ?? null;
         $this->percent = $values['percent'] ?? null;

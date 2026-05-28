@@ -17,16 +17,16 @@ class Progress extends JsonSerializableType
     public ?string $added;
 
     /**
-     * @var ?int $denominator quantity of objects to process
+     * @var ?string $denominator quantity of objects to process
      */
     #[JsonProperty('denominator')]
-    public ?int $denominator;
+    public ?string $denominator;
 
     /**
-     * @var int $eta estimated time to finish in seconds
+     * @var string $eta estimated time to finish in seconds
      */
     #[JsonProperty('eta')]
-    public int $eta;
+    public string $eta;
 
     /**
      * @var ?string $etaUpdate last eta update date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -41,16 +41,16 @@ class Progress extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $nominator quantity of processed objects
+     * @var ?string $nominator quantity of processed objects
      */
     #[JsonProperty('nominator')]
-    public ?int $nominator;
+    public ?string $nominator;
 
     /**
-     * @var ?int $progressId progress identifier
+     * @var ?string $progressId progress identifier
      */
     #[JsonProperty('progress_id')]
-    public ?int $progressId;
+    public ?string $progressId;
 
     /**
      * @var ?string $start processing start date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -71,22 +71,22 @@ class Progress extends JsonSerializableType
      *     <li>7 - failed and closed,</li>
      * </ul>
      *
-     * @var ?int $status
+     * @var ?string $status
      */
     #[JsonProperty('status')]
-    public ?int $status;
+    public ?string $status;
 
     /**
      * @param array{
-     *   eta: int,
+     *   eta: string,
      *   name: string,
      *   added?: ?string,
-     *   denominator?: ?int,
+     *   denominator?: ?string,
      *   etaUpdate?: ?string,
-     *   nominator?: ?int,
-     *   progressId?: ?int,
+     *   nominator?: ?string,
+     *   progressId?: ?string,
      *   start?: ?string,
-     *   status?: ?int,
+     *   status?: ?string,
      * } $values
      */
     public function __construct(

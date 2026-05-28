@@ -12,16 +12,16 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class PromotionCode extends JsonSerializableType
 {
     /**
-     * @var ?int $active is promo code active
+     * @var ?string $active is promo code active
      */
     #[JsonProperty('active')]
-    public ?int $active;
+    public ?string $active;
 
     /**
-     * @var ?int $additionalFreeShipping free shipping
+     * @var ?string $additionalFreeShipping free shipping
      */
     #[JsonProperty('additional_free_shipping')]
-    public ?int $additionalFreeShipping;
+    public ?string $additionalFreeShipping;
 
     /**
      * @var ?array<int> $categoriesLimit promotion limited to selected categories. Array of categories ids.
@@ -36,10 +36,10 @@ class PromotionCode extends JsonSerializableType
     public string $code;
 
     /**
-     * @var ?int $codeId Unique identifier of the promotion code.
+     * @var ?string $codeId Unique identifier of the promotion code.
      */
     #[JsonProperty('code_id')]
-    public ?int $codeId;
+    public ?string $codeId;
 
     /**
      * @var ?array<int> $collectionsLimit promotion limited to selected collections. Array of collections ids.
@@ -48,22 +48,22 @@ class PromotionCode extends JsonSerializableType
     public ?array $collectionsLimit;
 
     /**
-     * @var ?int $discount value of discount
+     * @var ?string $discount value of discount
      */
     #[JsonProperty('discount')]
-    public ?int $discount;
+    public ?string $discount;
 
     /**
-     * @var int $discountType promotion type
+     * @var string $discountType promotion type
      */
     #[JsonProperty('discount_type')]
-    public int $discountType;
+    public string $discountType;
 
     /**
-     * @var ?int $global discount for all products in order
+     * @var ?string $global discount for all products in order
      */
     #[JsonProperty('global')]
-    public ?int $global;
+    public ?string $global;
 
     /**
      * @var ?array<int> $groupsLimit promotion limited to selected groups. Array of groups ids.
@@ -72,10 +72,10 @@ class PromotionCode extends JsonSerializableType
     public ?array $groupsLimit;
 
     /**
-     * @var ?float $maxAmount maximum order value
+     * @var ?string $maxAmount maximum order value
      */
     #[JsonProperty('max_amount')]
-    public ?float $maxAmount;
+    public ?string $maxAmount;
 
     /**
      * @var ?float $maxDiscountAmount maximum discount value
@@ -84,22 +84,22 @@ class PromotionCode extends JsonSerializableType
     public ?float $maxDiscountAmount;
 
     /**
-     * @var ?int $maxQuantity maximum quantity
+     * @var ?string $maxQuantity maximum quantity
      */
     #[JsonProperty('max_quantity')]
-    public ?int $maxQuantity;
+    public ?string $maxQuantity;
 
     /**
-     * @var ?float $minAmount minimum order value
+     * @var ?string $minAmount minimum order value
      */
     #[JsonProperty('min_amount')]
-    public ?float $minAmount;
+    public ?string $minAmount;
 
     /**
-     * @var ?int $minQuantity minimum quantity
+     * @var ?string $minQuantity minimum quantity
      */
     #[JsonProperty('min_quantity')]
-    public ?int $minQuantity;
+    public ?string $minQuantity;
 
     /**
      * @var string $name promotion code name
@@ -108,10 +108,10 @@ class PromotionCode extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $peruserLimit per user usage limit
+     * @var ?string $peruserLimit per user usage limit
      */
     #[JsonProperty('peruser_limit')]
-    public ?int $peruserLimit;
+    public ?string $peruserLimit;
 
     /**
      * @var ?array<int> $producersLimit promotion limited to selected producers. Array of producers ids.
@@ -144,7 +144,7 @@ class PromotionCode extends JsonSerializableType
     public ?string $timeFrom;
 
     /**
-     * @var ?string $timeTo promotion to - <a href="http://www.iso.org/iso/home/standards/iso8601.htm">ISO_8601</a>
+     * @var ?string $timeTo promotion to - <a href="http://www.iso.org/iso/home/standards/iso8601.yml">ISO_8601</a>
      */
     #[JsonProperty('time_to')]
     public ?string $timeTo;
@@ -156,30 +156,30 @@ class PromotionCode extends JsonSerializableType
     public ?int $usageCount;
 
     /**
-     * @var ?int $usageLimit usage limit
+     * @var ?string $usageLimit usage limit
      */
     #[JsonProperty('usage_limit')]
-    public ?int $usageLimit;
+    public ?string $usageLimit;
 
     /**
      * @param array{
      *   code: string,
-     *   discountType: int,
+     *   discountType: string,
      *   name: string,
-     *   active?: ?int,
-     *   additionalFreeShipping?: ?int,
+     *   active?: ?string,
+     *   additionalFreeShipping?: ?string,
      *   categoriesLimit?: ?array<int>,
-     *   codeId?: ?int,
+     *   codeId?: ?string,
      *   collectionsLimit?: ?array<int>,
-     *   discount?: ?int,
-     *   global?: ?int,
+     *   discount?: ?string,
+     *   global?: ?string,
      *   groupsLimit?: ?array<int>,
-     *   maxAmount?: ?float,
+     *   maxAmount?: ?string,
      *   maxDiscountAmount?: ?float,
-     *   maxQuantity?: ?int,
-     *   minAmount?: ?float,
-     *   minQuantity?: ?int,
-     *   peruserLimit?: ?int,
+     *   maxQuantity?: ?string,
+     *   minAmount?: ?string,
+     *   minQuantity?: ?string,
+     *   peruserLimit?: ?string,
      *   producersLimit?: ?array<int>,
      *   productsLimit?: ?array<int>,
      *   ranges?: ?array<PromotionCodeRangesItem>,
@@ -187,7 +187,7 @@ class PromotionCode extends JsonSerializableType
      *   timeFrom?: ?string,
      *   timeTo?: ?string,
      *   usageCount?: ?int,
-     *   usageLimit?: ?int,
+     *   usageLimit?: ?string,
      * } $values
      */
     public function __construct(

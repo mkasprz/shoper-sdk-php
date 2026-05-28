@@ -8,10 +8,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class CollectionTranslationsValue extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is translation active
+     * @var ?value-of<CollectionTranslationsValueActive> $active is translation active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $description collection description (top)
@@ -26,13 +26,13 @@ class CollectionTranslationsValue extends JsonSerializableType
     public ?string $descriptionBottom;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
-     * @var ?value-of<CollectionTranslationsValueMainPage> $mainPage Whether the collection is pinned to the main page (stored as string "0" or "1").
+     * @var ?value-of<CollectionTranslationsValueMainPage> $mainPage Whether the collection is pinned to the main page (stored as string "0" or "1"). Only present when the main-page-collection feature is enabled on the shop.
      */
     #[JsonProperty('main_page')]
     public ?string $mainPage;
@@ -69,10 +69,10 @@ class CollectionTranslationsValue extends JsonSerializableType
 
     /**
      * @param array{
-     *   active?: ?bool,
+     *   active?: ?value-of<CollectionTranslationsValueActive>,
      *   description?: ?string,
      *   descriptionBottom?: ?string,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   mainPage?: ?value-of<CollectionTranslationsValueMainPage>,
      *   name?: ?string,
      *   seoDescription?: ?string,

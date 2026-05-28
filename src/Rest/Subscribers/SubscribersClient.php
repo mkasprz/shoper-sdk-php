@@ -69,7 +69,7 @@ class SubscribersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listSubscribers(ListSubscribersRequest $request = new ListSubscribersRequest(), ?array $options = null): ?ListSubscribersResponse
+    public function list(ListSubscribersRequest $request = new ListSubscribersRequest(), ?array $options = null): ?ListSubscribersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class SubscribersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createSubscriber(SubscriberInsert $request, ?array $options = null): int|Subscriber|null
+    public function create(SubscriberInsert $request, ?array $options = null): int|Subscriber|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class SubscribersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class SubscribersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getSubscriber(string $id, ?array $options = null): ?Subscriber
+    public function get(string $id, ?array $options = null): ?Subscriber
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class SubscribersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param SubscriberUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class SubscribersClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Subscriber
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateSubscriber(string $id, SubscriberUpdate $request = new SubscriberUpdate(), ?array $options = null): bool|Subscriber|null
+    public function update(string $id, SubscriberUpdate $request = new SubscriberUpdate(), ?array $options = null): int|Subscriber|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class SubscribersClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Subscriber::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Subscriber::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class SubscribersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class SubscribersClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteSubscriber(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class SubscribersClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

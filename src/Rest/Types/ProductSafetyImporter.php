@@ -29,10 +29,10 @@ class ProductSafetyImporter extends JsonSerializableType
     public ?string $email;
 
     /**
-     * @var ?int $gpsrImporterId identifier
+     * @var ?string $gpsrImporterId identifier
      */
     #[JsonProperty('gpsr_importer_id')]
-    public ?int $gpsrImporterId;
+    public ?string $gpsrImporterId;
 
     /**
      * @var string $internalName importer internal name
@@ -79,7 +79,7 @@ class ProductSafetyImporter extends JsonSerializableType
      *   postcode: string,
      *   street1: string,
      *   email?: ?string,
-     *   gpsrImporterId?: ?int,
+     *   gpsrImporterId?: ?string,
      *   phone?: ?string,
      *   street2?: ?string,
      * } $values

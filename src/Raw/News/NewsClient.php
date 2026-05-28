@@ -69,7 +69,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listNews(ListNewsRequest $request = new ListNewsRequest(), ?array $options = null): ?ListNewsResponse
+    public function list(ListNewsRequest $request = new ListNewsRequest(), ?array $options = null): ?ListNewsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createNews(NewsInsert $request, ?array $options = null): int|News|null
+    public function create(NewsInsert $request, ?array $options = null): int|News|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getNews(string $id, ?array $options = null): ?News
+    public function get(string $id, ?array $options = null): ?News
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateNews(string $id, NewsUpdate $request = new NewsUpdate(), ?array $options = null): int|News|null
+    public function update(string $id, NewsUpdate $request = new NewsUpdate(), ?array $options = null): int|News|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteNews(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

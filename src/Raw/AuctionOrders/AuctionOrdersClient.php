@@ -69,7 +69,7 @@ class AuctionOrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAuctionOrders(ListAuctionOrdersRequest $request = new ListAuctionOrdersRequest(), ?array $options = null): ?ListAuctionOrdersResponse
+    public function list(ListAuctionOrdersRequest $request = new ListAuctionOrdersRequest(), ?array $options = null): ?ListAuctionOrdersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AuctionOrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAuctionOrder(AuctionOrderInsert $request, ?array $options = null): int|AuctionOrder|null
+    public function create(AuctionOrderInsert $request, ?array $options = null): int|AuctionOrder|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class AuctionOrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAuctionOrder(string $id, ?array $options = null): ?AuctionOrder
+    public function get(string $id, ?array $options = null): ?AuctionOrder
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class AuctionOrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAuctionOrder(string $id, AuctionOrderUpdate $request = new AuctionOrderUpdate(), ?array $options = null): int|AuctionOrder|null
+    public function update(string $id, AuctionOrderUpdate $request = new AuctionOrderUpdate(), ?array $options = null): int|AuctionOrder|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {

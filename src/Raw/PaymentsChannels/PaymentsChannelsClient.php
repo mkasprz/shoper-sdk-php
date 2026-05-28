@@ -70,7 +70,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listPaymentsChannels(string $paymentId, ListPaymentsChannelsRequest $request = new ListPaymentsChannelsRequest(), ?array $options = null): ?ListPaymentsChannelsResponse
+    public function list(string $paymentId, ListPaymentsChannelsRequest $request = new ListPaymentsChannelsRequest(), ?array $options = null): ?ListPaymentsChannelsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -128,7 +128,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createPaymentChannel(string $paymentId, PaymentChannelInsert $request, ?array $options = null): int|PaymentChannel|null
+    public function create(string $paymentId, PaymentChannelInsert $request, ?array $options = null): int|PaymentChannel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -176,7 +176,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getPaymentChannel(string $paymentId, string $id, ?array $options = null): ?PaymentChannel
+    public function get(string $paymentId, string $id, ?array $options = null): ?PaymentChannel
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -227,7 +227,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updatePaymentChannel(string $paymentId, string $id, PaymentChannelUpdate $request = new PaymentChannelUpdate(), ?array $options = null): int|PaymentChannel|null
+    public function update(string $paymentId, string $id, PaymentChannelUpdate $request = new PaymentChannelUpdate(), ?array $options = null): int|PaymentChannel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -275,7 +275,7 @@ class PaymentsChannelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deletePaymentChannel(string $paymentId, string $id, ?array $options = null): ?int
+    public function delete(string $paymentId, string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

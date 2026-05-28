@@ -12,9 +12,9 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class CategoryTree extends JsonSerializableType
 {
     /**
-     * @var ?array<string, CategoryTreeChildrenValue> $children an array of [subcategories](#tag/Categories). Returned arrays have the same structure as root ones
+     * @var ?array<array<string, mixed>> $children an array of [subcategories](#tag/Categories). Returned arrays have the same structure as root ones
      */
-    #[JsonProperty('children'), ArrayType(['string' => CategoryTreeChildrenValue::class])]
+    #[JsonProperty('children'), ArrayType([['string' => 'mixed']])]
     public ?array $children;
 
     /**
@@ -25,7 +25,7 @@ class CategoryTree extends JsonSerializableType
 
     /**
      * @param array{
-     *   children?: ?array<string, CategoryTreeChildrenValue>,
+     *   children?: ?array<array<string, mixed>>,
      *   id?: ?int,
      * } $values
      */

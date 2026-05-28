@@ -4,8 +4,7 @@ namespace Shoper\Sdk\Rest\ApplicationConfigs;
 
 use Psr\Http\Client\ClientInterface;
 use Shoper\Sdk\Rest\Core\Client\RawClient;
-use Shoper\Sdk\Rest\ApplicationConfigs\Requests\ListApplicationConfigsRequest;
-use Shoper\Sdk\Rest\ApplicationConfigs\Types\ListApplicationConfigsResponse;
+use Shoper\Sdk\Rest\Types\ApplicationConfig;
 use Shoper\Sdk\Rest\Exceptions\ShoperException;
 use Shoper\Sdk\Rest\Exceptions\ShoperApiException;
 use Shoper\Sdk\Rest\Core\Json\JsonApiRequest;
@@ -51,7 +50,6 @@ class ApplicationConfigsClient
     }
 
     /**
-     * @param ListApplicationConfigsRequest $request
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -60,27 +58,19 @@ class ApplicationConfigsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?ListApplicationConfigsResponse
+     * @return ?ApplicationConfig
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listApplicationConfigs(ListApplicationConfigsRequest $request = new ListApplicationConfigsRequest(), ?array $options = null): ?ListApplicationConfigsResponse
+    public function list(?array $options = null): ?ApplicationConfig
     {
         $options = array_merge($this->options, $options ?? []);
-        $query = [];
-        if ($request->limit != null) {
-            $query['limit'] = $request->limit;
-        }
-        if ($request->page != null) {
-            $query['page'] = $request->page;
-        }
         try {
             $response = $this->client->sendRequest(
                 new JsonApiRequest(
                     baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
                     path: "webapi/rest/application-config",
                     method: HttpMethod::GET,
-                    query: $query,
                 ),
                 $options,
             );
@@ -90,7 +80,7 @@ class ApplicationConfigsClient
                 if (empty($json)) {
                     return null;
                 }
-                return ListApplicationConfigsResponse::fromJson($json);
+                return ApplicationConfig::fromJson($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

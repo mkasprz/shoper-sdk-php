@@ -13,10 +13,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class ProductStock extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is stock active
+     * @var ?value-of<ProductStockActive> $active is stock active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?ProductStockAdditionalCodes $additionalCodes additional codes
@@ -25,16 +25,16 @@ class ProductStock extends JsonSerializableType
     public ?ProductStockAdditionalCodes $additionalCodes;
 
     /**
-     * @var ?int $availabilityId stock [availability](#tag/Availabilities) identifier
+     * @var ?string $availabilityId stock [availability](#tag/Availabilities) identifier
      */
     #[JsonProperty('availability_id')]
-    public ?int $availabilityId;
+    public ?string $availabilityId;
 
     /**
-     * @var ?int $calculatedAvailabilityId stock [availability](#tag/Availabilities) identifier
+     * @var ?string $calculatedAvailabilityId stock [availability](#tag/Availabilities) identifier
      */
     #[JsonProperty('calculated_availability_id')]
-    public ?int $calculatedAvailabilityId;
+    public ?string $calculatedAvailabilityId;
 
     /**
      * @var ?int $calculationUnitId unit price calculation [identifier](#tag/Units)
@@ -43,10 +43,10 @@ class ProductStock extends JsonSerializableType
     public ?int $calculationUnitId;
 
     /**
-     * @var ?float $calculationUnitRatio unit price calculation ratio
+     * @var ?string $calculationUnitRatio unit price calculation ratio
      */
     #[JsonProperty('calculation_unit_ratio')]
-    public ?float $calculationUnitRatio;
+    public ?string $calculationUnitRatio;
 
     /**
      * @var ?string $code stock code
@@ -55,16 +55,16 @@ class ProductStock extends JsonSerializableType
     public ?string $code;
 
     /**
-     * @var ?bool $default should the stock be selected as default upon selection?
+     * @var ?value-of<ProductStockDefault> $default should the stock be selected as default upon selection?
      */
     #[JsonProperty('default')]
-    public ?bool $default;
+    public ?string $default;
 
     /**
-     * @var ?int $deliveryId stock [delivery](#tag/Deliveries) identifier
+     * @var ?string $deliveryId stock [delivery](#tag/Deliveries) identifier
      */
     #[JsonProperty('delivery_id')]
-    public ?int $deliveryId;
+    public ?string $deliveryId;
 
     /**
      * @var ?string $ean stock EAN code
@@ -73,52 +73,56 @@ class ProductStock extends JsonSerializableType
     public ?string $ean;
 
     /**
-     * @var ?bool $extended flag determining, if object is a basic stock (0) or extended by options group (1)
+     * @var ?value-of<ProductStockExtended> $extended flag determining, if object is a basic stock (0) or extended by options group (1)
      */
     #[JsonProperty('extended')]
-    public ?bool $extended;
+    public ?string $extended;
 
     /**
-     * @var ?int $gfxId an identifier of product stock photo
+     * @var ?string $gfxId an identifier of product stock photo
      */
     #[JsonProperty('gfx_id')]
-    public ?int $gfxId;
+    public ?string $gfxId;
 
     /**
-     * @var ?float $historicalLowestPrice price from the last 30 days before the promotion
+     * @var ?string $historicalLowestPrice price from the last 30 days before the promotion
      */
     #[JsonProperty('historical_lowest_price')]
-    public ?float $historicalLowestPrice;
+    public ?string $historicalLowestPrice;
 
     /**
-     * @var ?array<ProductStockOptionsItem> $options an array of stock options
+     * Assoc map {option_id: value_id} - legacy quirk; NOT array of objects.
+     * Keys are option identifiers (string), values are option value identifiers (integer).
+     * Example: {"1": 5, "3": 12}
+     *
+     * @var ?array<string, int> $options
      */
-    #[JsonProperty('options'), ArrayType([ProductStockOptionsItem::class])]
+    #[JsonProperty('options'), ArrayType(['string' => 'integer'])]
     public ?array $options;
 
     /**
-     * @var ?float $package package
+     * @var ?string $package package
      */
     #[JsonProperty('package')]
-    public ?float $package;
+    public ?string $package;
 
     /**
-     * @var ?float $price a price or price difference to the basic stock price (always greater than 0)
+     * @var ?string $price a price or price difference to the basic stock price (always greater than 0)
      */
     #[JsonProperty('price')]
-    public ?float $price;
+    public ?string $price;
 
     /**
-     * @var ?float $priceBuying wholesale price second basic stock type
+     * @var ?string $priceBuying wholesale price second basic stock type
      */
     #[JsonProperty('price_buying')]
-    public ?float $priceBuying;
+    public ?string $priceBuying;
 
     /**
-     * @var ?float $priceSpecial wholesale price second basic stock type
+     * @var ?string $priceSpecial wholesale price second basic stock type
      */
     #[JsonProperty('price_special')]
-    public ?float $priceSpecial;
+    public ?string $priceSpecial;
 
     /**
      * price calculation method:
@@ -131,10 +135,10 @@ class ProductStock extends JsonSerializableType
      *
      *     if `extended` is <code>false</code> the only valid value is <code>1</code>.
      *
-     * @var ?int $priceType
+     * @var ?string $priceType
      */
     #[JsonProperty('price_type')]
-    public ?int $priceType;
+    public ?string $priceType;
 
     /**
      * second wholesale price calculation type:
@@ -145,10 +149,10 @@ class ProductStock extends JsonSerializableType
      *     <li>3 - price will be subtracted from the base price</li>
      * </ul>
      *
-     * @var ?int $priceTypeSpecial
+     * @var ?string $priceTypeSpecial
      */
     #[JsonProperty('price_type_special')]
-    public ?int $priceTypeSpecial;
+    public ?string $priceTypeSpecial;
 
     /**
      * first wholesale price calculation type:
@@ -159,34 +163,34 @@ class ProductStock extends JsonSerializableType
      *     <li>3 - price will be subtracted from the base price</li>
      * </ul>
      *
-     * @var ?int $priceTypeWholesale
+     * @var ?string $priceTypeWholesale
      */
     #[JsonProperty('price_type_wholesale')]
-    public ?int $priceTypeWholesale;
+    public ?string $priceTypeWholesale;
 
     /**
-     * @var ?float $priceWholesale wholesale price first basic stock type
+     * @var ?string $priceWholesale wholesale price first basic stock type
      */
     #[JsonProperty('price_wholesale')]
-    public ?float $priceWholesale;
+    public ?string $priceWholesale;
 
     /**
-     * @var ?int $productId [product](#tag/Products) identifier
+     * @var ?string $productId [product](#tag/Products) identifier
      */
     #[JsonProperty('product_id')]
-    public ?int $productId;
+    public ?string $productId;
 
     /**
-     * @var ?float $sold sold items count
+     * @var ?string $sold sold items count
      */
     #[JsonProperty('sold')]
-    public ?float $sold;
+    public ?string $sold;
 
     /**
-     * @var ?float $specialHistoricalLowestPrice wholesale price second from the last 30 days before the promotion
+     * @var ?string $specialHistoricalLowestPrice wholesale price second from the last 30 days before the promotion
      */
     #[JsonProperty('special_historical_lowest_price')]
-    public ?float $specialHistoricalLowestPrice;
+    public ?string $specialHistoricalLowestPrice;
 
     /**
      * @var ?ProductStockSpecialOffer $specialOffer an associative array with stock special offer information
@@ -195,16 +199,16 @@ class ProductStock extends JsonSerializableType
     public ?ProductStockSpecialOffer $specialOffer;
 
     /**
-     * @var ?float $stock stock availability - if warehouses is enabled field is read only and includes the sum of all warehouses
+     * @var ?string $stock stock availability - if warehouses is enabled field is read only and includes the sum of all warehouses
      */
     #[JsonProperty('stock')]
-    public ?float $stock;
+    public ?string $stock;
 
     /**
-     * @var ?int $stockId stock identifier
+     * @var ?string $stockId stock identifier
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @var ?array<string, string> $warehouses if warehouses is enabled it represents stock availability (keys: [warehouse](#tag/Warehouses) identifiers, values: quantity value)
@@ -213,16 +217,16 @@ class ProductStock extends JsonSerializableType
     public ?array $warehouses;
 
     /**
-     * @var ?float $warnLevel stock availability warning level
+     * @var ?string $warnLevel stock availability warning level
      */
     #[JsonProperty('warn_level')]
-    public ?float $warnLevel;
+    public ?string $warnLevel;
 
     /**
-     * @var ?float $weight weight
+     * @var ?string $weight weight
      */
     #[JsonProperty('weight')]
-    public ?float $weight;
+    public ?string $weight;
 
     /**
      * a method of weight calculation:
@@ -233,52 +237,52 @@ class ProductStock extends JsonSerializableType
      *     <li>3 - weight will be subtracted from the base weight</li>
      * </ul>
      *
-     * @var ?int $weightType
+     * @var ?string $weightType
      */
     #[JsonProperty('weight_type')]
-    public ?int $weightType;
+    public ?string $weightType;
 
     /**
-     * @var ?float $wholesaleHistoricalLowestPrice wholesale price first from the last 30 days before the promotion
+     * @var ?string $wholesaleHistoricalLowestPrice wholesale price first from the last 30 days before the promotion
      */
     #[JsonProperty('wholesale_historical_lowest_price')]
-    public ?float $wholesaleHistoricalLowestPrice;
+    public ?string $wholesaleHistoricalLowestPrice;
 
     /**
      * @param array{
-     *   active?: ?bool,
+     *   active?: ?value-of<ProductStockActive>,
      *   additionalCodes?: ?ProductStockAdditionalCodes,
-     *   availabilityId?: ?int,
-     *   calculatedAvailabilityId?: ?int,
+     *   availabilityId?: ?string,
+     *   calculatedAvailabilityId?: ?string,
      *   calculationUnitId?: ?int,
-     *   calculationUnitRatio?: ?float,
+     *   calculationUnitRatio?: ?string,
      *   code?: ?string,
-     *   default?: ?bool,
-     *   deliveryId?: ?int,
+     *   default?: ?value-of<ProductStockDefault>,
+     *   deliveryId?: ?string,
      *   ean?: ?string,
-     *   extended?: ?bool,
-     *   gfxId?: ?int,
-     *   historicalLowestPrice?: ?float,
-     *   options?: ?array<ProductStockOptionsItem>,
-     *   package?: ?float,
-     *   price?: ?float,
-     *   priceBuying?: ?float,
-     *   priceSpecial?: ?float,
-     *   priceType?: ?int,
-     *   priceTypeSpecial?: ?int,
-     *   priceTypeWholesale?: ?int,
-     *   priceWholesale?: ?float,
-     *   productId?: ?int,
-     *   sold?: ?float,
-     *   specialHistoricalLowestPrice?: ?float,
+     *   extended?: ?value-of<ProductStockExtended>,
+     *   gfxId?: ?string,
+     *   historicalLowestPrice?: ?string,
+     *   options?: ?array<string, int>,
+     *   package?: ?string,
+     *   price?: ?string,
+     *   priceBuying?: ?string,
+     *   priceSpecial?: ?string,
+     *   priceType?: ?string,
+     *   priceTypeSpecial?: ?string,
+     *   priceTypeWholesale?: ?string,
+     *   priceWholesale?: ?string,
+     *   productId?: ?string,
+     *   sold?: ?string,
+     *   specialHistoricalLowestPrice?: ?string,
      *   specialOffer?: ?ProductStockSpecialOffer,
-     *   stock?: ?float,
-     *   stockId?: ?int,
+     *   stock?: ?string,
+     *   stockId?: ?string,
      *   warehouses?: ?array<string, string>,
-     *   warnLevel?: ?float,
-     *   weight?: ?float,
-     *   weightType?: ?int,
-     *   wholesaleHistoricalLowestPrice?: ?float,
+     *   warnLevel?: ?string,
+     *   weight?: ?string,
+     *   weightType?: ?string,
+     *   wholesaleHistoricalLowestPrice?: ?string,
      * } $values
      */
     public function __construct(

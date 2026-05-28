@@ -18,34 +18,40 @@ class ProductImage extends JsonSerializableType
     public ?string $extension;
 
     /**
-     * @var ?int $gfxId file asset identifier
+     * @var ?string $gfxId file asset identifier
      */
     #[JsonProperty('gfx_id')]
-    public ?int $gfxId;
+    public ?string $gfxId;
 
     /**
-     * @var ?bool $hidden is the photo hidden
+     * @var ?value-of<ProductImageHidden> $hidden is the photo hidden
      */
     #[JsonProperty('hidden')]
-    public ?bool $hidden;
+    public ?string $hidden;
 
     /**
-     * @var ?bool $main is the photo set as main
+     * @var ?int $main is the photo set as main
      */
     #[JsonProperty('main')]
-    public ?bool $main;
+    public ?int $main;
 
     /**
-     * @var ?int $order photo order
+     * @var ?string $name Legacy top-level photo name (SHOPER-123489). Use translations[locale].name instead.
+     */
+    #[JsonProperty('name')]
+    public ?string $name;
+
+    /**
+     * @var ?string $order photo order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?int $productId [product](#tag/Products) identifier
+     * @var ?string $productId [product](#tag/Products) identifier
      */
     #[JsonProperty('product_id')]
-    public ?int $productId;
+    public ?string $productId;
 
     /**
      * @var ?array<string, ProductImageTranslationsValue> $translations an associative array with object translations; if you want to filter things - you can skip locale subkey
@@ -62,11 +68,12 @@ class ProductImage extends JsonSerializableType
     /**
      * @param array{
      *   extension?: ?string,
-     *   gfxId?: ?int,
-     *   hidden?: ?bool,
-     *   main?: ?bool,
-     *   order?: ?int,
-     *   productId?: ?int,
+     *   gfxId?: ?string,
+     *   hidden?: ?value-of<ProductImageHidden>,
+     *   main?: ?int,
+     *   name?: ?string,
+     *   order?: ?string,
+     *   productId?: ?string,
      *   translations?: ?array<string, ProductImageTranslationsValue>,
      *   unicName?: ?string,
      * } $values
@@ -78,6 +85,7 @@ class ProductImage extends JsonSerializableType
         $this->gfxId = $values['gfxId'] ?? null;
         $this->hidden = $values['hidden'] ?? null;
         $this->main = $values['main'] ?? null;
+        $this->name = $values['name'] ?? null;
         $this->order = $values['order'] ?? null;
         $this->productId = $values['productId'] ?? null;
         $this->translations = $values['translations'] ?? null;

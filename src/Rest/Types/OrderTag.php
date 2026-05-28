@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class OrderTag extends JsonSerializableType
 {
     /**
-     * @var int $langId identifier of the language
+     * @var string $langId identifier of the language
      */
     #[JsonProperty('lang_id')]
-    public int $langId;
+    public string $langId;
 
     /**
      * @var string $name order tag name
@@ -30,7 +30,7 @@ class OrderTag extends JsonSerializableType
 
     /**
      * @param array{
-     *   langId: int,
+     *   langId: string,
      *   name: string,
      *   tagId?: ?int,
      * } $values

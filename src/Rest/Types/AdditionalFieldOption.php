@@ -18,10 +18,10 @@ class AdditionalFieldOption extends JsonSerializableType
     public int $fieldId;
 
     /**
-     * @var ?int $optionId additional field option identifier
+     * @var ?string $optionId additional field option identifier
      */
     #[JsonProperty('option_id')]
-    public ?int $optionId;
+    public ?string $optionId;
 
     /**
      * @var array<string, AdditionalFieldOptionTranslationsValue> $translations translations data keyed by locale code
@@ -33,7 +33,7 @@ class AdditionalFieldOption extends JsonSerializableType
      * @param array{
      *   fieldId: int,
      *   translations: array<string, AdditionalFieldOptionTranslationsValue>,
-     *   optionId?: ?int,
+     *   optionId?: ?string,
      * } $values
      */
     public function __construct(

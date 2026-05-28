@@ -12,10 +12,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class User extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is active?
+     * @var ?value-of<UserActive> $active is active?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * [user additional fields](#tag/AdditionalFields):
@@ -40,10 +40,10 @@ class User extends JsonSerializableType
     public ?string $dateAdd;
 
     /**
-     * @var ?float $discount discount for this user (percent)
+     * @var ?string $discount discount for this user (percent)
      */
     #[JsonProperty('discount')]
-    public ?float $discount;
+    public ?string $discount;
 
     /**
      * @var string $email e-mail address
@@ -58,10 +58,10 @@ class User extends JsonSerializableType
     public ?string $firstname;
 
     /**
-     * @var ?int $groupId [user group](#tag/UserGroups) identifier
+     * @var ?string $groupId [user group](#tag/UserGroups) identifier
      */
     #[JsonProperty('group_id')]
-    public ?int $groupId;
+    public ?string $groupId;
 
     /**
      * @var ?array<int> $groups an array with [user groups](#tag/UserGroups)
@@ -70,16 +70,10 @@ class User extends JsonSerializableType
     public ?array $groups;
 
     /**
-     * @var ?UserInfo $info Extended user information. Returned only when the `info=true` query parameter is passed.
-     */
-    #[JsonProperty('info')]
-    public ?UserInfo $info;
-
-    /**
-     * @var ?int $langId [language](#tag/Languages) set upon registration
+     * @var ?string $langId [language](#tag/Languages) set upon registration
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?string $lastname last name
@@ -100,10 +94,10 @@ class User extends JsonSerializableType
     public ?string $login;
 
     /**
-     * @var ?bool $newsletter user wants to receive newsletter?
+     * @var ?value-of<UserNewsletter> $newsletter user wants to receive newsletter?
      */
     #[JsonProperty('newsletter')]
-    public ?bool $newsletter;
+    public ?string $newsletter;
 
     /**
      * user origin:
@@ -114,50 +108,63 @@ class User extends JsonSerializableType
      *     <li>3 - Allegro</li>
      * </ul>
      *
-     * @var ?int $origin
+     * @var ?string $origin
      */
     #[JsonProperty('origin')]
-    public ?int $origin;
+    public ?string $origin;
 
     /**
-     * @var ?string $tags user tags
+     * @var ?value-of<UserRegistered> $registered is user a registered (account-based) customer? (0 = guest, 1 = registered)
      */
-    #[JsonProperty('tags')]
-    public ?string $tags;
+    #[JsonProperty('registered')]
+    public ?string $registered;
 
     /**
-     * @var ?int $userId user identifier
+     * @var ?float $loyaltySum current loyalty points balance; returned only when the loyalty program is enabled
+     */
+    #[JsonProperty('loyalty_sum')]
+    public ?float $loyaltySum;
+
+    /**
+     * @var ?array<string> $tags list of tags assigned to this user
+     */
+    #[JsonProperty('tags'), ArrayType(['string'])]
+    public ?array $tags;
+
+    /**
+     * @var ?string $userId user identifier
      */
     #[JsonProperty('user_id')]
-    public ?int $userId;
+    public ?string $userId;
 
     /**
-     * @var ?bool $verifyEmail has been user e-mail confirmed?
+     * @var ?value-of<UserVerifyEmail> $verifyEmail has been user e-mail confirmed?
      */
     #[JsonProperty('verify_email')]
-    public ?bool $verifyEmail;
+    public ?string $verifyEmail;
 
     /**
      * @param array{
      *   email: string,
-     *   active?: ?bool,
+     *   active?: ?value-of<UserActive>,
      *   additionalFields?: ?array<UserAdditionalFieldsItem>,
      *   comment?: ?string,
      *   dateAdd?: ?string,
-     *   discount?: ?float,
+     *   discount?: ?string,
      *   firstname?: ?string,
-     *   groupId?: ?int,
+     *   groupId?: ?string,
      *   groups?: ?array<int>,
-     *   info?: ?UserInfo,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   lastname?: ?string,
      *   lastvisit?: ?string,
      *   login?: ?string,
-     *   newsletter?: ?bool,
-     *   origin?: ?int,
-     *   tags?: ?string,
-     *   userId?: ?int,
-     *   verifyEmail?: ?bool,
+     *   newsletter?: ?value-of<UserNewsletter>,
+     *   origin?: ?string,
+     *   registered?: ?value-of<UserRegistered>,
+     *   loyaltySum?: ?float,
+     *   tags?: ?array<string>,
+     *   userId?: ?string,
+     *   verifyEmail?: ?value-of<UserVerifyEmail>,
      * } $values
      */
     public function __construct(
@@ -172,13 +179,14 @@ class User extends JsonSerializableType
         $this->firstname = $values['firstname'] ?? null;
         $this->groupId = $values['groupId'] ?? null;
         $this->groups = $values['groups'] ?? null;
-        $this->info = $values['info'] ?? null;
         $this->langId = $values['langId'] ?? null;
         $this->lastname = $values['lastname'] ?? null;
         $this->lastvisit = $values['lastvisit'] ?? null;
         $this->login = $values['login'] ?? null;
         $this->newsletter = $values['newsletter'] ?? null;
         $this->origin = $values['origin'] ?? null;
+        $this->registered = $values['registered'] ?? null;
+        $this->loyaltySum = $values['loyaltySum'] ?? null;
         $this->tags = $values['tags'] ?? null;
         $this->userId = $values['userId'] ?? null;
         $this->verifyEmail = $values['verifyEmail'] ?? null;

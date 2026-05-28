@@ -5,15 +5,15 @@ namespace Shoper\Sdk\Rest\CategoriesTrees;
 use Psr\Http\Client\ClientInterface;
 use Shoper\Sdk\Rest\Core\Client\RawClient;
 use Shoper\Sdk\Rest\CategoriesTrees\Requests\ListCategoriesTreesRequest;
-use Shoper\Sdk\Rest\CategoriesTrees\Types\ListCategoriesTreesResponse;
+use Shoper\Sdk\Rest\Types\CategoryTree;
 use Shoper\Sdk\Rest\Exceptions\ShoperException;
 use Shoper\Sdk\Rest\Exceptions\ShoperApiException;
 use Shoper\Sdk\Rest\Core\Json\JsonApiRequest;
 use Shoper\Sdk\Rest\Environments;
 use Shoper\Sdk\Rest\Core\Client\HttpMethod;
+use Shoper\Sdk\Rest\Core\Json\JsonDecoder;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
-use Shoper\Sdk\Rest\Types\CategoryTree;
 
 class CategoriesTreesClient
 {
@@ -61,11 +61,11 @@ class CategoriesTreesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?ListCategoriesTreesResponse
+     * @return ?array<CategoryTree>
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCategoriesTrees(ListCategoriesTreesRequest $request = new ListCategoriesTreesRequest(), ?array $options = null): ?ListCategoriesTreesResponse
+    public function list(ListCategoriesTreesRequest $request = new ListCategoriesTreesRequest(), ?array $options = null): ?array
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -91,7 +91,7 @@ class CategoriesTreesClient
                 if (empty($json)) {
                     return null;
                 }
-                return ListCategoriesTreesResponse::fromJson($json);
+                return JsonDecoder::decodeArray($json, [CategoryTree::class]); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -106,7 +106,7 @@ class CategoriesTreesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -119,7 +119,7 @@ class CategoriesTreesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getCategoryTree(string $id, ?array $options = null): ?CategoryTree
+    public function get(string $id, ?array $options = null): ?CategoryTree
     {
         $options = array_merge($this->options, $options ?? []);
         try {

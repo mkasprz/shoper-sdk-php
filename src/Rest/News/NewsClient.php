@@ -69,7 +69,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listNews(ListNewsRequest $request = new ListNewsRequest(), ?array $options = null): ?ListNewsResponse
+    public function list(ListNewsRequest $request = new ListNewsRequest(), ?array $options = null): ?ListNewsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createNews(NewsInsert $request, ?array $options = null): int|News|null
+    public function create(NewsInsert $request, ?array $options = null): int|News|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class NewsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class NewsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getNews(string $id, ?array $options = null): ?News
+    public function get(string $id, ?array $options = null): ?News
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class NewsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param NewsUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class NewsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |News
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateNews(string $id, NewsUpdate $request = new NewsUpdate(), ?array $options = null): bool|News|null
+    public function update(string $id, NewsUpdate $request = new NewsUpdate(), ?array $options = null): int|News|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class NewsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', News::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', News::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class NewsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class NewsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteNews(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class NewsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

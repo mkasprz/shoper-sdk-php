@@ -659,6 +659,20 @@ class ApplicationConfig extends JsonSerializableType
     public ?bool $warehousesEnabled;
 
     /**
+     * Shop license type. Returned only when the access token has the <code>shop_license_type</code> scope (scope id: 201).
+     * Values:
+     * <ul>
+     *     <li>1 - basic</li>
+     *     <li>2 - pro</li>
+     *     <li>3 - enterprise</li>
+     * </ul>
+     *
+     * @var ?int $licenseType
+     */
+    #[JsonProperty('license_type')]
+    public ?int $licenseType;
+
+    /**
      * @param array{
      *   blogCategoryDefaultUrlFormat?: ?int,
      *   blogCommentsEnable?: ?bool,
@@ -751,6 +765,7 @@ class ApplicationConfig extends JsonSerializableType
      *   storefrontEnabled?: ?bool,
      *   technicalUrl?: ?string,
      *   warehousesEnabled?: ?bool,
+     *   licenseType?: ?int,
      * } $values
      */
     public function __construct(
@@ -847,6 +862,7 @@ class ApplicationConfig extends JsonSerializableType
         $this->storefrontEnabled = $values['storefrontEnabled'] ?? null;
         $this->technicalUrl = $values['technicalUrl'] ?? null;
         $this->warehousesEnabled = $values['warehousesEnabled'] ?? null;
+        $this->licenseType = $values['licenseType'] ?? null;
     }
 
     /**

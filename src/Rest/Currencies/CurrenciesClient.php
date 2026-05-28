@@ -13,7 +13,11 @@ use Shoper\Sdk\Rest\Environments;
 use Shoper\Sdk\Rest\Core\Client\HttpMethod;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
+use Shoper\Sdk\Rest\Currencies\Requests\CurrencyInsert;
 use Shoper\Sdk\Rest\Types\Currency;
+use Shoper\Sdk\Rest\Core\Json\JsonDecoder;
+use Shoper\Sdk\Rest\Core\Types\Union;
+use Shoper\Sdk\Rest\Currencies\Requests\CurrencyUpdate;
 
 class CurrenciesClient
 {
@@ -65,7 +69,7 @@ class CurrenciesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCurrencies(ListCurrenciesRequest $request = new ListCurrenciesRequest(), ?array $options = null): ?ListCurrenciesResponse
+    public function list(ListCurrenciesRequest $request = new ListCurrenciesRequest(), ?array $options = null): ?ListCurrenciesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -106,7 +110,57 @@ class CurrenciesClient
     }
 
     /**
-     * @param string $id
+     * @param CurrencyInsert $request
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return (
+     *    int
+     *   |Currency
+     * )|null
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function create(CurrencyInsert $request, ?array $options = null): int|Currency|null
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/currencies",
+                    method: HttpMethod::POST,
+                    body: $request,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeUnion($json, new Union('integer', Currency::class)); // @phpstan-ignore-line
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -119,7 +173,7 @@ class CurrenciesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getCurrency(string $id, ?array $options = null): ?Currency
+    public function get(string $id, ?array $options = null): ?Currency
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -138,6 +192,103 @@ class CurrenciesClient
                     return null;
                 }
                 return Currency::fromJson($json);
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id Resource identifier.
+     * @param CurrencyUpdate $request
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return (
+     *    int
+     *   |Currency
+     * )|null
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function update(string $id, CurrencyUpdate $request = new CurrencyUpdate(), ?array $options = null): int|Currency|null
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/currencies/{$id}",
+                    method: HttpMethod::PUT,
+                    body: $request,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeUnion($json, new Union('integer', Currency::class)); // @phpstan-ignore-line
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id Resource identifier.
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return ?int
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function delete(string $id, ?array $options = null): ?int
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/currencies/{$id}",
+                    method: HttpMethod::DELETE,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

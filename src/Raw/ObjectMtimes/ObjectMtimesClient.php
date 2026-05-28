@@ -62,7 +62,7 @@ class ObjectMtimesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getObjectMtime(?array $options = null): ?ObjectMtime
+    public function get(?array $options = null): ?ObjectMtime
     {
         $options = array_merge($this->options, $options ?? []);
         try {

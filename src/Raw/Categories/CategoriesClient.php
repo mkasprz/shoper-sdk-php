@@ -69,7 +69,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCategories(ListCategoriesRequest $request = new ListCategoriesRequest(), ?array $options = null): ?ListCategoriesResponse
+    public function list(ListCategoriesRequest $request = new ListCategoriesRequest(), ?array $options = null): ?ListCategoriesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createCategory(CategoryInsert $request, ?array $options = null): int|Category|null
+    public function create(CategoryInsert $request, ?array $options = null): int|Category|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getCategory(string $id, ?array $options = null): ?Category
+    public function get(string $id, ?array $options = null): ?Category
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateCategory(string $id, CategoryUpdate $request = new CategoryUpdate(), ?array $options = null): int|Category|null
+    public function update(string $id, CategoryUpdate $request = new CategoryUpdate(), ?array $options = null): int|Category|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class CategoriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteCategory(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

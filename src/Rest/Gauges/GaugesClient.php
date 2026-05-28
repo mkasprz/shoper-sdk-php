@@ -65,7 +65,7 @@ class GaugesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listGauges(ListGaugesRequest $request = new ListGaugesRequest(), ?array $options = null): ?ListGaugesResponse
+    public function list(ListGaugesRequest $request = new ListGaugesRequest(), ?array $options = null): ?ListGaugesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -106,7 +106,7 @@ class GaugesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -119,7 +119,7 @@ class GaugesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getGauge(string $id, ?array $options = null): ?Gauge
+    public function get(string $id, ?array $options = null): ?Gauge
     {
         $options = array_merge($this->options, $options ?? []);
         try {

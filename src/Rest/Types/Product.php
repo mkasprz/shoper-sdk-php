@@ -5,6 +5,7 @@ namespace Shoper\Sdk\Rest\Types;
 use Shoper\Sdk\Rest\Core\Json\JsonSerializableType;
 use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 use Shoper\Sdk\Rest\Core\Types\ArrayType;
+use Shoper\Sdk\Rest\Core\Types\Union;
 
 /**
  * Product in the shop
@@ -70,19 +71,18 @@ class Product extends JsonSerializableType
 
     /**
      * a nested associative array - keys of main array = [attribute group](#tag/AttributeGroups)
-     * identifiers, values: an associative array (keys: [attribute](#tag/Attributes) identifiers,
-     * values: attribute value)
+     * identifiers, values: an array of [attribute](#tag/Attributes) values for that group.
      *
-     * @var ?array<string, string> $attributes
+     * @var ?array<string, mixed> $attributes
      */
-    #[JsonProperty('attributes'), ArrayType(['string' => 'string'])]
+    #[JsonProperty('attributes'), ArrayType(['string' => 'mixed'])]
     public ?array $attributes;
 
     /**
-     * @var ?bool $bestseller is product marked as bestseller?
+     * @var ?value-of<ProductBestseller> $bestseller is product marked as bestseller?
      */
     #[JsonProperty('bestseller')]
-    public ?bool $bestseller;
+    public ?string $bestseller;
 
     /**
      * @var ?array<int> $categories an array of identifiers of [categories](#tag/Categories)
@@ -91,10 +91,13 @@ class Product extends JsonSerializableType
     public ?array $categories;
 
     /**
-     * @var int $categoryId main [category](#tag/Categories) identifier
+     * @var (
+     *    string
+     *   |int
+     * ) $categoryId main [category](#tag/Categories) identifier
      */
-    #[JsonProperty('category_id')]
-    public int $categoryId;
+    #[JsonProperty('category_id'), Union('string', 'integer')]
+    public string|int $categoryId;
 
     /**
      * @var ?int $categoryTreeId tree category identifier to which the product belongs (allows filtering throughout the subjected category)
@@ -121,28 +124,28 @@ class Product extends JsonSerializableType
     public ?array $collections;
 
     /**
-     * @var ?int $currencyId product [currency](#tag/Currencies)
+     * @var ?string $currencyId product [currency](#tag/Currencies)
      */
     #[JsonProperty('currency_id')]
-    public ?int $currencyId;
+    public ?string $currencyId;
 
     /**
-     * @var ?float $dimensionH product package height
+     * @var ?string $dimensionH product package height
      */
     #[JsonProperty('dimension_h')]
-    public ?float $dimensionH;
+    public ?string $dimensionH;
 
     /**
-     * @var ?float $dimensionL product package length
+     * @var ?string $dimensionL product package length
      */
     #[JsonProperty('dimension_l')]
-    public ?float $dimensionL;
+    public ?string $dimensionL;
 
     /**
-     * @var ?float $dimensionW product package width
+     * @var ?string $dimensionW product package width
      */
     #[JsonProperty('dimension_w')]
-    public ?float $dimensionW;
+    public ?string $dimensionW;
 
     /**
      * @var ?string $ean product ean code
@@ -157,10 +160,10 @@ class Product extends JsonSerializableType
     public ?string $editDate;
 
     /**
-     * @var ?array<int> $feedsExludes array of product feed identifiers
+     * @var ?array<int> $feedsExcludes array of product feed identifiers
      */
-    #[JsonProperty('feeds_exludes'), ArrayType(['integer'])]
-    public ?array $feedsExludes;
+    #[JsonProperty('feeds_excludes'), ArrayType(['integer'])]
+    public ?array $feedsExcludes;
 
     /**
      * @var ?int $gaugeId [gauge](#tag/Gauges) identifier
@@ -169,16 +172,20 @@ class Product extends JsonSerializableType
     public ?int $gaugeId;
 
     /**
-     * @var ?int $groupId [option group](#tag/OptionGroups) identifier the product is bound to
+     * [option group](#tag/OptionGroups) identifier the product is bound to.
+     * When parent option_group has `denomination=1`, this option behaves as a gift card denomination —
+     * `amount` field becomes mandatory, option_values cannot be modified directly.
+     *
+     * @var ?string $groupId
      */
     #[JsonProperty('group_id')]
-    public ?int $groupId;
+    public ?string $groupId;
 
     /**
-     * @var ?bool $inLoyalty is loyalty enabled for product?
+     * @var ?value-of<ProductInLoyalty> $inLoyalty is loyalty enabled for product?
      */
     #[JsonProperty('in_loyalty')]
-    public ?bool $inLoyalty;
+    public ?string $inLoyalty;
 
     /**
      * @var ?bool $isProductOfDay is product a product of the day?
@@ -205,22 +212,37 @@ class Product extends JsonSerializableType
     public ?ProductMainImage $mainImage;
 
     /**
-     * @var ?bool $newproduct is product marked as new?
+     * @var ?value-of<ProductNewproduct> $newproduct is product marked as new?
      */
     #[JsonProperty('newproduct')]
-    public ?bool $newproduct;
+    public ?string $newproduct;
 
     /**
-     * @var ?array<int> $options array of product [stock](#tag/ProductStocks) identifiers
+     * Array of product option assignments.
+     *
+     * Behavior depends on option type:
+     * - **Options WITH children** (select/radio): returns ONLY active assigned values
+     *   (active=true). Inactive assignments are filtered out.
+     * - **Options WITHOUT children** (checkbox/text/file): always returns an entry
+     *   with `active=false` when no value is assigned, to signal the option exists
+     *   but has no assignment. Use `active=true` to filter actually-assigned ones.
+     *
+     * @var ?array<int> $options
      */
     #[JsonProperty('options'), ArrayType(['integer'])]
     public ?array $options;
 
     /**
-     * @var ?float $otherPrice price of product in other shops
+     * @var ?array<array<string, mixed>> $optionsNonStock array of non-stock product option assignments
+     */
+    #[JsonProperty('options_non_stock'), ArrayType([['string' => 'mixed']])]
+    public ?array $optionsNonStock;
+
+    /**
+     * @var ?string $otherPrice price of product in other shops
      */
     #[JsonProperty('other_price')]
-    public ?float $otherPrice;
+    public ?string $otherPrice;
 
     /**
      * @var string $pkwiu PKWiU (product quantifier)
@@ -229,22 +251,22 @@ class Product extends JsonSerializableType
     public string $pkwiu;
 
     /**
-     * @var ?int $producerId [producer](#tag/Producers) identifier
+     * @var ?string $producerId [producer](#tag/Producers) identifier
      */
     #[JsonProperty('producer_id')]
-    public ?int $producerId;
+    public ?string $producerId;
 
     /**
-     * @var ?int $productId product identifier
+     * @var ?string $productId product identifier
      */
     #[JsonProperty('product_id')]
-    public ?int $productId;
+    public ?string $productId;
 
     /**
-     * @var ?float $promoPrice **Deprecated since 5.7.0.** current product discount calculated according to the default shop's currency
+     * @var ?string $promoPrice **Deprecated since 5.7.0.** current product discount calculated according to the default shop's currency
      */
     #[JsonProperty('promo_price')]
-    public ?float $promoPrice;
+    public ?string $promoPrice;
 
     /**
      * @var ?array<int> $related array of identifiers of related products
@@ -283,10 +305,10 @@ class Product extends JsonSerializableType
     public ?array $tags;
 
     /**
-     * @var ?int $taxId [tax](#tag/Taxes) identifier
+     * @var ?string $taxId [tax](#tag/Taxes) identifier
      */
     #[JsonProperty('tax_id')]
-    public ?int $taxId;
+    public ?string $taxId;
 
     /**
      * @var array<string, ProductTranslationsValue> $translations an associative array with object translations; if you want to filter things - you can skip locale subkey
@@ -301,32 +323,35 @@ class Product extends JsonSerializableType
      *     <li>1 - bundle,</li>
      * </ul>
      *
-     * @var ?int $type
+     * @var ?string $type
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
-     * @var ?int $unitId measurement [unit](#tag/Units) identifier
+     * @var ?string $unitId measurement [unit](#tag/Units) identifier
      */
     #[JsonProperty('unit_id')]
-    public ?int $unitId;
+    public ?string $unitId;
 
     /**
-     * @var ?bool $unitPriceCalculation is product unit price calculation enabled?
+     * @var ?value-of<ProductUnitPriceCalculation> $unitPriceCalculation is product unit price calculation enabled?
      */
     #[JsonProperty('unit_price_calculation')]
-    public ?bool $unitPriceCalculation;
+    public ?string $unitPriceCalculation;
 
     /**
-     * @var ?float $volWeight gauge product weight
+     * @var ?string $volWeight gauge product weight
      */
     #[JsonProperty('vol_weight')]
-    public ?float $volWeight;
+    public ?string $volWeight;
 
     /**
      * @param array{
-     *   categoryId: int,
+     *   categoryId: (
+     *    string
+     *   |int
+     * ),
      *   code: string,
      *   pkwiu: string,
      *   stock: ProductStock,
@@ -340,42 +365,43 @@ class Product extends JsonSerializableType
      *   additionalKgo?: ?string,
      *   additionalProducer?: ?string,
      *   additionalWarehouse?: ?string,
-     *   attributes?: ?array<string, string>,
-     *   bestseller?: ?bool,
+     *   attributes?: ?array<string, mixed>,
+     *   bestseller?: ?value-of<ProductBestseller>,
      *   categories?: ?array<int>,
      *   categoryTreeId?: ?int,
      *   children?: ?ProductChildren,
      *   collections?: ?array<int>,
-     *   currencyId?: ?int,
-     *   dimensionH?: ?float,
-     *   dimensionL?: ?float,
-     *   dimensionW?: ?float,
+     *   currencyId?: ?string,
+     *   dimensionH?: ?string,
+     *   dimensionL?: ?string,
+     *   dimensionW?: ?string,
      *   ean?: ?string,
      *   editDate?: ?string,
-     *   feedsExludes?: ?array<int>,
+     *   feedsExcludes?: ?array<int>,
      *   gaugeId?: ?int,
-     *   groupId?: ?int,
-     *   inLoyalty?: ?bool,
+     *   groupId?: ?string,
+     *   inLoyalty?: ?value-of<ProductInLoyalty>,
      *   isProductOfDay?: ?bool,
      *   loyaltyPrice?: ?int,
      *   loyaltyScore?: ?int,
      *   mainImage?: ?ProductMainImage,
-     *   newproduct?: ?bool,
+     *   newproduct?: ?value-of<ProductNewproduct>,
      *   options?: ?array<int>,
-     *   otherPrice?: ?float,
-     *   producerId?: ?int,
-     *   productId?: ?int,
-     *   promoPrice?: ?float,
+     *   optionsNonStock?: ?array<array<string, mixed>>,
+     *   otherPrice?: ?string,
+     *   producerId?: ?string,
+     *   productId?: ?string,
+     *   promoPrice?: ?string,
      *   related?: ?array<int>,
      *   safetyInformation?: ?ProductSafetyInformation,
      *   specialOffer?: ?ProductSpecialOffer,
      *   tagId?: ?int,
      *   tags?: ?array<int>,
-     *   taxId?: ?int,
-     *   type?: ?int,
-     *   unitId?: ?int,
-     *   unitPriceCalculation?: ?bool,
-     *   volWeight?: ?float,
+     *   taxId?: ?string,
+     *   type?: ?string,
+     *   unitId?: ?string,
+     *   unitPriceCalculation?: ?value-of<ProductUnitPriceCalculation>,
+     *   volWeight?: ?string,
      * } $values
      */
     public function __construct(
@@ -404,7 +430,7 @@ class Product extends JsonSerializableType
         $this->dimensionW = $values['dimensionW'] ?? null;
         $this->ean = $values['ean'] ?? null;
         $this->editDate = $values['editDate'] ?? null;
-        $this->feedsExludes = $values['feedsExludes'] ?? null;
+        $this->feedsExcludes = $values['feedsExcludes'] ?? null;
         $this->gaugeId = $values['gaugeId'] ?? null;
         $this->groupId = $values['groupId'] ?? null;
         $this->inLoyalty = $values['inLoyalty'] ?? null;
@@ -414,6 +440,7 @@ class Product extends JsonSerializableType
         $this->mainImage = $values['mainImage'] ?? null;
         $this->newproduct = $values['newproduct'] ?? null;
         $this->options = $values['options'] ?? null;
+        $this->optionsNonStock = $values['optionsNonStock'] ?? null;
         $this->otherPrice = $values['otherPrice'] ?? null;
         $this->pkwiu = $values['pkwiu'];
         $this->producerId = $values['producerId'] ?? null;

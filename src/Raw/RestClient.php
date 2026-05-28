@@ -28,6 +28,7 @@ use Shoper\Sdk\Rest\GeolocationRegions\GeolocationRegionsClient;
 use Shoper\Sdk\Rest\GeolocationSubregions\GeolocationSubregionsClient;
 use Shoper\Sdk\Rest\Languages\LanguagesClient;
 use Shoper\Sdk\Rest\LoyaltyEvents\LoyaltyEventsClient;
+use Shoper\Sdk\Rest\MetafieldBind\MetafieldBindClient;
 use Shoper\Sdk\Rest\MetafieldValues\MetafieldValuesClient;
 use Shoper\Sdk\Rest\Metafields\MetafieldsClient;
 use Shoper\Sdk\Rest\News\NewsClient;
@@ -210,6 +211,11 @@ class RestClient
      * @var LoyaltyEventsClient $loyaltyEvents
      */
     public LoyaltyEventsClient $loyaltyEvents;
+
+    /**
+     * @var MetafieldBindClient $metafieldBind
+     */
+    public MetafieldBindClient $metafieldBind;
 
     /**
      * @var MetafieldValuesClient $metafieldValues
@@ -524,6 +530,7 @@ class RestClient
         $this->geolocationSubregions = new GeolocationSubregionsClient($this->client, $this->options);
         $this->languages = new LanguagesClient($this->client, $this->options);
         $this->loyaltyEvents = new LoyaltyEventsClient($this->client, $this->options);
+        $this->metafieldBind = new MetafieldBindClient($this->client, $this->options);
         $this->metafieldValues = new MetafieldValuesClient($this->client, $this->options);
         $this->metafields = new MetafieldsClient($this->client, $this->options);
         $this->news = new NewsClient($this->client, $this->options);

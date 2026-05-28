@@ -4,8 +4,8 @@ namespace Shoper\Sdk\Rest\ProductOptions;
 
 use Psr\Http\Client\ClientInterface;
 use Shoper\Sdk\Rest\Core\Client\RawClient;
-use Shoper\Sdk\Rest\ProductOptions\Requests\ListOptionsRequest;
-use Shoper\Sdk\Rest\ProductOptions\Types\ListOptionsResponse;
+use Shoper\Sdk\Rest\ProductOptions\Requests\ListProductOptionsRequest;
+use Shoper\Sdk\Rest\ProductOptions\Types\ListProductOptionsResponse;
 use Shoper\Sdk\Rest\Exceptions\ShoperException;
 use Shoper\Sdk\Rest\Exceptions\ShoperApiException;
 use Shoper\Sdk\Rest\Core\Json\JsonApiRequest;
@@ -56,7 +56,7 @@ class ProductOptionsClient
     }
 
     /**
-     * @param ListOptionsRequest $request
+     * @param ListProductOptionsRequest $request
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -65,11 +65,11 @@ class ProductOptionsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?ListOptionsResponse
+     * @return ?ListProductOptionsResponse
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOptions(ListOptionsRequest $request = new ListOptionsRequest(), ?array $options = null): ?ListOptionsResponse
+    public function list(ListProductOptionsRequest $request = new ListProductOptionsRequest(), ?array $options = null): ?ListProductOptionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -95,7 +95,7 @@ class ProductOptionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return ListOptionsResponse::fromJson($json);
+                return ListProductOptionsResponse::fromJson($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -126,7 +126,7 @@ class ProductOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOption(OptionInsert $request, ?array $options = null): int|Option|null
+    public function create(OptionInsert $request, ?array $options = null): int|Option|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ProductOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOption(string $id, ?array $options = null): ?Option
+    public function get(string $id, ?array $options = null): ?Option
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ProductOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOption(string $id, OptionUpdate $request = new OptionUpdate(), ?array $options = null): int|Option|null
+    public function update(string $id, OptionUpdate $request = new OptionUpdate(), ?array $options = null): int|Option|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ProductOptionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOption(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

@@ -69,7 +69,7 @@ class ProductSafetyCertificatesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProductSafetyCertificates(ListProductSafetyCertificatesRequest $request = new ListProductSafetyCertificatesRequest(), ?array $options = null): ?ListProductSafetyCertificatesResponse
+    public function list(ListProductSafetyCertificatesRequest $request = new ListProductSafetyCertificatesRequest(), ?array $options = null): ?ListProductSafetyCertificatesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProductSafetyCertificatesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProductSafetyCertificate(ProductSafetyCertificateInsert $request, ?array $options = null): int|ProductSafetyCertificate|null
+    public function create(ProductSafetyCertificateInsert $request, ?array $options = null): int|ProductSafetyCertificate|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ProductSafetyCertificatesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProductSafetyCertificate(string $id, ?array $options = null): ?ProductSafetyCertificate
+    public function get(string $id, ?array $options = null): ?ProductSafetyCertificate
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ProductSafetyCertificatesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProductSafetyCertificate(string $id, ProductSafetyCertificateUpdate $request = new ProductSafetyCertificateUpdate(), ?array $options = null): int|ProductSafetyCertificate|null
+    public function update(string $id, ProductSafetyCertificateUpdate $request = new ProductSafetyCertificateUpdate(), ?array $options = null): int|ProductSafetyCertificate|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ProductSafetyCertificatesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProductSafetyCertificate(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

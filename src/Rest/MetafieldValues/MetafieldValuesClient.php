@@ -69,7 +69,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listMetafieldValues(ListMetafieldValuesRequest $request = new ListMetafieldValuesRequest(), ?array $options = null): ?ListMetafieldValuesResponse
+    public function list(ListMetafieldValuesRequest $request = new ListMetafieldValuesRequest(), ?array $options = null): ?ListMetafieldValuesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createMetafieldValue(MetafieldValueInsert $request, ?array $options = null): int|MetafieldValue|null
+    public function create(MetafieldValueInsert $request, ?array $options = null): int|MetafieldValue|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class MetafieldValuesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getMetafieldValue(string $id, ?array $options = null): ?MetafieldValue
+    public function get(string $id, ?array $options = null): ?MetafieldValue
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class MetafieldValuesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param MetafieldValueUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class MetafieldValuesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |MetafieldValue
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateMetafieldValue(string $id, MetafieldValueUpdate $request = new MetafieldValueUpdate(), ?array $options = null): bool|MetafieldValue|null
+    public function update(string $id, MetafieldValueUpdate $request = new MetafieldValueUpdate(), ?array $options = null): int|MetafieldValue|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class MetafieldValuesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', MetafieldValue::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', MetafieldValue::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class MetafieldValuesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class MetafieldValuesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteMetafieldValue(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class MetafieldValuesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

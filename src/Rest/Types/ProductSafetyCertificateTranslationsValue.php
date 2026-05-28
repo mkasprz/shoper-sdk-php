@@ -20,23 +20,23 @@ class ProductSafetyCertificateTranslationsValue extends JsonSerializableType
     public ?string $gpsrCertificateId;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
-     * @var ?int $translationId translation identifier
+     * @var ?string $translationId translation identifier
      */
     #[JsonProperty('translation_id')]
-    public ?int $translationId;
+    public ?string $translationId;
 
     /**
      * @param array{
      *   description?: ?string,
      *   gpsrCertificateId?: ?string,
-     *   langId?: ?int,
-     *   translationId?: ?int,
+     *   langId?: ?string,
+     *   translationId?: ?string,
      * } $values
      */
     public function __construct(

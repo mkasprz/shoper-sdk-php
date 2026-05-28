@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class OrderTransaction extends JsonSerializableType
 {
     /**
-     * @var int $currencyId [currency](#tag/Currencies) identifier
+     * @var ?string $currencyId [currency](#tag/Currencies) identifier
      */
     #[JsonProperty('currency_id')]
-    public int $currencyId;
+    public ?string $currencyId;
 
     /**
      * @var float $currencyValue transaction value
@@ -29,16 +29,16 @@ class OrderTransaction extends JsonSerializableType
     public ?string $date;
 
     /**
-     * @var int $orderId [order](#tag/Orders) identifier
+     * @var string $orderId [order](#tag/Orders) identifier
      */
     #[JsonProperty('order_id')]
-    public int $orderId;
+    public string $orderId;
 
     /**
-     * @var int $paymentId [payment](#tag/Payments) identifier
+     * @var string $paymentId [payment](#tag/Payments) identifier
      */
     #[JsonProperty('payment_id')]
-    public int $paymentId;
+    public string $paymentId;
 
     /**
      * @var ?string $refundId refund identifier
@@ -55,10 +55,10 @@ class OrderTransaction extends JsonSerializableType
      *     <li>4 - failed</li>
      * </ul>
      *
-     * @var int $status
+     * @var string $status
      */
     #[JsonProperty('status')]
-    public int $status;
+    public string $status;
 
     /**
      * @var ?string $statusDescription transaction status description
@@ -68,11 +68,11 @@ class OrderTransaction extends JsonSerializableType
 
     /**
      * @param array{
-     *   currencyId: int,
      *   currencyValue: float,
-     *   orderId: int,
-     *   paymentId: int,
-     *   status: int,
+     *   orderId: string,
+     *   paymentId: string,
+     *   status: string,
+     *   currencyId?: ?string,
      *   date?: ?string,
      *   refundId?: ?string,
      *   statusDescription?: ?string,
@@ -81,7 +81,7 @@ class OrderTransaction extends JsonSerializableType
     public function __construct(
         array $values,
     ) {
-        $this->currencyId = $values['currencyId'];
+        $this->currencyId = $values['currencyId'] ?? null;
         $this->currencyValue = $values['currencyValue'];
         $this->date = $values['date'] ?? null;
         $this->orderId = $values['orderId'];

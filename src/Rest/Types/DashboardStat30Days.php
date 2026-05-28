@@ -41,10 +41,22 @@ class DashboardStat30Days extends JsonSerializableType
     public ?int $orders;
 
     /**
+     * @var ?int $returningCustomers unique returning customers count from orders in last 30 days
+     */
+    #[JsonProperty('returning_customers')]
+    public ?int $returningCustomers;
+
+    /**
      * @var ?int $subscribers registered subscribers count
      */
     #[JsonProperty('subscribers')]
     public ?int $subscribers;
+
+    /**
+     * @var ?int $uniqueCustomers unique customers count from orders in last 30 days
+     */
+    #[JsonProperty('unique_customers')]
+    public ?int $uniqueCustomers;
 
     /**
      * @param array{
@@ -53,7 +65,9 @@ class DashboardStat30Days extends JsonSerializableType
      *   newOrders?: ?int,
      *   openOrders?: ?int,
      *   orders?: ?int,
+     *   returningCustomers?: ?int,
      *   subscribers?: ?int,
+     *   uniqueCustomers?: ?int,
      * } $values
      */
     public function __construct(
@@ -64,7 +78,9 @@ class DashboardStat30Days extends JsonSerializableType
         $this->newOrders = $values['newOrders'] ?? null;
         $this->openOrders = $values['openOrders'] ?? null;
         $this->orders = $values['orders'] ?? null;
+        $this->returningCustomers = $values['returningCustomers'] ?? null;
         $this->subscribers = $values['subscribers'] ?? null;
+        $this->uniqueCustomers = $values['uniqueCustomers'] ?? null;
     }
 
     /**

@@ -68,7 +68,7 @@ class WarehouseRelocationsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listWarehouseRelocations(ListWarehouseRelocationsRequest $request = new ListWarehouseRelocationsRequest(), ?array $options = null): ?ListWarehouseRelocationsResponse
+    public function list(ListWarehouseRelocationsRequest $request = new ListWarehouseRelocationsRequest(), ?array $options = null): ?ListWarehouseRelocationsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -125,7 +125,7 @@ class WarehouseRelocationsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createWarehouseRelocation(WarehouseRelocationInsert $request = new WarehouseRelocationInsert(), ?array $options = null): int|WarehouseRelocation|null
+    public function create(WarehouseRelocationInsert $request = new WarehouseRelocationInsert(), ?array $options = null): int|WarehouseRelocation|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -172,7 +172,7 @@ class WarehouseRelocationsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getWarehouseRelocation(string $id, ?array $options = null): ?WarehouseRelocation
+    public function get(string $id, ?array $options = null): ?WarehouseRelocation
     {
         $options = array_merge($this->options, $options ?? []);
         try {

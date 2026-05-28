@@ -18,29 +18,29 @@ class ProductSafetyInformation extends JsonSerializableType
     public ?array $gpsrCertificates;
 
     /**
-     * @var ?int $gpsrImporterId [importer](#tag/ProductSafetyImporters) identifier
+     * @var ?string $gpsrImporterId [importer](#tag/ProductSafetyImporters) identifier
      */
     #[JsonProperty('gpsr_importer_id')]
-    public ?int $gpsrImporterId;
+    public ?string $gpsrImporterId;
 
     /**
-     * @var ?int $gpsrProducerId [producer](#tag/ProductSafetyProducers) identifier
+     * @var ?string $gpsrProducerId [producer](#tag/ProductSafetyProducers) identifier
      */
     #[JsonProperty('gpsr_producer_id')]
-    public ?int $gpsrProducerId;
+    public ?string $gpsrProducerId;
 
     /**
-     * @var ?int $gpsrResponsibleId [responsible person](#tag/ProductSafetyResponsibles) identifier
+     * @var ?string $gpsrResponsibleId [responsible person](#tag/ProductSafetyResponsibles) identifier
      */
     #[JsonProperty('gpsr_responsible_id')]
-    public ?int $gpsrResponsibleId;
+    public ?string $gpsrResponsibleId;
 
     /**
      * @param array{
      *   gpsrCertificates?: ?array<int>,
-     *   gpsrImporterId?: ?int,
-     *   gpsrProducerId?: ?int,
-     *   gpsrResponsibleId?: ?int,
+     *   gpsrImporterId?: ?string,
+     *   gpsrProducerId?: ?string,
+     *   gpsrResponsibleId?: ?string,
      * } $values
      */
     public function __construct(

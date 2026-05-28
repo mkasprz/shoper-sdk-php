@@ -14,10 +14,10 @@ class ParcelProductsItem extends JsonSerializableType
     public ?string $code;
 
     /**
-     * @var ?int $id reationship identifier
+     * @var ?string $id reationship identifier
      */
     #[JsonProperty('id')]
-    public ?int $id;
+    public ?string $id;
 
     /**
      * @var ?string $name product name
@@ -44,10 +44,10 @@ class ParcelProductsItem extends JsonSerializableType
     public ?string $parcelId;
 
     /**
-     * @var ?int $productId [product](#tag/Products) identifier
+     * @var ?string $productId [product](#tag/Products) identifier
      */
     #[JsonProperty('product_id')]
-    public ?int $productId;
+    public ?string $productId;
 
     /**
      * @var ?string $quantity product quantity
@@ -56,10 +56,10 @@ class ParcelProductsItem extends JsonSerializableType
     public ?string $quantity;
 
     /**
-     * @var ?int $stockId [product stock](#tag/ProductStocks) identifier
+     * @var ?string $stockId [product stock](#tag/ProductStocks) identifier
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @var ?string $unit measurement unit
@@ -68,31 +68,31 @@ class ParcelProductsItem extends JsonSerializableType
     public ?string $unit;
 
     /**
-     * @var ?bool $unitFp is the unit floating point?
+     * @var ?value-of<ParcelProductsItemUnitFp> $unitFp is the unit floating point?
      */
     #[JsonProperty('unit_fp')]
-    public ?bool $unitFp;
+    public ?string $unitFp;
 
     /**
-     * @var ?float $weight product weight
+     * @var ?string $weight product weight
      */
     #[JsonProperty('weight')]
-    public ?float $weight;
+    public ?string $weight;
 
     /**
      * @param array{
      *   code?: ?string,
-     *   id?: ?int,
+     *   id?: ?string,
      *   name?: ?string,
      *   option?: ?string,
      *   orderProductId?: ?int,
      *   parcelId?: ?string,
-     *   productId?: ?int,
+     *   productId?: ?string,
      *   quantity?: ?string,
-     *   stockId?: ?int,
+     *   stockId?: ?string,
      *   unit?: ?string,
-     *   unitFp?: ?bool,
-     *   weight?: ?float,
+     *   unitFp?: ?value-of<ParcelProductsItemUnitFp>,
+     *   weight?: ?string,
      * } $values
      */
     public function __construct(

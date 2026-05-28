@@ -69,7 +69,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOrderRefunds(ListOrderRefundsRequest $request = new ListOrderRefundsRequest(), ?array $options = null): ?ListOrderRefundsResponse
+    public function list(ListOrderRefundsRequest $request = new ListOrderRefundsRequest(), ?array $options = null): ?ListOrderRefundsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOrderRefund(OrderRefundInsert $request, ?array $options = null): int|OrderRefund|null
+    public function create(OrderRefundInsert $request, ?array $options = null): int|OrderRefund|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class OrderRefundsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOrderRefund(string $id, ?array $options = null): ?OrderRefund
+    public function get(string $id, ?array $options = null): ?OrderRefund
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class OrderRefundsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param OrderRefundUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class OrderRefundsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |OrderRefund
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOrderRefund(string $id, OrderRefundUpdate $request = new OrderRefundUpdate(), ?array $options = null): bool|OrderRefund|null
+    public function update(string $id, OrderRefundUpdate $request = new OrderRefundUpdate(), ?array $options = null): int|OrderRefund|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class OrderRefundsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', OrderRefund::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', OrderRefund::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class OrderRefundsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class OrderRefundsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOrderRefund(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class OrderRefundsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

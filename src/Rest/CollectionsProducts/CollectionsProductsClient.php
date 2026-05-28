@@ -55,7 +55,7 @@ class CollectionsProductsClient
     }
 
     /**
-     * @param string $collectionId
+     * @param string $collectionId `collection_id` identifier.
      * @param ListCollectionsProductsRequest $request
      * @param ?array{
      *   baseUrl?: string,
@@ -69,7 +69,7 @@ class CollectionsProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCollectionsProducts(string $collectionId, ListCollectionsProductsRequest $request = new ListCollectionsProductsRequest(), ?array $options = null): ?ListCollectionsProductsResponse
+    public function list(string $collectionId, ListCollectionsProductsRequest $request = new ListCollectionsProductsRequest(), ?array $options = null): ?ListCollectionsProductsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -110,8 +110,8 @@ class CollectionsProductsClient
     }
 
     /**
-     * @param string $collectionId
-     * @param string $productId
+     * @param string $collectionId `collection_id` identifier.
+     * @param string $productId `product_id` identifier.
      * @param CollectionProductUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -122,13 +122,13 @@ class CollectionsProductsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |CollectionProduct
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateCollectionProduct(string $collectionId, string $productId, CollectionProductUpdate $request = new CollectionProductUpdate(), ?array $options = null): bool|CollectionProduct|null
+    public function update(string $collectionId, string $productId, CollectionProductUpdate $request = new CollectionProductUpdate(), ?array $options = null): int|CollectionProduct|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -147,7 +147,7 @@ class CollectionsProductsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', CollectionProduct::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', CollectionProduct::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

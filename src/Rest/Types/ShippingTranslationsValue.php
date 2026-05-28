@@ -44,10 +44,10 @@ class ShippingTranslationsValue extends JsonSerializableType
     public ?string $shippingId;
 
     /**
-     * @var ?int $translationId translation identifier
+     * @var ?string $translationId translation identifier
      */
     #[JsonProperty('translation_id')]
-    public ?int $translationId;
+    public ?string $translationId;
 
     /**
      * @var ?string $url
@@ -69,7 +69,7 @@ class ShippingTranslationsValue extends JsonSerializableType
      *   description?: ?string,
      *   langId?: ?string,
      *   shippingId?: ?string,
-     *   translationId?: ?int,
+     *   translationId?: ?string,
      *   url?: ?string,
      *   vendorDescription?: ?string,
      * } $values

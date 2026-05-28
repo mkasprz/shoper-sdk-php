@@ -69,7 +69,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAttributes(ListAttributesRequest $request = new ListAttributesRequest(), ?array $options = null): ?ListAttributesResponse
+    public function list(ListAttributesRequest $request = new ListAttributesRequest(), ?array $options = null): ?ListAttributesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAttribute(AttributeInsert $request, ?array $options = null): int|Attribute|null
+    public function create(AttributeInsert $request, ?array $options = null): int|Attribute|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAttribute(string $id, ?array $options = null): ?Attribute
+    public function get(string $id, ?array $options = null): ?Attribute
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAttribute(string $id, AttributeUpdate $request = new AttributeUpdate(), ?array $options = null): int|Attribute|null
+    public function update(string $id, AttributeUpdate $request = new AttributeUpdate(), ?array $options = null): int|Attribute|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAttribute(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

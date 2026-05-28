@@ -8,10 +8,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class PaymentTranslationsValue extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is the payment method active?
+     * @var ?value-of<PaymentTranslationsValueActive> $active is the payment method active?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $description payment description
@@ -20,10 +20,10 @@ class PaymentTranslationsValue extends JsonSerializableType
     public ?string $description;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?string $notify message contents shown upon payment completion
@@ -44,20 +44,20 @@ class PaymentTranslationsValue extends JsonSerializableType
     public ?string $title;
 
     /**
-     * @var ?int $transId translation identifier
+     * @var ?string $transId translation identifier
      */
     #[JsonProperty('trans_id')]
-    public ?int $transId;
+    public ?string $transId;
 
     /**
      * @param array{
-     *   active?: ?bool,
+     *   active?: ?value-of<PaymentTranslationsValueActive>,
      *   description?: ?string,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   notify?: ?string,
      *   notifyMail?: ?string,
      *   title?: ?string,
-     *   transId?: ?int,
+     *   transId?: ?string,
      * } $values
      */
     public function __construct(

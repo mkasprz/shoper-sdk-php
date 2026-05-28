@@ -35,16 +35,16 @@ class WarehouseLog extends JsonSerializableType
     public ?int $logId;
 
     /**
-     * @var ?int $orderId order identifier
+     * @var ?string $orderId order identifier
      */
     #[JsonProperty('order_id')]
-    public ?int $orderId;
+    public ?string $orderId;
 
     /**
-     * @var ?float $quantity quantity of change
+     * @var ?string $quantity quantity of change
      */
     #[JsonProperty('quantity')]
-    public ?float $quantity;
+    public ?string $quantity;
 
     /**
      * @var ?int $relocationId relocation identifier
@@ -53,10 +53,10 @@ class WarehouseLog extends JsonSerializableType
     public ?int $relocationId;
 
     /**
-     * @var ?int $stockId stock identifier
+     * @var ?string $stockId stock identifier
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @var ?float $sum sum after change
@@ -76,10 +76,10 @@ class WarehouseLog extends JsonSerializableType
      *   applicationId?: ?int,
      *   date?: ?string,
      *   logId?: ?int,
-     *   orderId?: ?int,
-     *   quantity?: ?float,
+     *   orderId?: ?string,
+     *   quantity?: ?string,
      *   relocationId?: ?int,
-     *   stockId?: ?int,
+     *   stockId?: ?string,
      *   sum?: ?float,
      *   warehouseId?: ?int,
      * } $values

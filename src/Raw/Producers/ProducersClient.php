@@ -69,7 +69,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProducers(ListProducersRequest $request = new ListProducersRequest(), ?array $options = null): ?ListProducersResponse
+    public function list(ListProducersRequest $request = new ListProducersRequest(), ?array $options = null): ?ListProducersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProducer(ProducerInsert $request, ?array $options = null): int|Producer|null
+    public function create(ProducerInsert $request, ?array $options = null): int|Producer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProducer(string $id, ?array $options = null): ?Producer
+    public function get(string $id, ?array $options = null): ?Producer
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProducer(string $id, ProducerUpdate $request = new ProducerUpdate(), ?array $options = null): int|Producer|null
+    public function update(string $id, ProducerUpdate $request = new ProducerUpdate(), ?array $options = null): int|Producer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProducer(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

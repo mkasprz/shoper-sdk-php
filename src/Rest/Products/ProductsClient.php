@@ -69,7 +69,7 @@ class ProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProducts(ListProductsRequest $request = new ListProductsRequest(), ?array $options = null): ?ListProductsResponse
+    public function list(ListProductsRequest $request = new ListProductsRequest(), ?array $options = null): ?ListProductsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -141,7 +141,7 @@ class ProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProduct(ProductInsert $request, ?array $options = null): int|Product|null
+    public function create(ProductInsert $request, ?array $options = null): int|Product|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -175,7 +175,7 @@ class ProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -188,7 +188,7 @@ class ProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProduct(string $id, ?array $options = null): ?Product
+    public function get(string $id, ?array $options = null): ?Product
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -221,7 +221,7 @@ class ProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ProductUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -232,13 +232,13 @@ class ProductsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Product
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProduct(string $id, ProductUpdate $request = new ProductUpdate(), ?array $options = null): bool|Product|null
+    public function update(string $id, ProductUpdate $request = new ProductUpdate(), ?array $options = null): int|Product|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -257,7 +257,7 @@ class ProductsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Product::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Product::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -272,7 +272,7 @@ class ProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -281,11 +281,11 @@ class ProductsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProduct(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -303,7 +303,7 @@ class ProductsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

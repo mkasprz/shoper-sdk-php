@@ -8,10 +8,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class UserAdditionalFieldsItem extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is field active
+     * @var ?value-of<UserAdditionalFieldsItemActive> $active is field active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?int $fieldId field identifier
@@ -27,22 +27,22 @@ class UserAdditionalFieldsItem extends JsonSerializableType
      *     <li>4 - registration</li>
      * </ul>
      *
-     * @var ?int $locate
+     * @var ?string $locate
      */
     #[JsonProperty('locate')]
-    public ?int $locate;
+    public ?string $locate;
 
     /**
-     * @var ?int $order field order
+     * @var ?string $order field order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?bool $req is field required
+     * @var ?value-of<UserAdditionalFieldsItemReq> $req is field required
      */
     #[JsonProperty('req')]
-    public ?bool $req;
+    public ?string $req;
 
     /**
      * field type:
@@ -52,25 +52,32 @@ class UserAdditionalFieldsItem extends JsonSerializableType
      *     <li>3 - drop down</li>
      * </ul>
      *
-     * @var ?int $type
+     * @var ?string $type
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
-     * @var ?string $value field value
+     * @var ?string $fieldValue raw field value (identifier for select type, text value otherwise); null when option label is available
+     */
+    #[JsonProperty('field_value')]
+    public ?string $fieldValue;
+
+    /**
+     * @var ?string $value field value (resolved option label for select type, text value otherwise)
      */
     #[JsonProperty('value')]
     public ?string $value;
 
     /**
      * @param array{
-     *   active?: ?bool,
+     *   active?: ?value-of<UserAdditionalFieldsItemActive>,
      *   fieldId?: ?int,
-     *   locate?: ?int,
-     *   order?: ?int,
-     *   req?: ?bool,
-     *   type?: ?int,
+     *   locate?: ?string,
+     *   order?: ?string,
+     *   req?: ?value-of<UserAdditionalFieldsItemReq>,
+     *   type?: ?string,
+     *   fieldValue?: ?string,
      *   value?: ?string,
      * } $values
      */
@@ -83,6 +90,7 @@ class UserAdditionalFieldsItem extends JsonSerializableType
         $this->order = $values['order'] ?? null;
         $this->req = $values['req'] ?? null;
         $this->type = $values['type'] ?? null;
+        $this->fieldValue = $values['fieldValue'] ?? null;
         $this->value = $values['value'] ?? null;
     }
 

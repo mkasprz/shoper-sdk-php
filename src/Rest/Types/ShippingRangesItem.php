@@ -8,16 +8,16 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class ShippingRangesItem extends JsonSerializableType
 {
     /**
-     * @var ?float $from lower range value
+     * @var ?string $from lower range value
      */
     #[JsonProperty('from')]
-    public ?float $from;
+    public ?string $from;
 
     /**
-     * @var ?float $price shipping price for this range
+     * @var ?string $price shipping price for this range
      */
     #[JsonProperty('price')]
-    public ?float $price;
+    public ?string $price;
 
     /**
      * @var ?string $shippingId
@@ -26,10 +26,10 @@ class ShippingRangesItem extends JsonSerializableType
     public ?string $shippingId;
 
     /**
-     * @var ?float $to upper range value (<code>0</code> means an infinity)
+     * @var ?string $to upper range value (<code>0</code> means an infinity)
      */
     #[JsonProperty('to')]
-    public ?float $to;
+    public ?string $to;
 
     /**
      * @var ?int $weightId range identifier
@@ -39,10 +39,10 @@ class ShippingRangesItem extends JsonSerializableType
 
     /**
      * @param array{
-     *   from?: ?float,
-     *   price?: ?float,
+     *   from?: ?string,
+     *   price?: ?string,
      *   shippingId?: ?string,
-     *   to?: ?float,
+     *   to?: ?string,
      *   weightId?: ?int,
      * } $values
      */

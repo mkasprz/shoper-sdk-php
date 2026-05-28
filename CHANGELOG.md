@@ -8,6 +8,35 @@
 
 
 # Changelog
+## [0.5.4] — 2026-05-28 (Fern SHORT method names)
+
+### Changed (breaking generated-code signatures)
+- All resource clients now use SHORT method names: `$client->aboutpages()->list()`
+  instead of `->listAboutpages()`. Same for `get()`, `create()`, `update()`,
+  `delete()`. Powered by `x-fern-sdk-method-name` + `x-fern-sdk-group-name`
+  injection in `scripts/build-fern-spec.mjs` (shoper-openapi).
+- Multi-word tag normalization: `Order Tags` → `OrderTags`, `User Tags`
+  → `UserTags`, `Product Tags` → `ProductTags`, `Additional Field Options`
+  → `AdditionalFieldOptions`. Sub-clients now properly instantiated (no more
+  null returns from ShoperClient helper).
+- `Options` resource renamed to `ProductOptions` to avoid PHP `$options`
+  private-property collision in `RestClient`. Call path:
+  `$client->productOptions()->...`.
+
+### Added
+- New resource sub-clients (from shoper-openapi 0.5.3 spec):
+  - `MetafieldBind` (POST /metafield-bind)
+  - `ProductReview` types (ListProductReviews, ProductReviewInsert)
+  - Insert/Update DTOs for `Availabilities`, `Currencies`, `Languages`,
+    `Deliveries`.
+- Pipeline now ships `src/Rest/` mirror of `src/Raw/` (matches
+  `Shoper\Sdk\Rest\` namespace per PSR-4 autoload).
+
+### Verified
+- 246/260 (95%) of regenerated code samples from openapi/code-samples/*.yml
+  run 1:1 when pasted into a PHP project (path-repo composer setup against
+  local Docker shop, admin auth, ShoperClient helper).
+
 
 All notable changes to `shoper/sdk` will be documented in this file.
 This project follows [Semantic Versioning](https://semver.org/) (loose 0.x —

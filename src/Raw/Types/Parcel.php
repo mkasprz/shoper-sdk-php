@@ -12,10 +12,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Parcel extends JsonSerializableType
 {
     /**
-     * @var ?array<string, mixed> $billingAddress an associative array with billing address (same structure as `delivery_address`)
+     * @var ?ParcelBillingAddress $billingAddress an associative array with billing address (same structure as `delivery_address`)
      */
-    #[JsonProperty('billing_address'), ArrayType(['string' => 'mixed'])]
-    public ?array $billingAddress;
+    #[JsonProperty('billing_address')]
+    public ?ParcelBillingAddress $billingAddress;
 
     /**
      * @var ?value-of<ParcelCod> $cod COD parcel?
@@ -108,7 +108,7 @@ class Parcel extends JsonSerializableType
     public ?string $sendDate;
 
     /**
-     * @var ?value-of<ParcelSent> $sent has the parcel been sent?
+     * @var ?value-of<ParcelSent> $sent has the parcel been sent? Also accepted as a write alias for `send` on POST/PUT — if `sent` is provided and `send` is absent, the value is mapped to `send` (backport alias for legacy clients).
      */
     #[JsonProperty('sent')]
     public ?string $sent;
@@ -140,7 +140,7 @@ class Parcel extends JsonSerializableType
     /**
      * @param array{
      *   shippingId: string,
-     *   billingAddress?: ?array<string, mixed>,
+     *   billingAddress?: ?ParcelBillingAddress,
      *   cod?: ?value-of<ParcelCod>,
      *   codCost?: ?string,
      *   deliveryAddress?: ?ParcelDeliveryAddress,

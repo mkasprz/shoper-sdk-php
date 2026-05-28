@@ -12,16 +12,16 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class OptionGroup extends JsonSerializableType
 {
     /**
-     * @var ?bool $filters is shown in filters? - moved to the `filters`
+     * @var ?value-of<OptionGroupFilters> $filters is shown in filters? — server delivers as "0"/"1" string. Moved to the `filters` field on Option.
      */
     #[JsonProperty('filters')]
-    public ?bool $filters;
+    public ?string $filters;
 
     /**
-     * @var ?int $groupId group identifier
+     * @var ?string $groupId group identifier
      */
     #[JsonProperty('group_id')]
-    public ?int $groupId;
+    public ?string $groupId;
 
     /**
      * @var ?int $totalProducts amount of products the group is bound to
@@ -30,10 +30,10 @@ class OptionGroup extends JsonSerializableType
     public ?int $totalProducts;
 
     /**
-     * @var ?int $totalStock amount of products stocks the group is bound to
+     * @var ?int $totalStocks amount of products stocks the group is bound to
      */
-    #[JsonProperty('total_stock')]
-    public ?int $totalStock;
+    #[JsonProperty('total_stocks')]
+    public ?int $totalStocks;
 
     /**
      * @var ?array<string, OptionGroupTranslationsValue> $translations an associative array with object translations
@@ -43,10 +43,10 @@ class OptionGroup extends JsonSerializableType
 
     /**
      * @param array{
-     *   filters?: ?bool,
-     *   groupId?: ?int,
+     *   filters?: ?value-of<OptionGroupFilters>,
+     *   groupId?: ?string,
      *   totalProducts?: ?int,
-     *   totalStock?: ?int,
+     *   totalStocks?: ?int,
      *   translations?: ?array<string, OptionGroupTranslationsValue>,
      * } $values
      */
@@ -56,7 +56,7 @@ class OptionGroup extends JsonSerializableType
         $this->filters = $values['filters'] ?? null;
         $this->groupId = $values['groupId'] ?? null;
         $this->totalProducts = $values['totalProducts'] ?? null;
-        $this->totalStock = $values['totalStock'] ?? null;
+        $this->totalStocks = $values['totalStocks'] ?? null;
         $this->translations = $values['translations'] ?? null;
     }
 

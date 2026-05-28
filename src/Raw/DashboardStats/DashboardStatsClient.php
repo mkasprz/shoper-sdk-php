@@ -62,7 +62,7 @@ class DashboardStatsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getDashboardStat(?array $options = null): ?DashboardStat
+    public function get(?array $options = null): ?DashboardStat
     {
         $options = array_merge($this->options, $options ?? []);
         try {

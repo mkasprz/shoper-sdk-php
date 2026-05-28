@@ -69,7 +69,7 @@ class ProductFilesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProductFiles(ListProductFilesRequest $request = new ListProductFilesRequest(), ?array $options = null): ?ListProductFilesResponse
+    public function list(ListProductFilesRequest $request = new ListProductFilesRequest(), ?array $options = null): ?ListProductFilesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProductFilesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProductFile(ProductFileInsert $request, ?array $options = null): int|ProductFile|null
+    public function create(ProductFileInsert $request, ?array $options = null): int|ProductFile|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ProductFilesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProductFile(string $id, ?array $options = null): ?ProductFile
+    public function get(string $id, ?array $options = null): ?ProductFile
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ProductFilesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProductFile(string $id, ProductFileUpdate $request = new ProductFileUpdate(), ?array $options = null): int|ProductFile|null
+    public function update(string $id, ProductFileUpdate $request = new ProductFileUpdate(), ?array $options = null): int|ProductFile|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ProductFilesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProductFile(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

@@ -91,9 +91,13 @@ class ProductStock extends JsonSerializableType
     public ?string $historicalLowestPrice;
 
     /**
-     * @var ?array<ProductStockOptionsItem> $options an array of stock options
+     * Assoc map {option_id: value_id} - legacy quirk; NOT array of objects.
+     * Keys are option identifiers (string), values are option value identifiers (integer).
+     * Example: {"1": 5, "3": 12}
+     *
+     * @var ?array<string, int> $options
      */
-    #[JsonProperty('options'), ArrayType([ProductStockOptionsItem::class])]
+    #[JsonProperty('options'), ArrayType(['string' => 'integer'])]
     public ?array $options;
 
     /**
@@ -259,7 +263,7 @@ class ProductStock extends JsonSerializableType
      *   extended?: ?value-of<ProductStockExtended>,
      *   gfxId?: ?string,
      *   historicalLowestPrice?: ?string,
-     *   options?: ?array<ProductStockOptionsItem>,
+     *   options?: ?array<string, int>,
      *   package?: ?string,
      *   price?: ?string,
      *   priceBuying?: ?string,

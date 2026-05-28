@@ -12,16 +12,22 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class AdditionalField extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is field active
+     * @var ?string $fieldId additional field identifier
      */
-    #[JsonProperty('active')]
-    public ?bool $active;
+    #[JsonProperty('field_id')]
+    public ?string $fieldId;
 
     /**
-     * @var ?bool $checked is field checked (<code>checkbox</code> field only)
+     * @var ?value-of<AdditionalFieldActive> $active is field active
+     */
+    #[JsonProperty('active')]
+    public ?string $active;
+
+    /**
+     * @var ?value-of<AdditionalFieldChecked> $checked is field checked (<code>checkbox</code> field only)
      */
     #[JsonProperty('checked')]
-    public ?bool $checked;
+    public ?string $checked;
 
     /**
      * specifies where locate this field. Bitmask of following values:
@@ -36,22 +42,22 @@ class AdditionalField extends JsonSerializableType
      *     <li>128 - contact form</li>
      * </ul>
      *
-     * @var int $locate
+     * @var string $locate
      */
     #[JsonProperty('locate')]
-    public int $locate;
+    public string $locate;
 
     /**
-     * @var ?int $order factor used in display order calculation
+     * @var ?string $order factor used in display order calculation
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?bool $req is field required
+     * @var ?value-of<AdditionalFieldReq> $req is field required
      */
     #[JsonProperty('req')]
-    public ?bool $req;
+    public ?string $req;
 
     /**
      * @var array<string, AdditionalFieldTranslationsValue> $translations translations data
@@ -70,25 +76,27 @@ class AdditionalField extends JsonSerializableType
      *     <li>6 - description</li>
      * </ul>
      *
-     * @var int $type
+     * @var string $type
      */
     #[JsonProperty('type')]
-    public int $type;
+    public string $type;
 
     /**
      * @param array{
-     *   locate: int,
+     *   locate: string,
      *   translations: array<string, AdditionalFieldTranslationsValue>,
-     *   type: int,
-     *   active?: ?bool,
-     *   checked?: ?bool,
-     *   order?: ?int,
-     *   req?: ?bool,
+     *   type: string,
+     *   fieldId?: ?string,
+     *   active?: ?value-of<AdditionalFieldActive>,
+     *   checked?: ?value-of<AdditionalFieldChecked>,
+     *   order?: ?string,
+     *   req?: ?value-of<AdditionalFieldReq>,
      * } $values
      */
     public function __construct(
         array $values,
     ) {
+        $this->fieldId = $values['fieldId'] ?? null;
         $this->active = $values['active'] ?? null;
         $this->checked = $values['checked'] ?? null;
         $this->locate = $values['locate'];

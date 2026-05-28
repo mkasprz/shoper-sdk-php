@@ -69,7 +69,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listUnits(ListUnitsRequest $request = new ListUnitsRequest(), ?array $options = null): ?ListUnitsResponse
+    public function list(ListUnitsRequest $request = new ListUnitsRequest(), ?array $options = null): ?ListUnitsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createUnit(UnitInsert $request, ?array $options = null): int|Unit|null
+    public function create(UnitInsert $request, ?array $options = null): int|Unit|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getUnit(string $id, ?array $options = null): ?Unit
+    public function get(string $id, ?array $options = null): ?Unit
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateUnit(string $id, UnitUpdate $request = new UnitUpdate(), ?array $options = null): int|Unit|null
+    public function update(string $id, UnitUpdate $request = new UnitUpdate(), ?array $options = null): int|Unit|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteUnit(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

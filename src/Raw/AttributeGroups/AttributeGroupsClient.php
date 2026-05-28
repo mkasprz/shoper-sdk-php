@@ -69,7 +69,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAttributeGroups(ListAttributeGroupsRequest $request = new ListAttributeGroupsRequest(), ?array $options = null): ?ListAttributeGroupsResponse
+    public function list(ListAttributeGroupsRequest $request = new ListAttributeGroupsRequest(), ?array $options = null): ?ListAttributeGroupsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAttributeGroup(AttributeGroupInsert $request, ?array $options = null): int|AttributeGroup|null
+    public function create(AttributeGroupInsert $request, ?array $options = null): int|AttributeGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAttributeGroup(string $id, ?array $options = null): ?AttributeGroup
+    public function get(string $id, ?array $options = null): ?AttributeGroup
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAttributeGroup(string $id, AttributeGroupUpdate $request = new AttributeGroupUpdate(), ?array $options = null): int|AttributeGroup|null
+    public function update(string $id, AttributeGroupUpdate $request = new AttributeGroupUpdate(), ?array $options = null): int|AttributeGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAttributeGroup(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

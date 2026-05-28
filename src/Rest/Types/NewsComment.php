@@ -29,22 +29,22 @@ class NewsComment extends JsonSerializableType
     public ?string $date;
 
     /**
-     * @var ?int $langId ID comment lang
+     * @var ?string $langId ID comment lang
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
-     * @var ?int $newsId ID news
+     * @var ?string $newsId ID news
      */
     #[JsonProperty('news_id')]
-    public ?int $newsId;
+    public ?string $newsId;
 
     /**
-     * @var ?int $userId author user id
+     * @var ?string $userId author user id
      */
     #[JsonProperty('user_id')]
-    public ?int $userId;
+    public ?string $userId;
 
     /**
      * @var ?string $userName author user name
@@ -63,9 +63,9 @@ class NewsComment extends JsonSerializableType
      *   commId?: ?int,
      *   content?: ?string,
      *   date?: ?string,
-     *   langId?: ?int,
-     *   newsId?: ?int,
-     *   userId?: ?int,
+     *   langId?: ?string,
+     *   newsId?: ?string,
+     *   userId?: ?string,
      *   userName?: ?string,
      *   validated?: ?bool,
      * } $values

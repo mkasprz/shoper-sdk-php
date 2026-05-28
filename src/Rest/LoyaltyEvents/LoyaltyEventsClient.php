@@ -68,7 +68,7 @@ class LoyaltyEventsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listLoyaltyEvents(ListLoyaltyEventsRequest $request = new ListLoyaltyEventsRequest(), ?array $options = null): ?ListLoyaltyEventsResponse
+    public function list(ListLoyaltyEventsRequest $request = new ListLoyaltyEventsRequest(), ?array $options = null): ?ListLoyaltyEventsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -125,7 +125,7 @@ class LoyaltyEventsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createLoyaltyEvent(LoyaltyEventInsert $request, ?array $options = null): int|LoyaltyEvent|null
+    public function create(LoyaltyEventInsert $request, ?array $options = null): int|LoyaltyEvent|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -159,7 +159,7 @@ class LoyaltyEventsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -172,7 +172,7 @@ class LoyaltyEventsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getLoyaltyEvent(string $id, ?array $options = null): ?LoyaltyEvent
+    public function get(string $id, ?array $options = null): ?LoyaltyEvent
     {
         $options = array_merge($this->options, $options ?? []);
         try {

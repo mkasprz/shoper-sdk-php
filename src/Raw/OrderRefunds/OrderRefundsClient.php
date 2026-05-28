@@ -69,7 +69,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOrderRefunds(ListOrderRefundsRequest $request = new ListOrderRefundsRequest(), ?array $options = null): ?ListOrderRefundsResponse
+    public function list(ListOrderRefundsRequest $request = new ListOrderRefundsRequest(), ?array $options = null): ?ListOrderRefundsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOrderRefund(OrderRefundInsert $request, ?array $options = null): int|OrderRefund|null
+    public function create(OrderRefundInsert $request, ?array $options = null): int|OrderRefund|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOrderRefund(string $id, ?array $options = null): ?OrderRefund
+    public function get(string $id, ?array $options = null): ?OrderRefund
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOrderRefund(string $id, OrderRefundUpdate $request = new OrderRefundUpdate(), ?array $options = null): int|OrderRefund|null
+    public function update(string $id, OrderRefundUpdate $request = new OrderRefundUpdate(), ?array $options = null): int|OrderRefund|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class OrderRefundsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOrderRefund(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

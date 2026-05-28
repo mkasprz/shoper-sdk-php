@@ -69,7 +69,7 @@ class OrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOrders(ListOrdersRequest $request = new ListOrdersRequest(), ?array $options = null): ?ListOrdersResponse
+    public function list(ListOrdersRequest $request = new ListOrdersRequest(), ?array $options = null): ?ListOrdersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -150,7 +150,7 @@ class OrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOrder(OrderInsert $request, ?array $options = null): int|Order|null
+    public function create(OrderInsert $request, ?array $options = null): int|Order|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -197,7 +197,7 @@ class OrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOrder(string $id, ?array $options = null): ?Order
+    public function get(string $id, ?array $options = null): ?Order
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -247,7 +247,7 @@ class OrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOrder(string $id, OrderUpdate $request = new OrderUpdate(), ?array $options = null): int|Order|null
+    public function update(string $id, OrderUpdate $request = new OrderUpdate(), ?array $options = null): int|Order|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -294,7 +294,7 @@ class OrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOrder(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

@@ -69,7 +69,7 @@ class ProductSafetyProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProductSafetyProducers(ListProductSafetyProducersRequest $request = new ListProductSafetyProducersRequest(), ?array $options = null): ?ListProductSafetyProducersResponse
+    public function list(ListProductSafetyProducersRequest $request = new ListProductSafetyProducersRequest(), ?array $options = null): ?ListProductSafetyProducersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProductSafetyProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProductSafetyProducer(ProductSafetyProducerInsert $request, ?array $options = null): int|ProductSafetyProducer|null
+    public function create(ProductSafetyProducerInsert $request, ?array $options = null): int|ProductSafetyProducer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ProductSafetyProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProductSafetyProducer(string $id, ?array $options = null): ?ProductSafetyProducer
+    public function get(string $id, ?array $options = null): ?ProductSafetyProducer
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ProductSafetyProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProductSafetyProducer(string $id, ProductSafetyProducerUpdate $request = new ProductSafetyProducerUpdate(), ?array $options = null): int|ProductSafetyProducer|null
+    public function update(string $id, ProductSafetyProducerUpdate $request = new ProductSafetyProducerUpdate(), ?array $options = null): int|ProductSafetyProducer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ProductSafetyProducersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProductSafetyProducer(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

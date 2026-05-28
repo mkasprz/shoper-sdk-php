@@ -22,13 +22,13 @@ class Category extends JsonSerializableType
     public string|int|null $categoryId;
 
     /**
-     * @var ?string $imageBackground background image filename
+     * @var ?string $imageBackground Background image URL/filename
      */
     #[JsonProperty('image_background')]
     public ?string $imageBackground;
 
     /**
-     * @var ?string $imageThumbnail thumbnail image filename
+     * @var ?string $imageThumbnail Thumbnail image URL/filename
      */
     #[JsonProperty('image_thumbnail')]
     public ?string $imageThumbnail;

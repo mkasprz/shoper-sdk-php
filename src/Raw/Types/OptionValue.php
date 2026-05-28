@@ -12,6 +12,16 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class OptionValue extends JsonSerializableType
 {
     /**
+     * Denomination amount (value of a gift card variant). Set only for denomination
+     * option values (when parent option_group has `denomination=1`). Read-only —
+     * cannot be modified via REST API. SHOPAPI-780.
+     *
+     * @var ?string $amount
+     */
+    #[JsonProperty('amount')]
+    public ?string $amount;
+
+    /**
      * <ul>
      *     <li>-1 - decrease price by `change_price_value`,</li>
      *     <li>0 - keep price unchanged,</li>
@@ -85,6 +95,7 @@ class OptionValue extends JsonSerializableType
 
     /**
      * @param array{
+     *   amount?: ?string,
      *   changePriceType?: ?int,
      *   changePriceValue?: ?float,
      *   color?: ?string,
@@ -100,6 +111,7 @@ class OptionValue extends JsonSerializableType
     public function __construct(
         array $values = [],
     ) {
+        $this->amount = $values['amount'] ?? null;
         $this->changePriceType = $values['changePriceType'] ?? null;
         $this->changePriceValue = $values['changePriceValue'] ?? null;
         $this->color = $values['color'] ?? null;

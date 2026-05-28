@@ -69,7 +69,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOrderTransactions(ListOrderTransactionsRequest $request = new ListOrderTransactionsRequest(), ?array $options = null): ?ListOrderTransactionsResponse
+    public function list(ListOrderTransactionsRequest $request = new ListOrderTransactionsRequest(), ?array $options = null): ?ListOrderTransactionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -129,7 +129,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOrderTransaction(OrderTransactionInsert $request, ?array $options = null): int|OrderTransaction|null
+    public function create(OrderTransactionInsert $request, ?array $options = null): int|OrderTransaction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -176,7 +176,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOrderTransaction(string $id, ?array $options = null): ?OrderTransaction
+    public function get(string $id, ?array $options = null): ?OrderTransaction
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -226,7 +226,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOrderTransaction(string $id, OrderTransactionUpdate $request = new OrderTransactionUpdate(), ?array $options = null): int|OrderTransaction|null
+    public function update(string $id, OrderTransactionUpdate $request = new OrderTransactionUpdate(), ?array $options = null): int|OrderTransaction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -273,7 +273,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOrderTransaction(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

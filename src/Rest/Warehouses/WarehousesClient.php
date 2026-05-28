@@ -69,7 +69,7 @@ class WarehousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listWarehouses(ListWarehousesRequest $request = new ListWarehousesRequest(), ?array $options = null): ?ListWarehousesResponse
+    public function list(ListWarehousesRequest $request = new ListWarehousesRequest(), ?array $options = null): ?ListWarehousesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class WarehousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createWarehouse(WarehouseInsert $request, ?array $options = null): int|Warehouse|null
+    public function create(WarehouseInsert $request, ?array $options = null): int|Warehouse|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class WarehousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -169,11 +169,14 @@ class WarehousesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?Warehouse
+     * @return (
+     *    Warehouse
+     *   |int
+     * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getWarehouse(string $id, ?array $options = null): ?Warehouse
+    public function get(string $id, ?array $options = null): Warehouse|int|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -191,7 +194,7 @@ class WarehousesClient
                 if (empty($json)) {
                     return null;
                 }
-                return Warehouse::fromJson($json);
+                return JsonDecoder::decodeUnion($json, new Union(Warehouse::class, 'integer')); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -206,7 +209,7 @@ class WarehousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param WarehouseUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +220,13 @@ class WarehousesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Warehouse
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateWarehouse(string $id, WarehouseUpdate $request = new WarehouseUpdate(), ?array $options = null): bool|Warehouse|null
+    public function update(string $id, WarehouseUpdate $request = new WarehouseUpdate(), ?array $options = null): int|Warehouse|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +245,7 @@ class WarehousesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Warehouse::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Warehouse::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +260,7 @@ class WarehousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +269,11 @@ class WarehousesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteWarehouse(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +291,7 @@ class WarehousesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

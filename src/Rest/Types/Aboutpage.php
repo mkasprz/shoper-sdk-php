@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class Aboutpage extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is the page active?
+     * @var ?value-of<AboutpageActive> $active is the page active?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $content page contents
@@ -23,10 +23,10 @@ class Aboutpage extends JsonSerializableType
     public ?string $content;
 
     /**
-     * @var int $langId and identifier of [Language](#tag/Languages)
+     * @var string $langId and identifier of [Language](#tag/Languages)
      */
     #[JsonProperty('lang_id')]
-    public int $langId;
+    public string $langId;
 
     /**
      * @var string $name page name
@@ -35,10 +35,10 @@ class Aboutpage extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $pageId page identifier
+     * @var ?string $pageId page identifier
      */
     #[JsonProperty('page_id')]
-    public ?int $pageId;
+    public ?string $pageId;
 
     /**
      * @var ?string $seoDescription description displayed in meta description tag
@@ -66,11 +66,11 @@ class Aboutpage extends JsonSerializableType
 
     /**
      * @param array{
-     *   langId: int,
+     *   langId: string,
      *   name: string,
-     *   active?: ?bool,
+     *   active?: ?value-of<AboutpageActive>,
      *   content?: ?string,
-     *   pageId?: ?int,
+     *   pageId?: ?string,
      *   seoDescription?: ?string,
      *   seoKeywords?: ?string,
      *   seoTitle?: ?string,

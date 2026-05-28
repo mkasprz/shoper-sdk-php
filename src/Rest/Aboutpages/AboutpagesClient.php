@@ -69,7 +69,7 @@ class AboutpagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAboutpages(ListAboutpagesRequest $request = new ListAboutpagesRequest(), ?array $options = null): ?ListAboutpagesResponse
+    public function list(ListAboutpagesRequest $request = new ListAboutpagesRequest(), ?array $options = null): ?ListAboutpagesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AboutpagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAboutpage(AboutpageInsert $request, ?array $options = null): int|Aboutpage|null
+    public function create(AboutpageInsert $request, ?array $options = null): int|Aboutpage|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class AboutpagesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class AboutpagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAboutpage(string $id, ?array $options = null): ?Aboutpage
+    public function get(string $id, ?array $options = null): ?Aboutpage
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class AboutpagesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AboutpageUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class AboutpagesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Aboutpage
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAboutpage(string $id, AboutpageUpdate $request = new AboutpageUpdate(), ?array $options = null): bool|Aboutpage|null
+    public function update(string $id, AboutpageUpdate $request = new AboutpageUpdate(), ?array $options = null): int|Aboutpage|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class AboutpagesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Aboutpage::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Aboutpage::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class AboutpagesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class AboutpagesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAboutpage(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class AboutpagesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

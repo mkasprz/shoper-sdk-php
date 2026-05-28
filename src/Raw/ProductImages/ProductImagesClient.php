@@ -69,7 +69,7 @@ class ProductImagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProductImages(ListProductImagesRequest $request = new ListProductImagesRequest(), ?array $options = null): ?ListProductImagesResponse
+    public function list(ListProductImagesRequest $request = new ListProductImagesRequest(), ?array $options = null): ?ListProductImagesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProductImagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProductImage(ProductImageInsert $request = new ProductImageInsert(), ?array $options = null): int|ProductImage|null
+    public function create(ProductImageInsert $request = new ProductImageInsert(), ?array $options = null): int|ProductImage|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ProductImagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProductImage(string $id, ?array $options = null): ?ProductImage
+    public function get(string $id, ?array $options = null): ?ProductImage
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ProductImagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProductImage(string $id, ProductImageUpdate $request = new ProductImageUpdate(), ?array $options = null): int|ProductImage|null
+    public function update(string $id, ProductImageUpdate $request = new ProductImageUpdate(), ?array $options = null): int|ProductImage|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ProductImagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProductImage(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

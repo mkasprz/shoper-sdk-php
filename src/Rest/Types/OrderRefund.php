@@ -17,10 +17,10 @@ class OrderRefund extends JsonSerializableType
     public ?string $comment;
 
     /**
-     * @var int $currencyId [currency](#tag/Currencies) identifier
+     * @var ?string $currencyId [currency](#tag/Currencies) identifier
      */
     #[JsonProperty('currency_id')]
-    public int $currencyId;
+    public ?string $currencyId;
 
     /**
      * @var float $currencyValue refund value
@@ -37,10 +37,10 @@ class OrderRefund extends JsonSerializableType
      *     <li>4 - failed</li>
      * </ul>
      *
-     * @var int $status
+     * @var string $status
      */
     #[JsonProperty('status')]
-    public int $status;
+    public string $status;
 
     /**
      * @var ?string $statusDescription refund status description
@@ -56,11 +56,11 @@ class OrderRefund extends JsonSerializableType
 
     /**
      * @param array{
-     *   currencyId: int,
      *   currencyValue: float,
-     *   status: int,
+     *   status: string,
      *   transactionId: int,
      *   comment?: ?string,
+     *   currencyId?: ?string,
      *   statusDescription?: ?string,
      * } $values
      */
@@ -68,7 +68,7 @@ class OrderRefund extends JsonSerializableType
         array $values,
     ) {
         $this->comment = $values['comment'] ?? null;
-        $this->currencyId = $values['currencyId'];
+        $this->currencyId = $values['currencyId'] ?? null;
         $this->currencyValue = $values['currencyValue'];
         $this->status = $values['status'];
         $this->statusDescription = $values['statusDescription'] ?? null;

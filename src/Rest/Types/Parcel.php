@@ -12,22 +12,22 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Parcel extends JsonSerializableType
 {
     /**
-     * @var ?string $billingAddress
+     * @var ?ParcelBillingAddress $billingAddress an associative array with billing address (same structure as `delivery_address`)
      */
     #[JsonProperty('billing_address')]
-    public ?string $billingAddress;
+    public ?ParcelBillingAddress $billingAddress;
 
     /**
-     * @var ?bool $cod COD parcel?
+     * @var ?value-of<ParcelCod> $cod COD parcel?
      */
     #[JsonProperty('cod')]
-    public ?bool $cod;
+    public ?string $cod;
 
     /**
-     * @var ?float $codCost COD cost
+     * @var ?string $codCost COD cost
      */
     #[JsonProperty('cod_cost')]
-    public ?float $codCost;
+    public ?string $codCost;
 
     /**
      * @var ?ParcelDeliveryAddress $deliveryAddress an associative array with delivery address
@@ -48,16 +48,16 @@ class Parcel extends JsonSerializableType
     public ?string $email;
 
     /**
-     * @var ?bool $insurance has the parcel been insured?
+     * @var ?value-of<ParcelInsurance> $insurance has the parcel been insured?
      */
     #[JsonProperty('insurance')]
-    public ?bool $insurance;
+    public ?string $insurance;
 
     /**
-     * @var ?float $insuranceCost insurance cost
+     * @var ?string $insuranceCost insurance cost
      */
     #[JsonProperty('insurance_cost')]
-    public ?float $insuranceCost;
+    public ?string $insuranceCost;
 
     /**
      * @var ?string $notes parcel comments
@@ -72,10 +72,10 @@ class Parcel extends JsonSerializableType
      *     <li>1 - connected: after sending parcel from shop administration panel, parcel is in "pending" status - then using API can be either mark as sent or reseted</li>
      * </ul>
      *
-     * @var ?bool $online
+     * @var ?value-of<ParcelOnline> $online
      */
     #[JsonProperty('online')]
-    public ?bool $online;
+    public ?string $online;
 
     /**
      * @var ?string $orderDate order date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -84,16 +84,16 @@ class Parcel extends JsonSerializableType
     public ?string $orderDate;
 
     /**
-     * @var ?int $orderId [order](#tag/Orders) identifier
+     * @var ?string $orderId [order](#tag/Orders) identifier
      */
     #[JsonProperty('order_id')]
-    public ?int $orderId;
+    public ?string $orderId;
 
     /**
-     * @var ?int $parcelId parcel identifier
+     * @var ?string $parcelId parcel identifier
      */
     #[JsonProperty('parcel_id')]
-    public ?int $parcelId;
+    public ?string $parcelId;
 
     /**
      * @var ?array<ParcelProductsItem> $products an  array with products
@@ -108,10 +108,10 @@ class Parcel extends JsonSerializableType
     public ?string $sendDate;
 
     /**
-     * @var ?bool $sent has the parcel been sent?
+     * @var ?value-of<ParcelSent> $sent has the parcel been sent? Also accepted as a write alias for `send` on POST/PUT — if `sent` is provided and `send` is absent, the value is mapped to `send` (backport alias for legacy clients).
      */
     #[JsonProperty('sent')]
-    public ?bool $sent;
+    public ?string $sent;
 
     /**
      * @var ?string $shippingCode waybill number
@@ -120,10 +120,10 @@ class Parcel extends JsonSerializableType
     public ?string $shippingCode;
 
     /**
-     * @var int $shippingId [shipping](#tag/Shippings) method identifier
+     * @var string $shippingId [shipping](#tag/Shippings) method identifier
      */
     #[JsonProperty('shipping_id')]
-    public int $shippingId;
+    public string $shippingId;
 
     /**
      * @var ?int $warehouseId warehouse identifier
@@ -132,33 +132,33 @@ class Parcel extends JsonSerializableType
     public ?int $warehouseId;
 
     /**
-     * @var ?float $weight parcel weight (kg)
+     * @var ?string $weight parcel weight (kg)
      */
     #[JsonProperty('weight')]
-    public ?float $weight;
+    public ?string $weight;
 
     /**
      * @param array{
-     *   shippingId: int,
-     *   billingAddress?: ?string,
-     *   cod?: ?bool,
-     *   codCost?: ?float,
+     *   shippingId: string,
+     *   billingAddress?: ?ParcelBillingAddress,
+     *   cod?: ?value-of<ParcelCod>,
+     *   codCost?: ?string,
      *   deliveryAddress?: ?ParcelDeliveryAddress,
      *   deliveryDate?: ?string,
      *   email?: ?string,
-     *   insurance?: ?bool,
-     *   insuranceCost?: ?float,
+     *   insurance?: ?value-of<ParcelInsurance>,
+     *   insuranceCost?: ?string,
      *   notes?: ?string,
-     *   online?: ?bool,
+     *   online?: ?value-of<ParcelOnline>,
      *   orderDate?: ?string,
-     *   orderId?: ?int,
-     *   parcelId?: ?int,
+     *   orderId?: ?string,
+     *   parcelId?: ?string,
      *   products?: ?array<ParcelProductsItem>,
      *   sendDate?: ?string,
-     *   sent?: ?bool,
+     *   sent?: ?value-of<ParcelSent>,
      *   shippingCode?: ?string,
      *   warehouseId?: ?int,
-     *   weight?: ?float,
+     *   weight?: ?string,
      * } $values
      */
     public function __construct(

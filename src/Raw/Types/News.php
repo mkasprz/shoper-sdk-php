@@ -4,6 +4,7 @@ namespace Shoper\Sdk\Rest\Types;
 
 use Shoper\Sdk\Rest\Core\Json\JsonSerializableType;
 use Shoper\Sdk\Rest\Core\Json\JsonProperty;
+use Shoper\Sdk\Rest\Core\Types\ArrayType;
 
 /**
  * Shop blog pages.
@@ -101,6 +102,18 @@ class News extends JsonSerializableType
     public ?string $startPage;
 
     /**
+     * @var ?string $imageName news cover image filename
+     */
+    #[JsonProperty('image_name')]
+    public ?string $imageName;
+
+    /**
+     * @var ?array<NewsTag> $tags list of tags assigned to the news item
+     */
+    #[JsonProperty('tags'), ArrayType([NewsTag::class])]
+    public ?array $tags;
+
+    /**
      * @param array{
      *   content: string,
      *   date: string,
@@ -117,6 +130,8 @@ class News extends JsonSerializableType
      *   seoUrl?: ?string,
      *   shortContent?: ?string,
      *   startPage?: ?string,
+     *   imageName?: ?string,
+     *   tags?: ?array<NewsTag>,
      * } $values
      */
     public function __construct(
@@ -137,6 +152,8 @@ class News extends JsonSerializableType
         $this->seoUrl = $values['seoUrl'] ?? null;
         $this->shortContent = $values['shortContent'] ?? null;
         $this->startPage = $values['startPage'] ?? null;
+        $this->imageName = $values['imageName'] ?? null;
+        $this->tags = $values['tags'] ?? null;
     }
 
     /**

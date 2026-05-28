@@ -12,22 +12,22 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Attribute extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is attribute enabled
+     * @var ?value-of<AttributeActive> $active is attribute enabled
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
-     * @var int $attributeGroupId [attribute group](#tag/AttributeGroups) identifier
+     * @var string $attributeGroupId [attribute group](#tag/AttributeGroups) identifier
      */
     #[JsonProperty('attribute_group_id')]
-    public int $attributeGroupId;
+    public string $attributeGroupId;
 
     /**
-     * @var ?int $attributeId attribute identifier
+     * @var ?string $attributeId attribute identifier
      */
     #[JsonProperty('attribute_id')]
-    public ?int $attributeId;
+    public ?string $attributeId;
 
     /**
      * @var ?string $default default attribute value (for checkbox - 0/1)
@@ -48,16 +48,16 @@ class Attribute extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?array<string> $options an array of options for select
+     * @var ?array<array<string, mixed>> $options an array of options for select
      */
-    #[JsonProperty('options'), ArrayType(['string'])]
+    #[JsonProperty('options'), ArrayType([['string' => 'mixed']])]
     public ?array $options;
 
     /**
-     * @var ?int $order attribute sort order priority
+     * @var ?string $order attribute sort order priority
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
      * attribute type:
@@ -67,22 +67,22 @@ class Attribute extends JsonSerializableType
      *     <li>2 - drop down</li>
      * </ul>
      *
-     * @var int $type
+     * @var string $type
      */
     #[JsonProperty('type')]
-    public int $type;
+    public string $type;
 
     /**
      * @param array{
-     *   attributeGroupId: int,
+     *   attributeGroupId: string,
      *   name: string,
-     *   type: int,
-     *   active?: ?bool,
-     *   attributeId?: ?int,
+     *   type: string,
+     *   active?: ?value-of<AttributeActive>,
+     *   attributeId?: ?string,
      *   default?: ?string,
      *   description?: ?string,
-     *   options?: ?array<string>,
-     *   order?: ?int,
+     *   options?: ?array<array<string, mixed>>,
+     *   order?: ?string,
      * } $values
      */
     public function __construct(

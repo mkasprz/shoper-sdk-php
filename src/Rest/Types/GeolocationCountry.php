@@ -11,22 +11,22 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class GeolocationCountry extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is active
+     * @var ?value-of<GeolocationCountryActive> $active is active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
-     * @var ?bool $codes are post codes supported
+     * @var ?value-of<GeolocationCountryCodes> $codes are post codes supported
      */
     #[JsonProperty('codes')]
-    public ?bool $codes;
+    public ?string $codes;
 
     /**
-     * @var ?int $countryId resource identifier
+     * @var ?string $countryId resource identifier
      */
     #[JsonProperty('country_id')]
-    public ?int $countryId;
+    public ?string $countryId;
 
     /**
      * @var ?string $isocode <a href="http://data.okfn.org/data/core/country-list">ISO 3133-1 alpha-2</a> country identifier
@@ -35,18 +35,18 @@ class GeolocationCountry extends JsonSerializableType
     public ?string $isocode;
 
     /**
-     * @var ?bool $regions are [regions](#tag/GeolocationRegions) supported
+     * @var ?value-of<GeolocationCountryRegions> $regions are [regions](#tag/GeolocationRegions) supported
      */
     #[JsonProperty('regions')]
-    public ?bool $regions;
+    public ?string $regions;
 
     /**
      * @param array{
-     *   active?: ?bool,
-     *   codes?: ?bool,
-     *   countryId?: ?int,
+     *   active?: ?value-of<GeolocationCountryActive>,
+     *   codes?: ?value-of<GeolocationCountryCodes>,
+     *   countryId?: ?string,
      *   isocode?: ?string,
-     *   regions?: ?bool,
+     *   regions?: ?value-of<GeolocationCountryRegions>,
      * } $values
      */
     public function __construct(

@@ -69,7 +69,7 @@ class PromotionCodesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listPromotionCodes(ListPromotionCodesRequest $request = new ListPromotionCodesRequest(), ?array $options = null): ?ListPromotionCodesResponse
+    public function list(ListPromotionCodesRequest $request = new ListPromotionCodesRequest(), ?array $options = null): ?ListPromotionCodesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -129,7 +129,7 @@ class PromotionCodesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createPromotionCode(PromotionCodeInsert $request, ?array $options = null): int|PromotionCode|null
+    public function create(PromotionCodeInsert $request, ?array $options = null): int|PromotionCode|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -163,7 +163,7 @@ class PromotionCodesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -176,7 +176,7 @@ class PromotionCodesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getPromotionCode(string $id, ?array $options = null): ?PromotionCode
+    public function get(string $id, ?array $options = null): ?PromotionCode
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -209,7 +209,7 @@ class PromotionCodesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param PromotionCodeUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -220,13 +220,13 @@ class PromotionCodesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |PromotionCode
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updatePromotionCode(string $id, PromotionCodeUpdate $request = new PromotionCodeUpdate(), ?array $options = null): bool|PromotionCode|null
+    public function update(string $id, PromotionCodeUpdate $request = new PromotionCodeUpdate(), ?array $options = null): int|PromotionCode|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -245,7 +245,7 @@ class PromotionCodesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', PromotionCode::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', PromotionCode::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -260,7 +260,7 @@ class PromotionCodesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -269,11 +269,11 @@ class PromotionCodesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deletePromotionCode(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -291,7 +291,7 @@ class PromotionCodesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

@@ -69,7 +69,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listRedirects(ListRedirectsRequest $request = new ListRedirectsRequest(), ?array $options = null): ?ListRedirectsResponse
+    public function list(ListRedirectsRequest $request = new ListRedirectsRequest(), ?array $options = null): ?ListRedirectsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createRedirect(RedirectInsert $request = new RedirectInsert(), ?array $options = null): int|Redirect|null
+    public function create(RedirectInsert $request = new RedirectInsert(), ?array $options = null): int|Redirect|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getRedirect(string $id, ?array $options = null): ?Redirect
+    public function get(string $id, ?array $options = null): ?Redirect
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateRedirect(string $id, RedirectUpdate $request = new RedirectUpdate(), ?array $options = null): int|Redirect|null
+    public function update(string $id, RedirectUpdate $request = new RedirectUpdate(), ?array $options = null): int|Redirect|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class RedirectsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteRedirect(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

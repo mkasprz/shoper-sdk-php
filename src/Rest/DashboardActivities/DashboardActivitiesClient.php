@@ -5,12 +5,13 @@ namespace Shoper\Sdk\Rest\DashboardActivities;
 use Psr\Http\Client\ClientInterface;
 use Shoper\Sdk\Rest\Core\Client\RawClient;
 use Shoper\Sdk\Rest\DashboardActivities\Requests\ListDashboardActivitiesRequest;
-use Shoper\Sdk\Rest\DashboardActivities\Types\ListDashboardActivitiesResponse;
+use Shoper\Sdk\Rest\Types\DashboardActivity;
 use Shoper\Sdk\Rest\Exceptions\ShoperException;
 use Shoper\Sdk\Rest\Exceptions\ShoperApiException;
 use Shoper\Sdk\Rest\Core\Json\JsonApiRequest;
 use Shoper\Sdk\Rest\Environments;
 use Shoper\Sdk\Rest\Core\Client\HttpMethod;
+use Shoper\Sdk\Rest\Core\Json\JsonDecoder;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 
@@ -60,11 +61,11 @@ class DashboardActivitiesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?ListDashboardActivitiesResponse
+     * @return ?array<DashboardActivity>
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listDashboardActivities(ListDashboardActivitiesRequest $request = new ListDashboardActivitiesRequest(), ?array $options = null): ?ListDashboardActivitiesResponse
+    public function list(ListDashboardActivitiesRequest $request = new ListDashboardActivitiesRequest(), ?array $options = null): ?array
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -90,7 +91,7 @@ class DashboardActivitiesClient
                 if (empty($json)) {
                     return null;
                 }
-                return ListDashboardActivitiesResponse::fromJson($json);
+                return JsonDecoder::decodeArray($json, [DashboardActivity::class]); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

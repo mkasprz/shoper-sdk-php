@@ -69,7 +69,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOrderProducts(ListOrderProductsRequest $request = new ListOrderProductsRequest(), ?array $options = null): ?ListOrderProductsResponse
+    public function list(ListOrderProductsRequest $request = new ListOrderProductsRequest(), ?array $options = null): ?ListOrderProductsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -129,7 +129,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOrderProduct(OrderProductInsert $request, ?array $options = null): int|OrderProduct|null
+    public function create(OrderProductInsert $request, ?array $options = null): int|OrderProduct|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -163,7 +163,7 @@ class OrderProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -176,7 +176,7 @@ class OrderProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOrderProduct(string $id, ?array $options = null): ?OrderProduct
+    public function get(string $id, ?array $options = null): ?OrderProduct
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -209,7 +209,7 @@ class OrderProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param OrderProductUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -220,13 +220,13 @@ class OrderProductsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |OrderProduct
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOrderProduct(string $id, OrderProductUpdate $request = new OrderProductUpdate(), ?array $options = null): bool|OrderProduct|null
+    public function update(string $id, OrderProductUpdate $request = new OrderProductUpdate(), ?array $options = null): int|OrderProduct|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -245,7 +245,7 @@ class OrderProductsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', OrderProduct::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', OrderProduct::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -260,7 +260,7 @@ class OrderProductsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -269,11 +269,11 @@ class OrderProductsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOrderProduct(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -291,7 +291,7 @@ class OrderProductsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

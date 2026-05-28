@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class GeolocationRegion extends JsonSerializableType
 {
     /**
-     * @var ?int $countryId [country](#tag/GeolocationRegions) identifier
+     * @var ?string $countryId [country](#tag/GeolocationRegions) identifier
      */
     #[JsonProperty('country_id')]
-    public ?int $countryId;
+    public ?string $countryId;
 
     /**
      * @var ?string $isocode <a href="http://data.okfn.org/data/core/country-list">ISO 3133-1 alpha-2</a> country identifier
@@ -36,7 +36,7 @@ class GeolocationRegion extends JsonSerializableType
 
     /**
      * @param array{
-     *   countryId?: ?int,
+     *   countryId?: ?string,
      *   isocode?: ?string,
      *   name?: ?string,
      *   regionId?: ?int,

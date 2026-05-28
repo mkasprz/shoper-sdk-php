@@ -58,7 +58,13 @@ class UserAdditionalFieldsItem extends JsonSerializableType
     public ?string $type;
 
     /**
-     * @var ?string $value field value
+     * @var ?string $fieldValue raw field value (identifier for select type, text value otherwise); null when option label is available
+     */
+    #[JsonProperty('field_value')]
+    public ?string $fieldValue;
+
+    /**
+     * @var ?string $value field value (resolved option label for select type, text value otherwise)
      */
     #[JsonProperty('value')]
     public ?string $value;
@@ -71,6 +77,7 @@ class UserAdditionalFieldsItem extends JsonSerializableType
      *   order?: ?string,
      *   req?: ?value-of<UserAdditionalFieldsItemReq>,
      *   type?: ?string,
+     *   fieldValue?: ?string,
      *   value?: ?string,
      * } $values
      */
@@ -83,6 +90,7 @@ class UserAdditionalFieldsItem extends JsonSerializableType
         $this->order = $values['order'] ?? null;
         $this->req = $values['req'] ?? null;
         $this->type = $values['type'] ?? null;
+        $this->fieldValue = $values['fieldValue'] ?? null;
         $this->value = $values['value'] ?? null;
     }
 

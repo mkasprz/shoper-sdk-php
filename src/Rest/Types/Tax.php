@@ -23,23 +23,23 @@ class Tax extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?int $taxId tax identifier
+     * @var ?string $taxId tax identifier
      */
     #[JsonProperty('tax_id')]
-    public ?int $taxId;
+    public ?string $taxId;
 
     /**
-     * @var ?float $value percent value used for calculations
+     * @var ?string $value percent value used for calculations
      */
     #[JsonProperty('value')]
-    public ?float $value;
+    public ?string $value;
 
     /**
      * @param array{
      *   class?: ?string,
      *   name?: ?string,
-     *   taxId?: ?int,
-     *   value?: ?float,
+     *   taxId?: ?string,
+     *   value?: ?string,
      * } $values
      */
     public function __construct(

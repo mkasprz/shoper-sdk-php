@@ -13,7 +13,11 @@ use Shoper\Sdk\Rest\Environments;
 use Shoper\Sdk\Rest\Core\Client\HttpMethod;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
+use Shoper\Sdk\Rest\Languages\Requests\LanguageInsert;
 use Shoper\Sdk\Rest\Types\Language;
+use Shoper\Sdk\Rest\Core\Json\JsonDecoder;
+use Shoper\Sdk\Rest\Core\Types\Union;
+use Shoper\Sdk\Rest\Languages\Requests\LanguageUpdate;
 
 class LanguagesClient
 {
@@ -65,7 +69,7 @@ class LanguagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listLanguages(ListLanguagesRequest $request = new ListLanguagesRequest(), ?array $options = null): ?ListLanguagesResponse
+    public function list(ListLanguagesRequest $request = new ListLanguagesRequest(), ?array $options = null): ?ListLanguagesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -106,7 +110,57 @@ class LanguagesClient
     }
 
     /**
-     * @param string $id
+     * @param LanguageInsert $request
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return (
+     *    int
+     *   |Language
+     * )|null
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function create(LanguageInsert $request, ?array $options = null): int|Language|null
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/languages",
+                    method: HttpMethod::POST,
+                    body: $request,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeUnion($json, new Union('integer', Language::class)); // @phpstan-ignore-line
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -119,7 +173,7 @@ class LanguagesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getLanguage(string $id, ?array $options = null): ?Language
+    public function get(string $id, ?array $options = null): ?Language
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -138,6 +192,103 @@ class LanguagesClient
                     return null;
                 }
                 return Language::fromJson($json);
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id Resource identifier.
+     * @param LanguageUpdate $request
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return (
+     *    int
+     *   |Language
+     * )|null
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function update(string $id, LanguageUpdate $request = new LanguageUpdate(), ?array $options = null): int|Language|null
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/languages/{$id}",
+                    method: HttpMethod::PUT,
+                    body: $request,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeUnion($json, new Union('integer', Language::class)); // @phpstan-ignore-line
+            }
+        } catch (JsonException $e) {
+            throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
+        } catch (ClientExceptionInterface $e) {
+            throw new ShoperException(message: $e->getMessage(), previous: $e);
+        }
+        throw new ShoperApiException(
+            message: 'API request failed',
+            statusCode: $statusCode,
+            body: $response->getBody()->getContents(),
+        );
+    }
+
+    /**
+     * @param string $id Resource identifier.
+     * @param ?array{
+     *   baseUrl?: string,
+     *   maxRetries?: int,
+     *   timeout?: float,
+     *   headers?: array<string, string>,
+     *   queryParameters?: array<string, mixed>,
+     *   bodyProperties?: array<string, mixed>,
+     * } $options
+     * @return ?int
+     * @throws ShoperException
+     * @throws ShoperApiException
+     */
+    public function delete(string $id, ?array $options = null): ?int
+    {
+        $options = array_merge($this->options, $options ?? []);
+        try {
+            $response = $this->client->sendRequest(
+                new JsonApiRequest(
+                    baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
+                    path: "webapi/rest/languages/{$id}",
+                    method: HttpMethod::DELETE,
+                ),
+                $options,
+            );
+            $statusCode = $response->getStatusCode();
+            if ($statusCode >= 200 && $statusCode < 400) {
+                $json = $response->getBody()->getContents();
+                if (empty($json)) {
+                    return null;
+                }
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

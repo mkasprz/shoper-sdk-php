@@ -69,7 +69,7 @@ class NewsCommentsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listNewsComments(ListNewsCommentsRequest $request = new ListNewsCommentsRequest(), ?array $options = null): ?ListNewsCommentsResponse
+    public function list(ListNewsCommentsRequest $request = new ListNewsCommentsRequest(), ?array $options = null): ?ListNewsCommentsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class NewsCommentsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createNewsComment(NewsCommentInsert $request = new NewsCommentInsert(), ?array $options = null): int|NewsComment|null
+    public function create(NewsCommentInsert $request = new NewsCommentInsert(), ?array $options = null): int|NewsComment|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class NewsCommentsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class NewsCommentsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getNewsComment(string $id, ?array $options = null): ?NewsComment
+    public function get(string $id, ?array $options = null): ?NewsComment
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class NewsCommentsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param NewsCommentUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class NewsCommentsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |NewsComment
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateNewsComment(string $id, NewsCommentUpdate $request = new NewsCommentUpdate(), ?array $options = null): bool|NewsComment|null
+    public function update(string $id, NewsCommentUpdate $request = new NewsCommentUpdate(), ?array $options = null): int|NewsComment|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class NewsCommentsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', NewsComment::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', NewsComment::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class NewsCommentsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class NewsCommentsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteNewsComment(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class NewsCommentsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

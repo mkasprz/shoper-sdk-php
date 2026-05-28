@@ -12,6 +12,24 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Payment extends JsonSerializableType
 {
     /**
+     * @var ?string $paymentId payment method identifier
+     */
+    #[JsonProperty('payment_id')]
+    public ?string $paymentId;
+
+    /**
+     * @var ?string $minAmount minimum order amount required to use this payment method
+     */
+    #[JsonProperty('minAmount')]
+    public ?string $minAmount;
+
+    /**
+     * @var ?string $maxAmount maximum order amount allowed for this payment method (0 means no limit)
+     */
+    #[JsonProperty('maxAmount')]
+    public ?string $maxAmount;
+
+    /**
      * @var ?array<string> $currencies an array with identifiers of [currencies](#tag/Currencies) bound to this payment method
      */
     #[JsonProperty('currencies'), ArrayType(['string'])]
@@ -55,6 +73,9 @@ class Payment extends JsonSerializableType
 
     /**
      * @param array{
+     *   paymentId?: ?string,
+     *   minAmount?: ?string,
+     *   maxAmount?: ?string,
      *   currencies?: ?array<string>,
      *   imageUrl?: ?string,
      *   install?: ?value-of<PaymentInstall>,
@@ -67,6 +88,9 @@ class Payment extends JsonSerializableType
     public function __construct(
         array $values = [],
     ) {
+        $this->paymentId = $values['paymentId'] ?? null;
+        $this->minAmount = $values['minAmount'] ?? null;
+        $this->maxAmount = $values['maxAmount'] ?? null;
         $this->currencies = $values['currencies'] ?? null;
         $this->imageUrl = $values['imageUrl'] ?? null;
         $this->install = $values['install'] ?? null;

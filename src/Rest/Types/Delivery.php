@@ -12,22 +12,22 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Delivery extends JsonSerializableType
 {
     /**
-     * @var ?float $days **Deprecated since 5.20.14.** days count for delivery waiting
+     * @var ?string $days **Deprecated since 5.20.14.** days count for delivery waiting
      */
     #[JsonProperty('days')]
-    public ?float $days;
+    public ?string $days;
 
     /**
-     * @var ?int $deliveryId delivery identifier
+     * @var ?string $deliveryId delivery identifier
      */
     #[JsonProperty('delivery_id')]
-    public ?int $deliveryId;
+    public ?string $deliveryId;
 
     /**
-     * @var ?float $hours hours count for delivery waiting
+     * @var ?string $hours hours count for delivery waiting
      */
     #[JsonProperty('hours')]
-    public ?float $hours;
+    public ?string $hours;
 
     /**
      * @var ?array<string, DeliveryTranslationsValue> $translations an associative array with object translations
@@ -37,9 +37,9 @@ class Delivery extends JsonSerializableType
 
     /**
      * @param array{
-     *   days?: ?float,
-     *   deliveryId?: ?int,
-     *   hours?: ?float,
+     *   days?: ?string,
+     *   deliveryId?: ?string,
+     *   hours?: ?string,
      *   translations?: ?array<string, DeliveryTranslationsValue>,
      * } $values
      */

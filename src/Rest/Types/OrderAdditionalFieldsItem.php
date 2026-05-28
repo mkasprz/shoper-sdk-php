@@ -8,16 +8,16 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class OrderAdditionalFieldsItem extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is active?
+     * @var ?value-of<OrderAdditionalFieldsItemActive> $active is active?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
-     * @var ?int $fieldId additional field identifier
+     * @var ?string $fieldId additional field identifier
      */
     #[JsonProperty('field_id')]
-    public ?int $fieldId;
+    public ?string $fieldId;
 
     /**
      * Show in (bit mask):
@@ -28,22 +28,22 @@ class OrderAdditionalFieldsItem extends JsonSerializableType
      *     <li>64 - signed in client</li>
      * </ul>
      *
-     * @var ?int $locate
+     * @var ?string $locate
      */
     #[JsonProperty('locate')]
-    public ?int $locate;
+    public ?string $locate;
 
     /**
-     * @var ?int $order sorting order
+     * @var ?string $order sorting order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
-     * @var ?bool $req is required?
+     * @var ?value-of<OrderAdditionalFieldsItemReq> $req is required?
      */
     #[JsonProperty('req')]
-    public ?bool $req;
+    public ?string $req;
 
     /**
      * field type:
@@ -53,10 +53,10 @@ class OrderAdditionalFieldsItem extends JsonSerializableType
      *     <li>3 - drop down</li>
      * </ul>
      *
-     * @var ?int $type
+     * @var ?string $type
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
      * @var ?string $value additional field value
@@ -66,12 +66,12 @@ class OrderAdditionalFieldsItem extends JsonSerializableType
 
     /**
      * @param array{
-     *   active?: ?bool,
-     *   fieldId?: ?int,
-     *   locate?: ?int,
-     *   order?: ?int,
-     *   req?: ?bool,
-     *   type?: ?int,
+     *   active?: ?value-of<OrderAdditionalFieldsItemActive>,
+     *   fieldId?: ?string,
+     *   locate?: ?string,
+     *   order?: ?string,
+     *   req?: ?value-of<OrderAdditionalFieldsItemReq>,
+     *   type?: ?string,
      *   value?: ?string,
      * } $values
      */

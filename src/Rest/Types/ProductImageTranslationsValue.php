@@ -20,10 +20,10 @@ class ProductImageTranslationsValue extends JsonSerializableType
     public ?string $gfxId;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?string $name photo description SEO
@@ -32,18 +32,18 @@ class ProductImageTranslationsValue extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?int $translationId translation identifier
+     * @var ?string $translationId translation identifier
      */
     #[JsonProperty('translation_id')]
-    public ?int $translationId;
+    public ?string $translationId;
 
     /**
      * @param array{
      *   description?: ?string,
      *   gfxId?: ?string,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   name?: ?string,
-     *   translationId?: ?int,
+     *   translationId?: ?string,
      * } $values
      */
     public function __construct(

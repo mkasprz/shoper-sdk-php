@@ -69,7 +69,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listZones(ListZonesRequest $request = new ListZonesRequest(), ?array $options = null): ?ListZonesResponse
+    public function list(ListZonesRequest $request = new ListZonesRequest(), ?array $options = null): ?ListZonesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createZone(ZoneInsert $request, ?array $options = null): int|Zone|null
+    public function create(ZoneInsert $request, ?array $options = null): int|Zone|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class ZonesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getZone(string $id, ?array $options = null): ?Zone
+    public function get(string $id, ?array $options = null): ?Zone
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class ZonesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ZoneUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class ZonesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Zone
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateZone(string $id, ZoneUpdate $request = new ZoneUpdate(), ?array $options = null): bool|Zone|null
+    public function update(string $id, ZoneUpdate $request = new ZoneUpdate(), ?array $options = null): int|Zone|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class ZonesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Zone::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Zone::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class ZonesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class ZonesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteZone(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class ZonesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

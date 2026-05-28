@@ -69,7 +69,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listUserAddresses(ListUserAddressesRequest $request = new ListUserAddressesRequest(), ?array $options = null): ?ListUserAddressesResponse
+    public function list(ListUserAddressesRequest $request = new ListUserAddressesRequest(), ?array $options = null): ?ListUserAddressesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createUserAddress(UserAddressInsert $request, ?array $options = null): int|UserAddress|null
+    public function create(UserAddressInsert $request, ?array $options = null): int|UserAddress|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class UserAddressesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class UserAddressesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getUserAddress(string $id, ?array $options = null): ?UserAddress
+    public function get(string $id, ?array $options = null): ?UserAddress
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class UserAddressesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param UserAddressUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class UserAddressesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |UserAddress
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateUserAddress(string $id, UserAddressUpdate $request = new UserAddressUpdate(), ?array $options = null): bool|UserAddress|null
+    public function update(string $id, UserAddressUpdate $request = new UserAddressUpdate(), ?array $options = null): int|UserAddress|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class UserAddressesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', UserAddress::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', UserAddress::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class UserAddressesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class UserAddressesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteUserAddress(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class UserAddressesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

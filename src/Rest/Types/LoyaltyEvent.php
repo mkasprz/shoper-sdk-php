@@ -59,10 +59,10 @@ class LoyaltyEvent extends JsonSerializableType
     public ?int $objectId;
 
     /**
-     * @var ?int $quantity
+     * @var ?string $quantity
      */
     #[JsonProperty('quantity')]
-    public ?int $quantity;
+    public ?string $quantity;
 
     /**
      * @var ?int $ratio1 ratio amount to points
@@ -83,10 +83,10 @@ class LoyaltyEvent extends JsonSerializableType
     public int $score;
 
     /**
-     * @var ?int $status
+     * @var ?string $status
      */
     #[JsonProperty('status')]
-    public ?int $status;
+    public ?string $status;
 
     /**
      * @var ?int $sum points after event
@@ -95,15 +95,15 @@ class LoyaltyEvent extends JsonSerializableType
     public ?int $sum;
 
     /**
-     * @var int $userId user identifier
+     * @var string $userId user identifier
      */
     #[JsonProperty('user_id')]
-    public int $userId;
+    public string $userId;
 
     /**
      * @param array{
      *   score: int,
-     *   userId: int,
+     *   userId: string,
      *   date?: ?string,
      *   eventId?: ?int,
      *   eventType?: ?int,
@@ -112,10 +112,10 @@ class LoyaltyEvent extends JsonSerializableType
      *   expiredScore?: ?int,
      *   note?: ?string,
      *   objectId?: ?int,
-     *   quantity?: ?int,
+     *   quantity?: ?string,
      *   ratio1?: ?int,
      *   ratio2?: ?int,
-     *   status?: ?int,
+     *   status?: ?string,
      *   sum?: ?int,
      * } $values
      */

@@ -69,7 +69,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAttributeGroups(ListAttributeGroupsRequest $request = new ListAttributeGroupsRequest(), ?array $options = null): ?ListAttributeGroupsResponse
+    public function list(ListAttributeGroupsRequest $request = new ListAttributeGroupsRequest(), ?array $options = null): ?ListAttributeGroupsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAttributeGroup(AttributeGroupInsert $request, ?array $options = null): int|AttributeGroup|null
+    public function create(AttributeGroupInsert $request, ?array $options = null): int|AttributeGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class AttributeGroupsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class AttributeGroupsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAttributeGroup(string $id, ?array $options = null): ?AttributeGroup
+    public function get(string $id, ?array $options = null): ?AttributeGroup
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class AttributeGroupsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AttributeGroupUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class AttributeGroupsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |AttributeGroup
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAttributeGroup(string $id, AttributeGroupUpdate $request = new AttributeGroupUpdate(), ?array $options = null): bool|AttributeGroup|null
+    public function update(string $id, AttributeGroupUpdate $request = new AttributeGroupUpdate(), ?array $options = null): int|AttributeGroup|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class AttributeGroupsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', AttributeGroup::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', AttributeGroup::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class AttributeGroupsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class AttributeGroupsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAttributeGroup(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class AttributeGroupsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

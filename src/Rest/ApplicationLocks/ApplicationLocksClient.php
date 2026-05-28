@@ -66,7 +66,7 @@ class ApplicationLocksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getApplicationLock(?array $options = null): ?ApplicationLock
+    public function get(?array $options = null): ?ApplicationLock
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -109,13 +109,13 @@ class ApplicationLocksClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    int
+     *    bool
      *   |ApplicationLock
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createApplicationLock(ApplicationLockInsert $request, ?array $options = null): int|ApplicationLock|null
+    public function create(ApplicationLockInsert $request, ?array $options = null): bool|ApplicationLock|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -134,7 +134,7 @@ class ApplicationLocksClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('integer', ApplicationLock::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('bool', ApplicationLock::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -165,7 +165,7 @@ class ApplicationLocksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateApplicationLock(ApplicationLockUpdate $request = new ApplicationLockUpdate(), ?array $options = null): bool|ApplicationLock|null
+    public function update(ApplicationLockUpdate $request = new ApplicationLockUpdate(), ?array $options = null): bool|ApplicationLock|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -211,7 +211,7 @@ class ApplicationLocksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteApplicationLock(?array $options = null): ?bool
+    public function delete(?array $options = null): ?bool
     {
         $options = array_merge($this->options, $options ?? []);
         try {

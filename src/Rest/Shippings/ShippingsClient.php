@@ -69,7 +69,7 @@ class ShippingsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listShippings(ListShippingsRequest $request = new ListShippingsRequest(), ?array $options = null): ?ListShippingsResponse
+    public function list(ListShippingsRequest $request = new ListShippingsRequest(), ?array $options = null): ?ListShippingsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ShippingsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createShipping(ShippingInsert $request, ?array $options = null): int|Shipping|null
+    public function create(ShippingInsert $request, ?array $options = null): int|Shipping|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class ShippingsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class ShippingsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getShipping(string $id, ?array $options = null): ?Shipping
+    public function get(string $id, ?array $options = null): ?Shipping
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class ShippingsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ShippingUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class ShippingsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Shipping
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateShipping(string $id, ShippingUpdate $request = new ShippingUpdate(), ?array $options = null): bool|Shipping|null
+    public function update(string $id, ShippingUpdate $request = new ShippingUpdate(), ?array $options = null): int|Shipping|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class ShippingsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Shipping::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Shipping::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class ShippingsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class ShippingsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteShipping(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class ShippingsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

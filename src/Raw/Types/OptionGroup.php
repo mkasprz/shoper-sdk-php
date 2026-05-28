@@ -30,10 +30,10 @@ class OptionGroup extends JsonSerializableType
     public ?int $totalProducts;
 
     /**
-     * @var ?int $totalStock amount of products stocks the group is bound to
+     * @var ?int $totalStocks amount of products stocks the group is bound to
      */
-    #[JsonProperty('total_stock')]
-    public ?int $totalStock;
+    #[JsonProperty('total_stocks')]
+    public ?int $totalStocks;
 
     /**
      * @var ?array<string, OptionGroupTranslationsValue> $translations an associative array with object translations
@@ -46,7 +46,7 @@ class OptionGroup extends JsonSerializableType
      *   filters?: ?value-of<OptionGroupFilters>,
      *   groupId?: ?string,
      *   totalProducts?: ?int,
-     *   totalStock?: ?int,
+     *   totalStocks?: ?int,
      *   translations?: ?array<string, OptionGroupTranslationsValue>,
      * } $values
      */
@@ -56,7 +56,7 @@ class OptionGroup extends JsonSerializableType
         $this->filters = $values['filters'] ?? null;
         $this->groupId = $values['groupId'] ?? null;
         $this->totalProducts = $values['totalProducts'] ?? null;
-        $this->totalStock = $values['totalStock'] ?? null;
+        $this->totalStocks = $values['totalStocks'] ?? null;
         $this->translations = $values['translations'] ?? null;
     }
 

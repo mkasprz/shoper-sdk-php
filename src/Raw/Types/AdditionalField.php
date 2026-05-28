@@ -12,6 +12,12 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class AdditionalField extends JsonSerializableType
 {
     /**
+     * @var ?string $fieldId additional field identifier
+     */
+    #[JsonProperty('field_id')]
+    public ?string $fieldId;
+
+    /**
      * @var ?value-of<AdditionalFieldActive> $active is field active
      */
     #[JsonProperty('active')]
@@ -80,6 +86,7 @@ class AdditionalField extends JsonSerializableType
      *   locate: string,
      *   translations: array<string, AdditionalFieldTranslationsValue>,
      *   type: string,
+     *   fieldId?: ?string,
      *   active?: ?value-of<AdditionalFieldActive>,
      *   checked?: ?value-of<AdditionalFieldChecked>,
      *   order?: ?string,
@@ -89,6 +96,7 @@ class AdditionalField extends JsonSerializableType
     public function __construct(
         array $values,
     ) {
+        $this->fieldId = $values['fieldId'] ?? null;
         $this->active = $values['active'] ?? null;
         $this->checked = $values['checked'] ?? null;
         $this->locate = $values['locate'];

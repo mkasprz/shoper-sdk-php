@@ -27,10 +27,10 @@ class OrderProductChildrenItem extends JsonSerializableType
     public ?float $deliveryTime;
 
     /**
-     * @var ?float $discountPerc percent of discount
+     * @var ?string $discountPerc percent of discount
      */
     #[JsonProperty('discount_perc')]
-    public ?float $discountPerc;
+    public ?string $discountPerc;
 
     /**
      * array of objects with values entered in particular [options](#tag/Options), type: text
@@ -42,10 +42,10 @@ class OrderProductChildrenItem extends JsonSerializableType
     public ?array $fileOptions;
 
     /**
-     * @var ?int $id order product identifier
+     * @var ?string $id order product identifier
      */
     #[JsonProperty('id')]
-    public ?int $id;
+    public ?string $id;
 
     /**
      * @var ?string $name product name
@@ -60,10 +60,10 @@ class OrderProductChildrenItem extends JsonSerializableType
     public ?string $option;
 
     /**
-     * @var ?int $orderId [order](#tag/Orders) identifier
+     * @var ?string $orderId [order](#tag/Orders) identifier
      */
     #[JsonProperty('order_id')]
-    public ?int $orderId;
+    public ?string $orderId;
 
     /**
      * @var ?string $pkwiu
@@ -72,26 +72,26 @@ class OrderProductChildrenItem extends JsonSerializableType
     public ?string $pkwiu;
 
     /**
-     * @var ?float $price child price
+     * @var ?string $price child price
      */
     #[JsonProperty('price')]
-    public ?float $price;
+    public ?string $price;
 
     /**
-     * @var ?float $quantity quantity
+     * @var ?string $quantity quantity
      */
     #[JsonProperty('quantity')]
-    public ?float $quantity;
+    public ?string $quantity;
 
     /**
      * [product stock](#tag/ProductStocks) identifier. Value <code>0</code> means the product has never existed
      * in catalog and has been added in different way (eg. using API). Attention: it may point on non-existing
      * or an invalid product
      *
-     * @var ?int $stockId
+     * @var ?string $stockId
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @var ?string $tax tax rate name
@@ -100,10 +100,10 @@ class OrderProductChildrenItem extends JsonSerializableType
     public ?string $tax;
 
     /**
-     * @var ?float $taxValue tax rate value
+     * @var ?string $taxValue tax rate value
      */
     #[JsonProperty('tax_value')]
-    public ?float $taxValue;
+    public ?string $taxValue;
 
     /**
      * array of objects with values entered in particular [options](#tag/Options), type: text
@@ -121,10 +121,10 @@ class OrderProductChildrenItem extends JsonSerializableType
     public ?string $unit;
 
     /**
-     * @var ?bool $unitFp determines if unit is floating point
+     * @var ?value-of<OrderProductChildrenItemUnitFp> $unitFp determines if unit is floating point
      */
     #[JsonProperty('unit_fp')]
-    public ?bool $unitFp;
+    public ?string $unitFp;
 
     /**
      * @var ?int $unitId [unit](#tag/Units) identifier
@@ -133,33 +133,33 @@ class OrderProductChildrenItem extends JsonSerializableType
     public ?int $unitId;
 
     /**
-     * @var ?float $weight product weight
+     * @var ?string $weight product weight
      */
     #[JsonProperty('weight')]
-    public ?float $weight;
+    public ?string $weight;
 
     /**
      * @param array{
      *   bundleChildId: int,
      *   code?: ?string,
      *   deliveryTime?: ?float,
-     *   discountPerc?: ?float,
+     *   discountPerc?: ?string,
      *   fileOptions?: ?array<OrderProductChildrenItemFileOptionsItem>,
-     *   id?: ?int,
+     *   id?: ?string,
      *   name?: ?string,
      *   option?: ?string,
-     *   orderId?: ?int,
+     *   orderId?: ?string,
      *   pkwiu?: ?string,
-     *   price?: ?float,
-     *   quantity?: ?float,
-     *   stockId?: ?int,
+     *   price?: ?string,
+     *   quantity?: ?string,
+     *   stockId?: ?string,
      *   tax?: ?string,
-     *   taxValue?: ?float,
+     *   taxValue?: ?string,
      *   textOptions?: ?array<OrderProductChildrenItemTextOptionsItem>,
      *   unit?: ?string,
-     *   unitFp?: ?bool,
+     *   unitFp?: ?value-of<OrderProductChildrenItemUnitFp>,
      *   unitId?: ?int,
-     *   weight?: ?float,
+     *   weight?: ?string,
      * } $values
      */
     public function __construct(

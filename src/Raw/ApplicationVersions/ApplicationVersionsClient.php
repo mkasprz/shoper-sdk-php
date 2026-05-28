@@ -4,8 +4,7 @@ namespace Shoper\Sdk\Rest\ApplicationVersions;
 
 use Psr\Http\Client\ClientInterface;
 use Shoper\Sdk\Rest\Core\Client\RawClient;
-use Shoper\Sdk\Rest\ApplicationVersions\Requests\ListApplicationVersionsRequest;
-use Shoper\Sdk\Rest\ApplicationVersions\Types\ListApplicationVersionsResponse;
+use Shoper\Sdk\Rest\Types\ApplicationVersion;
 use Shoper\Sdk\Rest\Exceptions\ShoperException;
 use Shoper\Sdk\Rest\Exceptions\ShoperApiException;
 use Shoper\Sdk\Rest\Core\Json\JsonApiRequest;
@@ -51,7 +50,6 @@ class ApplicationVersionsClient
     }
 
     /**
-     * @param ListApplicationVersionsRequest $request
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -60,27 +58,19 @@ class ApplicationVersionsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?ListApplicationVersionsResponse
+     * @return ?ApplicationVersion
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listApplicationVersions(ListApplicationVersionsRequest $request = new ListApplicationVersionsRequest(), ?array $options = null): ?ListApplicationVersionsResponse
+    public function list(?array $options = null): ?ApplicationVersion
     {
         $options = array_merge($this->options, $options ?? []);
-        $query = [];
-        if ($request->limit != null) {
-            $query['limit'] = $request->limit;
-        }
-        if ($request->page != null) {
-            $query['page'] = $request->page;
-        }
         try {
             $response = $this->client->sendRequest(
                 new JsonApiRequest(
                     baseUrl: $options['baseUrl'] ?? $this->client->options['baseUrl'] ?? Environments::Default_->value,
                     path: "webapi/rest/application-version",
                     method: HttpMethod::GET,
-                    query: $query,
                 ),
                 $options,
             );
@@ -90,7 +80,7 @@ class ApplicationVersionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return ListApplicationVersionsResponse::fromJson($json);
+                return ApplicationVersion::fromJson($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

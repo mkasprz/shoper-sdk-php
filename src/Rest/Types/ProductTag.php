@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class ProductTag extends JsonSerializableType
 {
     /**
-     * @var int $langId identifier of the language
+     * @var string $langId identifier of the language
      */
     #[JsonProperty('lang_id')]
-    public int $langId;
+    public string $langId;
 
     /**
      * @var string $name product tag name
@@ -23,16 +23,16 @@ class ProductTag extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $tagId product tag identifier
+     * @var ?string $tagId product tag identifier
      */
     #[JsonProperty('tag_id')]
-    public ?int $tagId;
+    public ?string $tagId;
 
     /**
      * @param array{
-     *   langId: int,
+     *   langId: string,
      *   name: string,
-     *   tagId?: ?int,
+     *   tagId?: ?string,
      * } $values
      */
     public function __construct(

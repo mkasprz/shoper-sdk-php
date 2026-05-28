@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class DashboardActivity extends JsonSerializableType
 {
     /**
-     * @var ?int $id event context
+     * @var ?string $id event context
      */
     #[JsonProperty('id')]
-    public ?int $id;
+    public ?string $id;
 
     /**
      * @var ?string $info message
@@ -42,7 +42,7 @@ class DashboardActivity extends JsonSerializableType
 
     /**
      * @param array{
-     *   id?: ?int,
+     *   id?: ?string,
      *   info?: ?string,
      *   object?: ?string,
      *   time?: ?int,

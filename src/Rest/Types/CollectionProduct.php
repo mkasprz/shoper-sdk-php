@@ -11,7 +11,7 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class CollectionProduct extends JsonSerializableType
 {
     /**
-     * @var ?int $position the position of product in a manually sorted collection ( set asynchronously )
+     * @var ?int $position The position of product in a manually sorted collection (set asynchronously). Only present when the collection sort_type equals SORT_TYPE_MANUAL.
      */
     #[JsonProperty('position')]
     public ?int $position;

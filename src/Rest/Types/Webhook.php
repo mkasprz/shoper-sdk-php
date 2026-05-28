@@ -12,10 +12,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Webhook extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is webhook active?
+     * @var ?value-of<WebhookActive> $active is webhook active?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?array<string> $events an array with <a href="">events</a> the webhook is bound
@@ -29,10 +29,10 @@ class Webhook extends JsonSerializableType
      *     <li>0 - JSON,</li>
      *     <li>1 - XML</li>
      *
-     * @var int $format
+     * @var string $format
      */
     #[JsonProperty('format')]
-    public int $format;
+    public string $format;
 
     /**
      * @var ?string $secret a secret used in webhook checksum calculation
@@ -47,19 +47,19 @@ class Webhook extends JsonSerializableType
     public string $url;
 
     /**
-     * @var ?int $webhookId webhook identifier
+     * @var ?string $webhookId webhook identifier
      */
     #[JsonProperty('webhook_id')]
-    public ?int $webhookId;
+    public ?string $webhookId;
 
     /**
      * @param array{
-     *   format: int,
+     *   format: string,
      *   url: string,
-     *   active?: ?bool,
+     *   active?: ?value-of<WebhookActive>,
      *   events?: ?array<string>,
      *   secret?: ?string,
-     *   webhookId?: ?int,
+     *   webhookId?: ?string,
      * } $values
      */
     public function __construct(

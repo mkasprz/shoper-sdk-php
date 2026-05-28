@@ -65,7 +65,7 @@ class CategoriesTreesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCategoriesTrees(ListCategoriesTreesRequest $request = new ListCategoriesTreesRequest(), ?array $options = null): ?array
+    public function list(ListCategoriesTreesRequest $request = new ListCategoriesTreesRequest(), ?array $options = null): ?array
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -119,7 +119,7 @@ class CategoriesTreesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getCategoryTree(string $id, ?array $options = null): ?CategoryTree
+    public function get(string $id, ?array $options = null): ?CategoryTree
     {
         $options = array_merge($this->options, $options ?? []);
         try {

@@ -69,7 +69,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listZones(ListZonesRequest $request = new ListZonesRequest(), ?array $options = null): ?ListZonesResponse
+    public function list(ListZonesRequest $request = new ListZonesRequest(), ?array $options = null): ?ListZonesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createZone(ZoneInsert $request, ?array $options = null): int|Zone|null
+    public function create(ZoneInsert $request, ?array $options = null): int|Zone|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getZone(string $id, ?array $options = null): ?Zone
+    public function get(string $id, ?array $options = null): ?Zone
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateZone(string $id, ZoneUpdate $request = new ZoneUpdate(), ?array $options = null): int|Zone|null
+    public function update(string $id, ZoneUpdate $request = new ZoneUpdate(), ?array $options = null): int|Zone|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ZonesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteZone(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

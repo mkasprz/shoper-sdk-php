@@ -69,7 +69,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAuctionHouses(ListAuctionHousesRequest $request = new ListAuctionHousesRequest(), ?array $options = null): ?ListAuctionHousesResponse
+    public function list(ListAuctionHousesRequest $request = new ListAuctionHousesRequest(), ?array $options = null): ?ListAuctionHousesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAuctionHouse(AuctionHouseInsert $request, ?array $options = null): int|AuctionHouse|null
+    public function create(AuctionHouseInsert $request, ?array $options = null): int|AuctionHouse|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class AuctionHousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class AuctionHousesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAuctionHouse(string $id, ?array $options = null): ?AuctionHouse
+    public function get(string $id, ?array $options = null): ?AuctionHouse
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class AuctionHousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AuctionHouseUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class AuctionHousesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |AuctionHouse
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAuctionHouse(string $id, AuctionHouseUpdate $request = new AuctionHouseUpdate(), ?array $options = null): bool|AuctionHouse|null
+    public function update(string $id, AuctionHouseUpdate $request = new AuctionHouseUpdate(), ?array $options = null): int|AuctionHouse|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class AuctionHousesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', AuctionHouse::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', AuctionHouse::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class AuctionHousesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class AuctionHousesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAuctionHouse(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class AuctionHousesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

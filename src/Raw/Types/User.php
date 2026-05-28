@@ -70,12 +70,6 @@ class User extends JsonSerializableType
     public ?array $groups;
 
     /**
-     * @var ?UserInfo $info Extended user information. Returned only when the `info=true` query parameter is passed.
-     */
-    #[JsonProperty('info')]
-    public ?UserInfo $info;
-
-    /**
      * @var ?string $langId [language](#tag/Languages) set upon registration
      */
     #[JsonProperty('lang_id')]
@@ -120,6 +114,18 @@ class User extends JsonSerializableType
     public ?string $origin;
 
     /**
+     * @var ?value-of<UserRegistered> $registered is user a registered (account-based) customer? (0 = guest, 1 = registered)
+     */
+    #[JsonProperty('registered')]
+    public ?string $registered;
+
+    /**
+     * @var ?float $loyaltySum current loyalty points balance; returned only when the loyalty program is enabled
+     */
+    #[JsonProperty('loyalty_sum')]
+    public ?float $loyaltySum;
+
+    /**
      * @var ?array<string> $tags list of tags assigned to this user
      */
     #[JsonProperty('tags'), ArrayType(['string'])]
@@ -148,13 +154,14 @@ class User extends JsonSerializableType
      *   firstname?: ?string,
      *   groupId?: ?string,
      *   groups?: ?array<int>,
-     *   info?: ?UserInfo,
      *   langId?: ?string,
      *   lastname?: ?string,
      *   lastvisit?: ?string,
      *   login?: ?string,
      *   newsletter?: ?value-of<UserNewsletter>,
      *   origin?: ?string,
+     *   registered?: ?value-of<UserRegistered>,
+     *   loyaltySum?: ?float,
      *   tags?: ?array<string>,
      *   userId?: ?string,
      *   verifyEmail?: ?value-of<UserVerifyEmail>,
@@ -172,13 +179,14 @@ class User extends JsonSerializableType
         $this->firstname = $values['firstname'] ?? null;
         $this->groupId = $values['groupId'] ?? null;
         $this->groups = $values['groups'] ?? null;
-        $this->info = $values['info'] ?? null;
         $this->langId = $values['langId'] ?? null;
         $this->lastname = $values['lastname'] ?? null;
         $this->lastvisit = $values['lastvisit'] ?? null;
         $this->login = $values['login'] ?? null;
         $this->newsletter = $values['newsletter'] ?? null;
         $this->origin = $values['origin'] ?? null;
+        $this->registered = $values['registered'] ?? null;
+        $this->loyaltySum = $values['loyaltySum'] ?? null;
         $this->tags = $values['tags'] ?? null;
         $this->userId = $values['userId'] ?? null;
         $this->verifyEmail = $values['verifyEmail'] ?? null;

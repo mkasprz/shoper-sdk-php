@@ -69,7 +69,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listMetafieldValues(ListMetafieldValuesRequest $request = new ListMetafieldValuesRequest(), ?array $options = null): ?ListMetafieldValuesResponse
+    public function list(ListMetafieldValuesRequest $request = new ListMetafieldValuesRequest(), ?array $options = null): ?ListMetafieldValuesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createMetafieldValue(MetafieldValueInsert $request, ?array $options = null): int|MetafieldValue|null
+    public function create(MetafieldValueInsert $request, ?array $options = null): int|MetafieldValue|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getMetafieldValue(string $id, ?array $options = null): ?MetafieldValue
+    public function get(string $id, ?array $options = null): ?MetafieldValue
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateMetafieldValue(string $id, MetafieldValueUpdate $request = new MetafieldValueUpdate(), ?array $options = null): int|MetafieldValue|null
+    public function update(string $id, MetafieldValueUpdate $request = new MetafieldValueUpdate(), ?array $options = null): int|MetafieldValue|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class MetafieldValuesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteMetafieldValue(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

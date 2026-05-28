@@ -31,17 +31,17 @@ class ApplicationLock extends JsonSerializableType
     public string $message;
 
     /**
-     * @var ?int $userId an identifier of lock owner (only when the administration is an owner)
+     * @var ?string $userId an identifier of lock owner (only when the administration is an owner)
      */
     #[JsonProperty('user_id')]
-    public ?int $userId;
+    public ?string $userId;
 
     /**
      * @param array{
      *   message: string,
      *   date?: ?int,
      *   locked?: ?bool,
-     *   userId?: ?int,
+     *   userId?: ?string,
      * } $values
      */
     public function __construct(

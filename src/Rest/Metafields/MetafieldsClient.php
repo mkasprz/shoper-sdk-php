@@ -56,7 +56,7 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
+     * @param string $object Metafield object type (e.g. product, category, order).
      * @param ListMetafieldsRequest $request
      * @param ?array{
      *   baseUrl?: string,
@@ -70,7 +70,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listMetafields(string $object, ListMetafieldsRequest $request = new ListMetafieldsRequest(), ?array $options = null): ?ListMetafieldsResponse
+    public function list(string $object, ListMetafieldsRequest $request = new ListMetafieldsRequest(), ?array $options = null): ?ListMetafieldsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -111,7 +111,7 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
+     * @param string $object Metafield object type (e.g. product, category, order).
      * @param MetafieldInsert $request
      * @param ?array{
      *   baseUrl?: string,
@@ -128,7 +128,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createMetafield(string $object, MetafieldInsert $request = new MetafieldInsert(), ?array $options = null): int|Metafield|null
+    public function create(string $object, MetafieldInsert $request = new MetafieldInsert(), ?array $options = null): int|Metafield|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -162,8 +162,8 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
-     * @param string $id
+     * @param string $object Metafield object type (e.g. product, category, order).
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -176,7 +176,7 @@ class MetafieldsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getMetafield(string $object, string $id, ?array $options = null): ?Metafield
+    public function get(string $object, string $id, ?array $options = null): ?Metafield
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -209,8 +209,8 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
-     * @param string $id
+     * @param string $object Metafield object type (e.g. product, category, order).
+     * @param string $id Resource identifier.
      * @param MetafieldUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -221,13 +221,13 @@ class MetafieldsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Metafield
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateMetafield(string $object, string $id, MetafieldUpdate $request = new MetafieldUpdate(), ?array $options = null): bool|Metafield|null
+    public function update(string $object, string $id, MetafieldUpdate $request = new MetafieldUpdate(), ?array $options = null): int|Metafield|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -246,7 +246,7 @@ class MetafieldsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Metafield::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Metafield::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -261,8 +261,8 @@ class MetafieldsClient
     }
 
     /**
-     * @param string $object
-     * @param string $id
+     * @param string $object Metafield object type (e.g. product, category, order).
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -271,11 +271,11 @@ class MetafieldsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteMetafield(string $object, string $id, ?array $options = null): ?bool
+    public function delete(string $object, string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -293,7 +293,7 @@ class MetafieldsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

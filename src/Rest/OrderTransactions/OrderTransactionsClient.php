@@ -69,7 +69,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listOrderTransactions(ListOrderTransactionsRequest $request = new ListOrderTransactionsRequest(), ?array $options = null): ?ListOrderTransactionsResponse
+    public function list(ListOrderTransactionsRequest $request = new ListOrderTransactionsRequest(), ?array $options = null): ?ListOrderTransactionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -129,7 +129,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createOrderTransaction(OrderTransactionInsert $request, ?array $options = null): int|OrderTransaction|null
+    public function create(OrderTransactionInsert $request, ?array $options = null): int|OrderTransaction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -163,7 +163,7 @@ class OrderTransactionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -176,7 +176,7 @@ class OrderTransactionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getOrderTransaction(string $id, ?array $options = null): ?OrderTransaction
+    public function get(string $id, ?array $options = null): ?OrderTransaction
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -209,7 +209,7 @@ class OrderTransactionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param OrderTransactionUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -220,13 +220,13 @@ class OrderTransactionsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |OrderTransaction
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateOrderTransaction(string $id, OrderTransactionUpdate $request = new OrderTransactionUpdate(), ?array $options = null): bool|OrderTransaction|null
+    public function update(string $id, OrderTransactionUpdate $request = new OrderTransactionUpdate(), ?array $options = null): int|OrderTransaction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -245,7 +245,7 @@ class OrderTransactionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', OrderTransaction::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', OrderTransaction::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -260,7 +260,7 @@ class OrderTransactionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -269,11 +269,11 @@ class OrderTransactionsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteOrderTransaction(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -291,7 +291,7 @@ class OrderTransactionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

@@ -32,7 +32,7 @@ class CollectionTranslationsValue extends JsonSerializableType
     public ?string $langId;
 
     /**
-     * @var ?value-of<CollectionTranslationsValueMainPage> $mainPage Whether the collection is pinned to the main page (stored as string "0" or "1").
+     * @var ?value-of<CollectionTranslationsValueMainPage> $mainPage Whether the collection is pinned to the main page (stored as string "0" or "1"). Only present when the main-page-collection feature is enabled on the shop.
      */
     #[JsonProperty('main_page')]
     public ?string $mainPage;

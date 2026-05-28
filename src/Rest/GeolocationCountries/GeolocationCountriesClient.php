@@ -65,7 +65,7 @@ class GeolocationCountriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listGeolocationCountries(ListGeolocationCountriesRequest $request = new ListGeolocationCountriesRequest(), ?array $options = null): ?ListGeolocationCountriesResponse
+    public function list(ListGeolocationCountriesRequest $request = new ListGeolocationCountriesRequest(), ?array $options = null): ?ListGeolocationCountriesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -106,7 +106,7 @@ class GeolocationCountriesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -119,7 +119,7 @@ class GeolocationCountriesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getGeolocationCountry(string $id, ?array $options = null): ?GeolocationCountry
+    public function get(string $id, ?array $options = null): ?GeolocationCountry
     {
         $options = array_merge($this->options, $options ?? []);
         try {

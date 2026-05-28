@@ -65,7 +65,7 @@ class WarehouseLogsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listWarehouseLogs(ListWarehouseLogsRequest $request = new ListWarehouseLogsRequest(), ?array $options = null): ?ListWarehouseLogsResponse
+    public function list(ListWarehouseLogsRequest $request = new ListWarehouseLogsRequest(), ?array $options = null): ?ListWarehouseLogsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -128,7 +128,7 @@ class WarehouseLogsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getWarehouseLog(string $id, ?array $options = null): ?WarehouseLog
+    public function get(string $id, ?array $options = null): ?WarehouseLog
     {
         $options = array_merge($this->options, $options ?? []);
         try {

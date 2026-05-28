@@ -69,7 +69,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAttributes(ListAttributesRequest $request = new ListAttributesRequest(), ?array $options = null): ?ListAttributesResponse
+    public function list(ListAttributesRequest $request = new ListAttributesRequest(), ?array $options = null): ?ListAttributesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAttribute(AttributeInsert $request, ?array $options = null): int|Attribute|null
+    public function create(AttributeInsert $request, ?array $options = null): int|Attribute|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class AttributesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class AttributesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAttribute(string $id, ?array $options = null): ?Attribute
+    public function get(string $id, ?array $options = null): ?Attribute
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class AttributesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AttributeUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class AttributesClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Attribute
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAttribute(string $id, AttributeUpdate $request = new AttributeUpdate(), ?array $options = null): bool|Attribute|null
+    public function update(string $id, AttributeUpdate $request = new AttributeUpdate(), ?array $options = null): int|Attribute|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class AttributesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Attribute::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Attribute::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class AttributesClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class AttributesClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAttribute(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class AttributesClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

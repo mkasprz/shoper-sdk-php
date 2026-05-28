@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class NewsFile extends JsonSerializableType
 {
     /**
-     * @var ?string $addDate product addition date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
+     * @var ?string $dateAdd product addition date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
      */
-    #[JsonProperty('add_date')]
-    public ?string $addDate;
+    #[JsonProperty('date_add')]
+    public ?string $dateAdd;
 
     /**
      * @var ?string $description file description
@@ -61,7 +61,7 @@ class NewsFile extends JsonSerializableType
     /**
      * @param array{
      *   name: string,
-     *   addDate?: ?string,
+     *   dateAdd?: ?string,
      *   description?: ?string,
      *   fileId?: ?string,
      *   fileName?: ?string,
@@ -73,7 +73,7 @@ class NewsFile extends JsonSerializableType
     public function __construct(
         array $values,
     ) {
-        $this->addDate = $values['addDate'] ?? null;
+        $this->dateAdd = $values['dateAdd'] ?? null;
         $this->description = $values['description'] ?? null;
         $this->fileId = $values['fileId'] ?? null;
         $this->fileName = $values['fileName'] ?? null;

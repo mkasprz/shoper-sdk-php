@@ -12,10 +12,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class Subscriber extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is subscriber active
+     * @var ?value-of<SubscriberActive> $active is subscriber active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $dateadd addition date in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> (for example <code>2024-01-15 12:34:56</code>) format
@@ -36,25 +36,25 @@ class Subscriber extends JsonSerializableType
     public ?array $groups;
 
     /**
-     * @var ?int $langId mailing [language](#tag/Languages)
+     * @var ?string $langId mailing [language](#tag/Languages)
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
-     * @var ?int $subscriberId subscriber identifier
+     * @var ?string $subscriberId subscriber identifier
      */
     #[JsonProperty('subscriber_id')]
-    public ?int $subscriberId;
+    public ?string $subscriberId;
 
     /**
      * @param array{
      *   email: string,
-     *   active?: ?bool,
+     *   active?: ?value-of<SubscriberActive>,
      *   dateadd?: ?string,
      *   groups?: ?array<int>,
-     *   langId?: ?int,
-     *   subscriberId?: ?int,
+     *   langId?: ?string,
+     *   subscriberId?: ?string,
      * } $values
      */
     public function __construct(

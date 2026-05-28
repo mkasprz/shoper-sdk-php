@@ -69,7 +69,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listParcels(ListParcelsRequest $request = new ListParcelsRequest(), ?array $options = null): ?ListParcelsResponse
+    public function list(ListParcelsRequest $request = new ListParcelsRequest(), ?array $options = null): ?ListParcelsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createParcel(ParcelInsert $request, ?array $options = null): int|Parcel|null
+    public function create(ParcelInsert $request, ?array $options = null): int|Parcel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class ParcelsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getParcel(string $id, ?array $options = null): ?Parcel
+    public function get(string $id, ?array $options = null): ?Parcel
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class ParcelsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ParcelUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class ParcelsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Parcel
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateParcel(string $id, ParcelUpdate $request = new ParcelUpdate(), ?array $options = null): bool|Parcel|null
+    public function update(string $id, ParcelUpdate $request = new ParcelUpdate(), ?array $options = null): int|Parcel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class ParcelsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Parcel::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Parcel::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class ParcelsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class ParcelsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteParcel(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class ParcelsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

@@ -69,7 +69,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAuctions(ListAuctionsRequest $request = new ListAuctionsRequest(), ?array $options = null): ?ListAuctionsResponse
+    public function list(ListAuctionsRequest $request = new ListAuctionsRequest(), ?array $options = null): ?ListAuctionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAuction(AuctionInsert $request, ?array $options = null): int|Auction|null
+    public function create(AuctionInsert $request, ?array $options = null): int|Auction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class AuctionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAuction(string $id, ?array $options = null): ?Auction
+    public function get(string $id, ?array $options = null): ?Auction
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class AuctionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AuctionUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class AuctionsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Auction
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAuction(string $id, AuctionUpdate $request = new AuctionUpdate(), ?array $options = null): bool|Auction|null
+    public function update(string $id, AuctionUpdate $request = new AuctionUpdate(), ?array $options = null): int|Auction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class AuctionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Auction::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Auction::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class AuctionsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class AuctionsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAuction(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class AuctionsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

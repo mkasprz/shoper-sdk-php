@@ -69,7 +69,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listParcels(ListParcelsRequest $request = new ListParcelsRequest(), ?array $options = null): ?ListParcelsResponse
+    public function list(ListParcelsRequest $request = new ListParcelsRequest(), ?array $options = null): ?ListParcelsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createParcel(ParcelInsert $request, ?array $options = null): int|Parcel|null
+    public function create(ParcelInsert $request, ?array $options = null): int|Parcel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getParcel(string $id, ?array $options = null): ?Parcel
+    public function get(string $id, ?array $options = null): ?Parcel
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateParcel(string $id, ParcelUpdate $request = new ParcelUpdate(), ?array $options = null): int|Parcel|null
+    public function update(string $id, ParcelUpdate $request = new ParcelUpdate(), ?array $options = null): int|Parcel|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class ParcelsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteParcel(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

@@ -4,31 +4,49 @@ namespace Shoper\Sdk\Rest\PaymentsChannels\Requests;
 
 use Shoper\Sdk\Rest\Core\Json\JsonSerializableType;
 use Shoper\Sdk\Rest\Core\Json\JsonProperty;
+use Shoper\Sdk\Rest\Core\Types\ArrayType;
+use Shoper\Sdk\Rest\PaymentsChannels\Types\PaymentChannelUpdateTranslationsValue;
 
 class PaymentChannelUpdate extends JsonSerializableType
 {
     /**
-     * @var ?string $channelId channel id
+     * @var ?string $applicationChannelId application-side channel identifier
      */
-    #[JsonProperty('channel_id')]
-    public ?string $channelId;
+    #[JsonProperty('application_channel_id')]
+    public ?string $applicationChannelId;
 
     /**
-     * @var ?string $name channel name
+     * @var ?array<string> $currencies list of currency codes supported by this channel (e.g. PLN, EUR)
      */
-    #[JsonProperty('name')]
-    public ?string $name;
+    #[JsonProperty('currencies'), ArrayType(['string'])]
+    public ?array $currencies;
+
+    /**
+     * @var ?string $type channel type (e.g. card, transfer, blik)
+     */
+    #[JsonProperty('type')]
+    public ?string $type;
+
+    /**
+     * @var ?array<string, PaymentChannelUpdateTranslationsValue> $translations per-locale channel configuration
+     */
+    #[JsonProperty('translations'), ArrayType(['string' => PaymentChannelUpdateTranslationsValue::class])]
+    public ?array $translations;
 
     /**
      * @param array{
-     *   channelId?: ?string,
-     *   name?: ?string,
+     *   applicationChannelId?: ?string,
+     *   currencies?: ?array<string>,
+     *   type?: ?string,
+     *   translations?: ?array<string, PaymentChannelUpdateTranslationsValue>,
      * } $values
      */
     public function __construct(
         array $values = [],
     ) {
-        $this->channelId = $values['channelId'] ?? null;
-        $this->name = $values['name'] ?? null;
+        $this->applicationChannelId = $values['applicationChannelId'] ?? null;
+        $this->currencies = $values['currencies'] ?? null;
+        $this->type = $values['type'] ?? null;
+        $this->translations = $values['translations'] ?? null;
     }
 }

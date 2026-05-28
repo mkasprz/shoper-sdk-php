@@ -66,7 +66,7 @@ class SpecialoffersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getSpecialoffer(?array $options = null): ?Specialoffer
+    public function get(?array $options = null): ?Specialoffer
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -115,7 +115,7 @@ class SpecialoffersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createSpecialoffer(SpecialofferInsert $request, ?array $options = null): int|Specialoffer|null
+    public function create(SpecialofferInsert $request, ?array $options = null): int|Specialoffer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -161,7 +161,7 @@ class SpecialoffersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteSpecialoffer(?array $options = null): ?int
+    public function delete(?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -211,7 +211,7 @@ class SpecialoffersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateSpecialoffer(string $id, SpecialofferUpdate $request = new SpecialofferUpdate(), ?array $options = null): int|Specialoffer|null
+    public function update(string $id, SpecialofferUpdate $request = new SpecialofferUpdate(), ?array $options = null): int|Specialoffer|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {

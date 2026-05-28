@@ -12,16 +12,16 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class AttributeGroup extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is attribute group active?
+     * @var ?value-of<AttributeGroupActive> $active is attribute group active?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
-     * @var ?int $attributeGroupId attribute group identifier
+     * @var ?string $attributeGroupId attribute group identifier
      */
     #[JsonProperty('attribute_group_id')]
-    public ?int $attributeGroupId;
+    public ?string $attributeGroupId;
 
     /**
      * @var ?array<int> $categories an array of [categories](#tag/Categories) identifiers this attribute group belongs to
@@ -30,16 +30,16 @@ class AttributeGroup extends JsonSerializableType
     public ?array $categories;
 
     /**
-     * @var ?bool $filters show in filters?
+     * @var ?value-of<AttributeGroupFilters> $filters show in filters?
      */
     #[JsonProperty('filters')]
-    public ?bool $filters;
+    public ?string $filters;
 
     /**
-     * @var int $langId [language](#tag/Languages) identifier of this attribute group
+     * @var string $langId [language](#tag/Languages) identifier of this attribute group
      */
     #[JsonProperty('lang_id')]
-    public int $langId;
+    public string $langId;
 
     /**
      * @var string $name attribute group name
@@ -49,12 +49,12 @@ class AttributeGroup extends JsonSerializableType
 
     /**
      * @param array{
-     *   langId: int,
+     *   langId: string,
      *   name: string,
-     *   active?: ?bool,
-     *   attributeGroupId?: ?int,
+     *   active?: ?value-of<AttributeGroupActive>,
+     *   attributeGroupId?: ?string,
      *   categories?: ?array<int>,
-     *   filters?: ?bool,
+     *   filters?: ?value-of<AttributeGroupFilters>,
      * } $values
      */
     public function __construct(

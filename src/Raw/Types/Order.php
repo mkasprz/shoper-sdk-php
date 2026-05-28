@@ -34,6 +34,12 @@ class Order extends JsonSerializableType
     public ?OrderBillingAddress $billingAddress;
 
     /**
+     * @var ?array<int> $children identifiers of sub-orders (used in combined/grouped orders)
+     */
+    #[JsonProperty('children'), ArrayType(['integer'])]
+    public ?array $children;
+
+    /**
      * @var ?string $code order confirmation code
      */
     #[JsonProperty('code')]
@@ -279,6 +285,12 @@ class Order extends JsonSerializableType
     public ?OrderPickupPointData $pickupPointData;
 
     /**
+     * @var ?array<string, string> $properties custom order properties as key-value pairs (key is property name, value is property value)
+     */
+    #[JsonProperty('properties'), ArrayType(['string' => 'string'])]
+    public ?array $properties;
+
+    /**
      * @var ?string $promoCode promotion code; if empty - no code
      */
     #[JsonProperty('promo_code')]
@@ -351,10 +363,22 @@ class Order extends JsonSerializableType
     public ?int $totalParcels;
 
     /**
+     * @var ?array<int> $tags identifiers of order tags assigned to this order
+     */
+    #[JsonProperty('tags'), ArrayType(['integer'])]
+    public ?array $tags;
+
+    /**
      * @var ?int $totalProducts total products count
      */
     #[JsonProperty('total_products')]
     public ?int $totalProducts;
+
+    /**
+     * @var ?OrderUtms $utms UTM tracking parameters associated with this order (utm_source, utm_medium, utm_campaign, utm_content)
+     */
+    #[JsonProperty('utms')]
+    public ?OrderUtms $utms;
 
     /**
      * should the default address be used for delivery if `billing_address`,
@@ -394,6 +418,7 @@ class Order extends JsonSerializableType
      *   additionalFields?: ?array<OrderAdditionalFieldsItem>,
      *   auction?: ?array<string, mixed>,
      *   billingAddress?: ?OrderBillingAddress,
+     *   children?: ?array<int>,
      *   code?: ?string,
      *   codeId?: ?string,
      *   confirm?: ?value-of<OrderConfirm>,
@@ -428,6 +453,7 @@ class Order extends JsonSerializableType
      *   paymentUrl?: ?string,
      *   pickupPoint?: ?string,
      *   pickupPointData?: ?OrderPickupPointData,
+     *   properties?: ?array<string, string>,
      *   promoCode?: ?string,
      *   shippingAdditionalFields?: ?array<string, string>,
      *   shippingCost?: ?string,
@@ -437,7 +463,9 @@ class Order extends JsonSerializableType
      *   statusDate?: ?string,
      *   sum?: ?string,
      *   totalParcels?: ?int,
+     *   tags?: ?array<int>,
      *   totalProducts?: ?int,
+     *   utms?: ?OrderUtms,
      *   useShippingAddress?: ?bool,
      *   userId?: ?string,
      *   userOrder?: ?value-of<OrderUserOrder>,
@@ -450,6 +478,7 @@ class Order extends JsonSerializableType
         $this->additionalFields = $values['additionalFields'] ?? null;
         $this->auction = $values['auction'] ?? null;
         $this->billingAddress = $values['billingAddress'] ?? null;
+        $this->children = $values['children'] ?? null;
         $this->code = $values['code'] ?? null;
         $this->codeId = $values['codeId'] ?? null;
         $this->confirm = $values['confirm'] ?? null;
@@ -486,6 +515,7 @@ class Order extends JsonSerializableType
         $this->paymentUrl = $values['paymentUrl'] ?? null;
         $this->pickupPoint = $values['pickupPoint'] ?? null;
         $this->pickupPointData = $values['pickupPointData'] ?? null;
+        $this->properties = $values['properties'] ?? null;
         $this->promoCode = $values['promoCode'] ?? null;
         $this->shippingAdditionalFields = $values['shippingAdditionalFields'] ?? null;
         $this->shippingCost = $values['shippingCost'] ?? null;
@@ -498,7 +528,9 @@ class Order extends JsonSerializableType
         $this->statusId = $values['statusId'];
         $this->sum = $values['sum'] ?? null;
         $this->totalParcels = $values['totalParcels'] ?? null;
+        $this->tags = $values['tags'] ?? null;
         $this->totalProducts = $values['totalProducts'] ?? null;
+        $this->utms = $values['utms'] ?? null;
         $this->useShippingAddress = $values['useShippingAddress'] ?? null;
         $this->userId = $values['userId'] ?? null;
         $this->userOrder = $values['userOrder'] ?? null;

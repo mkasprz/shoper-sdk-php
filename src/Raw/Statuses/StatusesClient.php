@@ -65,7 +65,7 @@ class StatusesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listStatuses(ListStatusesRequest $request = new ListStatusesRequest(), ?array $options = null): ?ListStatusesResponse
+    public function list(ListStatusesRequest $request = new ListStatusesRequest(), ?array $options = null): ?ListStatusesResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -119,7 +119,7 @@ class StatusesClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getStatus(string $id, ?array $options = null): ?Status
+    public function get(string $id, ?array $options = null): ?Status
     {
         $options = array_merge($this->options, $options ?? []);
         try {

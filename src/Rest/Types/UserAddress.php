@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class UserAddress extends JsonSerializableType
 {
     /**
-     * @var ?int $addressBookId address identifier
+     * @var ?string $addressBookId address identifier
      */
     #[JsonProperty('address_book_id')]
-    public ?int $addressBookId;
+    public ?string $addressBookId;
 
     /**
      * @var ?string $addressName full address
@@ -53,10 +53,10 @@ class UserAddress extends JsonSerializableType
     public ?string $countryCode;
 
     /**
-     * @var ?bool $default is address default for the client billing
+     * @var ?value-of<UserAddressDefault> $default is address default for the client billing
      */
     #[JsonProperty('default')]
-    public ?bool $default;
+    public ?string $default;
 
     /**
      * @var string $firstname first name
@@ -83,10 +83,10 @@ class UserAddress extends JsonSerializableType
     public string $phone;
 
     /**
-     * @var ?bool $shippingDefault is address default for the delivery
+     * @var ?value-of<UserAddressShippingDefault> $shippingDefault is address default for the delivery
      */
     #[JsonProperty('shipping_default')]
-    public ?bool $shippingDefault;
+    public ?string $shippingDefault;
 
     /**
      * @var ?string $sortkey sort value (mostly last and first name)
@@ -119,10 +119,10 @@ class UserAddress extends JsonSerializableType
     public ?string $taxIdentificationNumber;
 
     /**
-     * @var int $userId [user](#tag/Users) identifier
+     * @var string $userId [user](#tag/Users) identifier
      */
     #[JsonProperty('user_id')]
-    public int $userId;
+    public string $userId;
 
     /**
      * @var string $zipCode post code
@@ -137,16 +137,16 @@ class UserAddress extends JsonSerializableType
      *   lastname: string,
      *   phone: string,
      *   street1: string,
-     *   userId: int,
+     *   userId: string,
      *   zipCode: string,
-     *   addressBookId?: ?int,
+     *   addressBookId?: ?string,
      *   addressName?: ?string,
      *   companyName?: ?string,
      *   country?: ?string,
      *   countryCode?: ?string,
-     *   default?: ?bool,
+     *   default?: ?value-of<UserAddressDefault>,
      *   pesel?: ?string,
-     *   shippingDefault?: ?bool,
+     *   shippingDefault?: ?value-of<UserAddressShippingDefault>,
      *   sortkey?: ?string,
      *   state?: ?string,
      *   street2?: ?string,

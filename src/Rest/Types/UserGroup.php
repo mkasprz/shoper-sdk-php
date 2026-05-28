@@ -11,22 +11,22 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class UserGroup extends JsonSerializableType
 {
     /**
-     * @var ?bool $autoAdd should users be automatically added to this group?
+     * @var ?int $autoAdd should users be automatically added to this group?
      */
     #[JsonProperty('auto_add')]
-    public ?bool $autoAdd;
+    public ?int $autoAdd;
 
     /**
-     * @var ?float $discount discount for group (percent)
+     * @var ?string $discount discount for group (percent)
      */
     #[JsonProperty('discount')]
-    public ?float $discount;
+    public ?string $discount;
 
     /**
-     * @var ?int $groupId group identifier
+     * @var ?string $groupId group identifier
      */
     #[JsonProperty('group_id')]
-    public ?int $groupId;
+    public ?string $groupId;
 
     /**
      * @var string $name name
@@ -35,18 +35,18 @@ class UserGroup extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $priceLevel pricing level (1-3)
+     * @var ?string $priceLevel pricing level (1-3)
      */
     #[JsonProperty('price_level')]
-    public ?int $priceLevel;
+    public ?string $priceLevel;
 
     /**
      * @param array{
      *   name: string,
-     *   autoAdd?: ?bool,
-     *   discount?: ?float,
-     *   groupId?: ?int,
-     *   priceLevel?: ?int,
+     *   autoAdd?: ?int,
+     *   discount?: ?string,
+     *   groupId?: ?string,
+     *   priceLevel?: ?string,
      * } $values
      */
     public function __construct(

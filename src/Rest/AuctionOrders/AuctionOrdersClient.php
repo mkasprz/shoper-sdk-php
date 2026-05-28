@@ -69,7 +69,7 @@ class AuctionOrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAuctionOrders(ListAuctionOrdersRequest $request = new ListAuctionOrdersRequest(), ?array $options = null): ?ListAuctionOrdersResponse
+    public function list(ListAuctionOrdersRequest $request = new ListAuctionOrdersRequest(), ?array $options = null): ?ListAuctionOrdersResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AuctionOrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAuctionOrder(AuctionOrderInsert $request, ?array $options = null): int|AuctionOrder|null
+    public function create(AuctionOrderInsert $request, ?array $options = null): int|AuctionOrder|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class AuctionOrdersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class AuctionOrdersClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAuctionOrder(string $id, ?array $options = null): ?AuctionOrder
+    public function get(string $id, ?array $options = null): ?AuctionOrder
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class AuctionOrdersClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param AuctionOrderUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class AuctionOrdersClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |AuctionOrder
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAuctionOrder(string $id, AuctionOrderUpdate $request = new AuctionOrderUpdate(), ?array $options = null): bool|AuctionOrder|null
+    public function update(string $id, AuctionOrderUpdate $request = new AuctionOrderUpdate(), ?array $options = null): int|AuctionOrder|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class AuctionOrdersClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', AuctionOrder::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', AuctionOrder::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

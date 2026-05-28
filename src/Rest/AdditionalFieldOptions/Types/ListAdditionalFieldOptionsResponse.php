@@ -10,10 +10,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class ListAdditionalFieldOptionsResponse extends JsonSerializableType
 {
     /**
-     * @var ?int $count
+     * @var ?string $count
      */
     #[JsonProperty('count')]
-    public ?int $count;
+    public ?string $count;
 
     /**
      * @var ?array<AdditionalFieldOption> $list
@@ -35,7 +35,7 @@ class ListAdditionalFieldOptionsResponse extends JsonSerializableType
 
     /**
      * @param array{
-     *   count?: ?int,
+     *   count?: ?string,
      *   list?: ?array<AdditionalFieldOption>,
      *   page?: ?int,
      *   pages?: ?int,

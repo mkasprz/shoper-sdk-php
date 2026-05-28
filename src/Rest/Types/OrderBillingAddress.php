@@ -11,10 +11,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class OrderBillingAddress extends JsonSerializableType
 {
     /**
-     * @var ?int $addressId billing address identifier
+     * @var ?string $addressId billing address identifier
      */
     #[JsonProperty('address_id')]
-    public ?int $addressId;
+    public ?string $addressId;
 
     /**
      * @var ?string $city city - name or [GeolocationSubregion](#tag/GeolocationCountries) identifier
@@ -95,14 +95,14 @@ class OrderBillingAddress extends JsonSerializableType
     public ?string $taxIdentificationNumber;
 
     /**
-     * @var ?int $type address type, always 1
+     * @var ?string $type address type, always 1
      */
     #[JsonProperty('type')]
-    public ?int $type;
+    public ?string $type;
 
     /**
      * @param array{
-     *   addressId?: ?int,
+     *   addressId?: ?string,
      *   city?: ?string,
      *   company?: ?string,
      *   country?: ?string,
@@ -116,7 +116,7 @@ class OrderBillingAddress extends JsonSerializableType
      *   street1?: ?string,
      *   street2?: ?string,
      *   taxIdentificationNumber?: ?string,
-     *   type?: ?int,
+     *   type?: ?string,
      * } $values
      */
     public function __construct(

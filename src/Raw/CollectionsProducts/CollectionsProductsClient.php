@@ -69,7 +69,7 @@ class CollectionsProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listCollectionsProducts(string $collectionId, ListCollectionsProductsRequest $request = new ListCollectionsProductsRequest(), ?array $options = null): ?ListCollectionsProductsResponse
+    public function list(string $collectionId, ListCollectionsProductsRequest $request = new ListCollectionsProductsRequest(), ?array $options = null): ?ListCollectionsProductsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -128,7 +128,7 @@ class CollectionsProductsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateCollectionProduct(string $collectionId, string $productId, CollectionProductUpdate $request = new CollectionProductUpdate(), ?array $options = null): int|CollectionProduct|null
+    public function update(string $collectionId, string $productId, CollectionProductUpdate $request = new CollectionProductUpdate(), ?array $options = null): int|CollectionProduct|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {

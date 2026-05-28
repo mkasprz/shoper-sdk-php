@@ -69,7 +69,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listWebhooks(ListWebhooksRequest $request = new ListWebhooksRequest(), ?array $options = null): ?ListWebhooksResponse
+    public function list(ListWebhooksRequest $request = new ListWebhooksRequest(), ?array $options = null): ?ListWebhooksResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createWebhook(WebhookInsert $request, ?array $options = null): int|Webhook|null
+    public function create(WebhookInsert $request, ?array $options = null): int|Webhook|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getWebhook(string $id, ?array $options = null): ?Webhook
+    public function get(string $id, ?array $options = null): ?Webhook
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateWebhook(string $id, WebhookUpdate $request = new WebhookUpdate(), ?array $options = null): int|Webhook|null
+    public function update(string $id, WebhookUpdate $request = new WebhookUpdate(), ?array $options = null): int|Webhook|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteWebhook(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

@@ -11,16 +11,16 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class AuctionHouse extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is active?
+     * @var ?value-of<AuctionHouseActive> $active is active?
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
-     * @var ?int $auctionHouseId auction house identifier
+     * @var ?string $auctionHouseId auction house identifier
      */
     #[JsonProperty('auction_house_id')]
-    public ?int $auctionHouseId;
+    public ?string $auctionHouseId;
 
     /**
      * @var ?string $engine auction system engine name
@@ -35,18 +35,18 @@ class AuctionHouse extends JsonSerializableType
     public string $name;
 
     /**
-     * @var ?int $order display order
+     * @var ?string $order display order
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
      * @param array{
      *   name: string,
-     *   active?: ?bool,
-     *   auctionHouseId?: ?int,
+     *   active?: ?value-of<AuctionHouseActive>,
+     *   auctionHouseId?: ?string,
      *   engine?: ?string,
-     *   order?: ?int,
+     *   order?: ?string,
      * } $values
      */
     public function __construct(

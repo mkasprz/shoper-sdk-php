@@ -35,10 +35,10 @@ class ProductSafetyResponsible extends JsonSerializableType
     public ?string $email;
 
     /**
-     * @var ?int $gpsrResponsibleId identifier
+     * @var ?string $gpsrResponsibleId identifier
      */
     #[JsonProperty('gpsr_responsible_id')]
-    public ?int $gpsrResponsibleId;
+    public ?string $gpsrResponsibleId;
 
     /**
      * @var string $internalName responsible internal name
@@ -86,7 +86,7 @@ class ProductSafetyResponsible extends JsonSerializableType
      *   street1: string,
      *   contactFormUrl?: ?string,
      *   email?: ?string,
-     *   gpsrResponsibleId?: ?int,
+     *   gpsrResponsibleId?: ?string,
      *   phone?: ?string,
      *   street2?: ?string,
      * } $values

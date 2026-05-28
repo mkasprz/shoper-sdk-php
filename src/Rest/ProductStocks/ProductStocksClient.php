@@ -69,7 +69,7 @@ class ProductStocksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listProductStocks(ListProductStocksRequest $request = new ListProductStocksRequest(), ?array $options = null): ?ListProductStocksResponse
+    public function list(ListProductStocksRequest $request = new ListProductStocksRequest(), ?array $options = null): ?ListProductStocksResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class ProductStocksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createProductStock(ProductStockInsert $request = new ProductStockInsert(), ?array $options = null): int|ProductStock|null
+    public function create(ProductStockInsert $request = new ProductStockInsert(), ?array $options = null): int|ProductStock|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class ProductStocksClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class ProductStocksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getProductStock(string $id, ?array $options = null): ?ProductStock
+    public function get(string $id, ?array $options = null): ?ProductStock
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class ProductStocksClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ProductStockUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class ProductStocksClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |ProductStock
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateProductStock(string $id, ProductStockUpdate $request = new ProductStockUpdate(), ?array $options = null): bool|ProductStock|null
+    public function update(string $id, ProductStockUpdate $request = new ProductStockUpdate(), ?array $options = null): int|ProductStock|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class ProductStocksClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', ProductStock::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', ProductStock::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class ProductStocksClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class ProductStocksClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteProductStock(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class ProductStocksClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

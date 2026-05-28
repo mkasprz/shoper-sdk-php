@@ -69,7 +69,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listUnits(ListUnitsRequest $request = new ListUnitsRequest(), ?array $options = null): ?ListUnitsResponse
+    public function list(ListUnitsRequest $request = new ListUnitsRequest(), ?array $options = null): ?ListUnitsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createUnit(UnitInsert $request, ?array $options = null): int|Unit|null
+    public function create(UnitInsert $request, ?array $options = null): int|Unit|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class UnitsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class UnitsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getUnit(string $id, ?array $options = null): ?Unit
+    public function get(string $id, ?array $options = null): ?Unit
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class UnitsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param UnitUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class UnitsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Unit
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateUnit(string $id, UnitUpdate $request = new UnitUpdate(), ?array $options = null): bool|Unit|null
+    public function update(string $id, UnitUpdate $request = new UnitUpdate(), ?array $options = null): int|Unit|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class UnitsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Unit::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Unit::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class UnitsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class UnitsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteUnit(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class UnitsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

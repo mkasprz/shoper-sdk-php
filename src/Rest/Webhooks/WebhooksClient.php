@@ -69,7 +69,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listWebhooks(ListWebhooksRequest $request = new ListWebhooksRequest(), ?array $options = null): ?ListWebhooksResponse
+    public function list(ListWebhooksRequest $request = new ListWebhooksRequest(), ?array $options = null): ?ListWebhooksResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createWebhook(WebhookInsert $request, ?array $options = null): int|Webhook|null
+    public function create(WebhookInsert $request, ?array $options = null): int|Webhook|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class WebhooksClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class WebhooksClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getWebhook(string $id, ?array $options = null): ?Webhook
+    public function get(string $id, ?array $options = null): ?Webhook
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class WebhooksClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param WebhookUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class WebhooksClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |Webhook
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateWebhook(string $id, WebhookUpdate $request = new WebhookUpdate(), ?array $options = null): bool|Webhook|null
+    public function update(string $id, WebhookUpdate $request = new WebhookUpdate(), ?array $options = null): int|Webhook|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class WebhooksClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', Webhook::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', Webhook::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class WebhooksClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class WebhooksClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteWebhook(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class WebhooksClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

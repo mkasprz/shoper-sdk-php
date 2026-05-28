@@ -10,10 +10,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class ListProductSafetyCertificatesResponse extends JsonSerializableType
 {
     /**
-     * @var ?int $count
+     * @var ?string $count
      */
     #[JsonProperty('count')]
-    public ?int $count;
+    public ?string $count;
 
     /**
      * @var ?array<ProductSafetyCertificate> $list
@@ -35,7 +35,7 @@ class ListProductSafetyCertificatesResponse extends JsonSerializableType
 
     /**
      * @param array{
-     *   count?: ?int,
+     *   count?: ?string,
      *   list?: ?array<ProductSafetyCertificate>,
      *   page?: ?int,
      *   pages?: ?int,

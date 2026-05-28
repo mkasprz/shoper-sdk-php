@@ -11,16 +11,16 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class Auction extends JsonSerializableType
 {
     /**
-     * @var int $auctionHouseId [auction house](#tag/AuctionHouses) identifier
+     * @var ?string $auctionHouseId [auction house](#tag/AuctionHouses) identifier
      */
     #[JsonProperty('auction_house_id')]
-    public int $auctionHouseId;
+    public ?string $auctionHouseId;
 
     /**
-     * @var ?int $auctionId auction identifier
+     * @var ?string $auctionId auction identifier
      */
     #[JsonProperty('auction_id')]
-    public ?int $auctionId;
+    public ?string $auctionId;
 
     /**
      * @var ?float $bestPrice best offer price
@@ -29,10 +29,10 @@ class Auction extends JsonSerializableType
     public ?float $bestPrice;
 
     /**
-     * @var ?int $binds bids number
+     * @var ?string $binds bids number
      */
     #[JsonProperty('binds')]
-    public ?int $binds;
+    public ?string $binds;
 
     /**
      * @var ?float $buyNowPrice buy now price
@@ -41,10 +41,10 @@ class Auction extends JsonSerializableType
     public ?float $buyNowPrice;
 
     /**
-     * @var ?float $cost auction setup cost
+     * @var ?string $cost auction setup cost
      */
     #[JsonProperty('cost')]
-    public ?float $cost;
+    public ?string $cost;
 
     /**
      * @var ?string $endTime auction end time in <a href="http://www.iso.org/iso/home/standards/iso8601.htm">ISO_8601</a> format
@@ -53,10 +53,10 @@ class Auction extends JsonSerializableType
     public ?string $endTime;
 
     /**
-     * @var ?bool $finished is auction ended?
+     * @var ?value-of<AuctionFinished> $finished is auction ended?
      */
     #[JsonProperty('finished')]
-    public ?bool $finished;
+    public ?string $finished;
 
     /**
      * @var ?float $minPrice minimal price
@@ -65,16 +65,16 @@ class Auction extends JsonSerializableType
     public ?float $minPrice;
 
     /**
-     * @var int $productId [product](#tag/Products) identifier
+     * @var string $productId [product](#tag/Products) identifier
      */
     #[JsonProperty('product_id')]
-    public int $productId;
+    public string $productId;
 
     /**
-     * @var int $quantity quantity of auction elements
+     * @var string $quantity quantity of auction elements
      */
     #[JsonProperty('quantity')]
-    public int $quantity;
+    public string $quantity;
 
     /**
      * @var string $realAuctionId auction identifier from auction house
@@ -89,10 +89,10 @@ class Auction extends JsonSerializableType
      *     <li>1 - immediate</li>
      * </ul>
      *
-     * @var int $salesFormat
+     * @var string $salesFormat
      */
     #[JsonProperty('sales_format')]
-    public int $salesFormat;
+    public string $salesFormat;
 
     /**
      * @var ?float $startPrice start price
@@ -113,10 +113,10 @@ class Auction extends JsonSerializableType
     public ?string $statusTime;
 
     /**
-     * @var ?int $stockId [product stock](#tag/ProductStocks) identifier
+     * @var ?string $stockId [product stock](#tag/ProductStocks) identifier
      */
     #[JsonProperty('stock_id')]
-    public ?int $stockId;
+    public ?string $stockId;
 
     /**
      * @var string $title auction title
@@ -125,38 +125,38 @@ class Auction extends JsonSerializableType
     public string $title;
 
     /**
-     * @var ?int $views views count
+     * @var ?string $views views count
      */
     #[JsonProperty('views')]
-    public ?int $views;
+    public ?string $views;
 
     /**
      * @param array{
-     *   auctionHouseId: int,
-     *   productId: int,
-     *   quantity: int,
+     *   productId: string,
+     *   quantity: string,
      *   realAuctionId: string,
-     *   salesFormat: int,
+     *   salesFormat: string,
      *   title: string,
-     *   auctionId?: ?int,
+     *   auctionHouseId?: ?string,
+     *   auctionId?: ?string,
      *   bestPrice?: ?float,
-     *   binds?: ?int,
+     *   binds?: ?string,
      *   buyNowPrice?: ?float,
-     *   cost?: ?float,
+     *   cost?: ?string,
      *   endTime?: ?string,
-     *   finished?: ?bool,
+     *   finished?: ?value-of<AuctionFinished>,
      *   minPrice?: ?float,
      *   startPrice?: ?float,
      *   startTime?: ?string,
      *   statusTime?: ?string,
-     *   stockId?: ?int,
-     *   views?: ?int,
+     *   stockId?: ?string,
+     *   views?: ?string,
      * } $values
      */
     public function __construct(
         array $values,
     ) {
-        $this->auctionHouseId = $values['auctionHouseId'];
+        $this->auctionHouseId = $values['auctionHouseId'] ?? null;
         $this->auctionId = $values['auctionId'] ?? null;
         $this->bestPrice = $values['bestPrice'] ?? null;
         $this->binds = $values['binds'] ?? null;

@@ -69,7 +69,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listAuctions(ListAuctionsRequest $request = new ListAuctionsRequest(), ?array $options = null): ?ListAuctionsResponse
+    public function list(ListAuctionsRequest $request = new ListAuctionsRequest(), ?array $options = null): ?ListAuctionsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createAuction(AuctionInsert $request, ?array $options = null): int|Auction|null
+    public function create(AuctionInsert $request, ?array $options = null): int|Auction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -173,7 +173,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getAuction(string $id, ?array $options = null): ?Auction
+    public function get(string $id, ?array $options = null): ?Auction
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -223,7 +223,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateAuction(string $id, AuctionUpdate $request = new AuctionUpdate(), ?array $options = null): int|Auction|null
+    public function update(string $id, AuctionUpdate $request = new AuctionUpdate(), ?array $options = null): int|Auction|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -270,7 +270,7 @@ class AuctionsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteAuction(string $id, ?array $options = null): ?int
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {

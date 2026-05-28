@@ -14,10 +14,10 @@ class DeliveryTranslationsValue extends JsonSerializableType
     public ?string $deliveryId;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
      * @var ?string $name name of delivery
@@ -26,17 +26,17 @@ class DeliveryTranslationsValue extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?int $transId translation identifier
+     * @var ?string $transId translation identifier
      */
     #[JsonProperty('trans_id')]
-    public ?int $transId;
+    public ?string $transId;
 
     /**
      * @param array{
      *   deliveryId?: ?string,
-     *   langId?: ?int,
+     *   langId?: ?string,
      *   name?: ?string,
-     *   transId?: ?int,
+     *   transId?: ?string,
      * } $values
      */
     public function __construct(

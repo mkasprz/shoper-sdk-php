@@ -12,10 +12,10 @@ use Shoper\Sdk\Rest\Core\Types\ArrayType;
 class ProductSafetyCertificate extends JsonSerializableType
 {
     /**
-     * @var ?int $gpsrCertificateId identifier
+     * @var ?string $gpsrCertificateId identifier
      */
     #[JsonProperty('gpsr_certificate_id')]
-    public ?int $gpsrCertificateId;
+    public ?string $gpsrCertificateId;
 
     /**
      * @var string $name certificate name
@@ -33,7 +33,7 @@ class ProductSafetyCertificate extends JsonSerializableType
      * @param array{
      *   name: string,
      *   translations: array<string, ProductSafetyCertificateTranslationsValue>,
-     *   gpsrCertificateId?: ?int,
+     *   gpsrCertificateId?: ?string,
      * } $values
      */
     public function __construct(

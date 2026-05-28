@@ -69,7 +69,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function listNewsTags(ListNewsTagsRequest $request = new ListNewsTagsRequest(), ?array $options = null): ?ListNewsTagsResponse
+    public function list(ListNewsTagsRequest $request = new ListNewsTagsRequest(), ?array $options = null): ?ListNewsTagsResponse
     {
         $options = array_merge($this->options, $options ?? []);
         $query = [];
@@ -126,7 +126,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function createNewsTag(NewsTagInsert $request, ?array $options = null): int|NewsTag|null
+    public function create(NewsTagInsert $request, ?array $options = null): int|NewsTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -160,7 +160,7 @@ class NewsTagsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -173,7 +173,7 @@ class NewsTagsClient
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function getNewsTag(string $id, ?array $options = null): ?NewsTag
+    public function get(string $id, ?array $options = null): ?NewsTag
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -206,7 +206,7 @@ class NewsTagsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param NewsTagUpdate $request
      * @param ?array{
      *   baseUrl?: string,
@@ -217,13 +217,13 @@ class NewsTagsClient
      *   bodyProperties?: array<string, mixed>,
      * } $options
      * @return (
-     *    bool
+     *    int
      *   |NewsTag
      * )|null
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function updateNewsTag(string $id, NewsTagUpdate $request = new NewsTagUpdate(), ?array $options = null): bool|NewsTag|null
+    public function update(string $id, NewsTagUpdate $request = new NewsTagUpdate(), ?array $options = null): int|NewsTag|null
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -242,7 +242,7 @@ class NewsTagsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeUnion($json, new Union('bool', NewsTag::class)); // @phpstan-ignore-line
+                return JsonDecoder::decodeUnion($json, new Union('integer', NewsTag::class)); // @phpstan-ignore-line
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
@@ -257,7 +257,7 @@ class NewsTagsClient
     }
 
     /**
-     * @param string $id
+     * @param string $id Resource identifier.
      * @param ?array{
      *   baseUrl?: string,
      *   maxRetries?: int,
@@ -266,11 +266,11 @@ class NewsTagsClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return ?bool
+     * @return ?int
      * @throws ShoperException
      * @throws ShoperApiException
      */
-    public function deleteNewsTag(string $id, ?array $options = null): ?bool
+    public function delete(string $id, ?array $options = null): ?int
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -288,7 +288,7 @@ class NewsTagsClient
                 if (empty($json)) {
                     return null;
                 }
-                return JsonDecoder::decodeBool($json);
+                return JsonDecoder::decodeInt($json);
             }
         } catch (JsonException $e) {
             throw new ShoperException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);

@@ -8,10 +8,10 @@ use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 class ProductTranslationsValue extends JsonSerializableType
 {
     /**
-     * @var ?bool $active is product translation active
+     * @var ?value-of<ProductTranslationsValueActive> $active is product translation active
      */
     #[JsonProperty('active')]
-    public ?bool $active;
+    public ?string $active;
 
     /**
      * @var ?string $description product description
@@ -20,28 +20,28 @@ class ProductTranslationsValue extends JsonSerializableType
     public ?string $description;
 
     /**
-     * @var ?bool $isdefault is product added during the install
+     * @var ?value-of<ProductTranslationsValueIsdefault> $isdefault is product added during the install
      */
     #[JsonProperty('isdefault')]
-    public ?bool $isdefault;
+    public ?string $isdefault;
 
     /**
-     * @var ?int $langId [language](#tag/Languages) identifier
+     * @var ?string $langId [language](#tag/Languages) identifier
      */
     #[JsonProperty('lang_id')]
-    public ?int $langId;
+    public ?string $langId;
 
     /**
-     * @var ?bool $mainPage **Deprecated since 5.22.7.** put product on home page ( since 5.22.7 replace the Recommended Products on the Home Page with any one collection )
+     * @var ?value-of<ProductTranslationsValueMainPage> $mainPage **Deprecated since 5.22.7.** put product on home page ( since 5.22.7 replace the Recommended Products on the Home Page with any one collection )
      */
     #[JsonProperty('main_page')]
-    public ?bool $mainPage;
+    public ?string $mainPage;
 
     /**
-     * @var ?int $mainPageOrder **Deprecated since 5.22.7.** priority used to calculate upon product list sorting on home page ( since 5.22.7 you can change the order of the products in the collection that is set on the home page )
+     * @var ?string $mainPageOrder **Deprecated since 5.22.7.** priority used to calculate upon product list sorting on home page ( since 5.22.7 you can change the order of the products in the collection that is set on the home page )
      */
     #[JsonProperty('main_page_order')]
-    public ?int $mainPageOrder;
+    public ?string $mainPageOrder;
 
     /**
      * @var ?string $name product name
@@ -50,10 +50,10 @@ class ProductTranslationsValue extends JsonSerializableType
     public ?string $name;
 
     /**
-     * @var ?int $order priority used to calculate upon product list sorting
+     * @var ?string $order priority used to calculate upon product list sorting
      */
     #[JsonProperty('order')]
-    public ?int $order;
+    public ?string $order;
 
     /**
      * @var ?string $permalink full, direct URL to the product
@@ -98,21 +98,21 @@ class ProductTranslationsValue extends JsonSerializableType
     public ?string $shortDescription;
 
     /**
-     * @var ?int $translationId translation identifier
+     * @var ?string $translationId translation identifier
      */
     #[JsonProperty('translation_id')]
-    public ?int $translationId;
+    public ?string $translationId;
 
     /**
      * @param array{
-     *   active?: ?bool,
+     *   active?: ?value-of<ProductTranslationsValueActive>,
      *   description?: ?string,
-     *   isdefault?: ?bool,
-     *   langId?: ?int,
-     *   mainPage?: ?bool,
-     *   mainPageOrder?: ?int,
+     *   isdefault?: ?value-of<ProductTranslationsValueIsdefault>,
+     *   langId?: ?string,
+     *   mainPage?: ?value-of<ProductTranslationsValueMainPage>,
+     *   mainPageOrder?: ?string,
      *   name?: ?string,
-     *   order?: ?int,
+     *   order?: ?string,
      *   permalink?: ?string,
      *   productId?: ?string,
      *   seoDescription?: ?string,
@@ -120,7 +120,7 @@ class ProductTranslationsValue extends JsonSerializableType
      *   seoTitle?: ?string,
      *   seoUrl?: ?string,
      *   shortDescription?: ?string,
-     *   translationId?: ?int,
+     *   translationId?: ?string,
      * } $values
      */
     public function __construct(
