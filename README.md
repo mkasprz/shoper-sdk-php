@@ -2,8 +2,8 @@
 
 Official PHP SDK for the [Shoper REST API](https://developers.shoper.pl/). Generated from OpenAPI 3.1 (Fern), with hand-written ergonomic helpers (`ShoperClient`, `OAuthManager`, `WebhookVerifier`, `Paginator`, `BulkRequestBuilder`, `RateLimitHandler`).
 
-- PHP 8.0+
-- PSR-18 HTTP client (Guzzle 7 by default; any compliant client via constructor injection)
+- PHP 8.1+
+- PSR-18 HTTP client (any compliant implementation, e.g. Guzzle 7 — auto-discovered via `php-http/discovery` or injected via constructor)
 - 74 typed sub-clients covering the full REST surface
 
 ## Install
@@ -31,9 +31,9 @@ Then `composer require shoper/sdk` resolves to the path repo.
 ```json
 {
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/dreamcommerce/shoper-php-sdk" }
+        { "type": "vcs", "url": "https://github.com/dreamcommerce/shoper-sdk-php" }
     ],
-    "require": { "shoper/sdk": "dev-faza-3-php-sdk" }
+    "require": { "shoper/sdk": "dev-main" }
 }
 ```
 
@@ -120,8 +120,9 @@ See `examples/` directory for end-to-end scenarios:
 - `07-error-handling.php` — typed exceptions
 
 ## Reference
-- API docs: https://docs.shoper.pl
-- Issue tracker / source: https://github.com/dreamcommerce/shoper-php-sdk
+- API docs: https://developers.shoper.pl
+- Issue tracker / source: https://github.com/dreamcommerce/shoper-sdk-php
+- Packagist: https://packagist.org/packages/shoper/sdk
 - Local-test harness (path-repo example): `sdk/php/local-test/` in the source repo
 
 ## Support
