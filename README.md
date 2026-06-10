@@ -8,33 +8,8 @@ Official PHP SDK for the [Shoper REST API](https://developers.shoper.pl/). Gener
 
 ## Install
 
-### From Packagist (recommended)
 ```bash
 composer require shoper/sdk
-```
-
-### From a local path (SDK developer or pre-release testing)
-In your app's `composer.json`:
-```json
-{
-    "repositories": [
-        { "type": "path", "url": "/absolute/path/to/shoper-openapi/sdk/php/bootstrap" }
-    ],
-    "require": { "shoper/sdk": "@dev" },
-    "minimum-stability": "dev",
-    "prefer-stable": true
-}
-```
-Then `composer require shoper/sdk` resolves to the path repo.
-
-### From VCS (fork or branch you haven't published yet)
-```json
-{
-    "repositories": [
-        { "type": "vcs", "url": "https://github.com/dreamcommerce/shoper-sdk-php" }
-    ],
-    "require": { "shoper/sdk": "dev-main" }
-}
 ```
 
 ## Quick start
@@ -44,18 +19,16 @@ Then `composer require shoper/sdk` resolves to the path repo.
 use Shoper\Sdk\ShoperClient;
 
 $client = new ShoperClient('https://yourshop.shoparena.pl');
-$auth = $client->authenticate('admin-user', 'admin-pass');
-$client->setToken($auth['access_token']);
+$client->authenticate('admin-user', 'admin-pass');   // fetches and stores the token
 ```
 
 ### Authenticate (OAuth authorization-code, AppStore apps)
 ```php
 $auth = $client->authenticateOAuth($clientId, $clientSecret, $authorizationCode);
-$client->setToken($auth['access_token']);
 // later, when access_token expires:
 $auth = $client->refreshToken($clientId, $clientSecret, $auth['refresh_token']);
-$client->setToken($auth['access_token']);
 ```
+Both calls store the new access token on the client automatically. An existing token can also be injected directly: `new ShoperClient($url, $accessToken)` or `$client->setToken($accessToken)`.
 
 ### List products
 ```php
@@ -68,8 +41,11 @@ foreach ($page->list as $p) {
 ### Iterate every page
 ```php
 use Shoper\Sdk\Paginator;
+use Shoper\Sdk\Rest\Products\Requests\ListProductsRequest;
 
-foreach (new Paginator($client->products(), 'listProducts') as $product) {
+$fetch = fn (array $params) => (array) $client->products()->listProducts(new ListProductsRequest($params));
+
+foreach (new Paginator($fetch, limit: 50) as $product) {
     // streams across all pages, transparent
 }
 ```
@@ -78,12 +54,13 @@ foreach (new Paginator($client->products(), 'listProducts') as $product) {
 ```php
 use Shoper\Sdk\WebhookVerifier;
 
-$verifier = new WebhookVerifier($appstoreSecret);
-if (!$verifier->verify($_SERVER['HTTP_X_SHOPER_HMAC_SHA256'] ?? '', file_get_contents('php://input'))) {
+$verifier = new WebhookVerifier($appstoreSecret, $webhookSecret);
+if (!$verifier->verifyFromGlobals(file_get_contents('php://input'))) {
     http_response_code(401);
     exit;
 }
 ```
+`verifyFromGlobals()` reads the `X-Webhook-Id`, `X-Shop-License` and `X-Webhook-SHA1` headers; `verifyFromPsr7($request)` does the same for a PSR-7 request. See `examples/03-webhook-verification.php`.
 
 ## All 74 sub-clients
 
@@ -123,7 +100,6 @@ See `examples/` directory for end-to-end scenarios:
 - API docs: https://developers.shoper.pl
 - Issue tracker / source: https://github.com/dreamcommerce/shoper-sdk-php
 - Packagist: https://packagist.org/packages/shoper/sdk
-- Local-test harness (path-repo example): `sdk/php/local-test/` in the source repo
 
 ## Support
 
