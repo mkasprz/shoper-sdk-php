@@ -5,6 +5,7 @@ namespace Shoper\Sdk\Rest\Products\Requests;
 use Shoper\Sdk\Rest\Core\Json\JsonSerializableType;
 use Shoper\Sdk\Rest\Core\Json\JsonProperty;
 use Shoper\Sdk\Rest\Core\Types\ArrayType;
+use Shoper\Sdk\Rest\Products\Types\ProductInsertOptionsNonStockItem;
 use Shoper\Sdk\Rest\Products\Types\ProductInsertSafetyInformation;
 use Shoper\Sdk\Rest\Products\Types\ProductInsertSpecialOffer;
 use Shoper\Sdk\Rest\Products\Types\ProductInsertStock;
@@ -148,6 +149,18 @@ class ProductInsert extends JsonSerializableType
     public ?array $options;
 
     /**
+     * An array used to fully synchronize non-stock option assignments for the product.
+     *
+     * Available only when the `non_stock_variants_ipa` feature is enabled. Each entry targets one
+     * non-stock [option](#tag/Options) of the product option group and replaces its full set of
+     * assigned values. Values omitted from `values` are deactivated.
+     *
+     * @var ?array<ProductInsertOptionsNonStockItem> $optionsNonStock
+     */
+    #[JsonProperty('options_non_stock'), ArrayType([ProductInsertOptionsNonStockItem::class])]
+    public ?array $optionsNonStock;
+
+    /**
      * @var ?float $otherPrice price of product in other shops
      */
     #[JsonProperty('other_price')]
@@ -252,6 +265,7 @@ class ProductInsert extends JsonSerializableType
      *   gaugeId?: ?int,
      *   isProductOfDay?: ?bool,
      *   options?: ?array<string>,
+     *   optionsNonStock?: ?array<ProductInsertOptionsNonStockItem>,
      *   otherPrice?: ?float,
      *   producerId?: ?int,
      *   related?: ?array<int>,
@@ -289,6 +303,7 @@ class ProductInsert extends JsonSerializableType
         $this->gaugeId = $values['gaugeId'] ?? null;
         $this->isProductOfDay = $values['isProductOfDay'] ?? null;
         $this->options = $values['options'] ?? null;
+        $this->optionsNonStock = $values['optionsNonStock'] ?? null;
         $this->otherPrice = $values['otherPrice'] ?? null;
         $this->pkwiu = $values['pkwiu'];
         $this->producerId = $values['producerId'] ?? null;

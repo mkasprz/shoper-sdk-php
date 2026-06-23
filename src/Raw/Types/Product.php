@@ -233,9 +233,15 @@ class Product extends JsonSerializableType
     public ?array $options;
 
     /**
-     * @var ?array<array<string, mixed>> $optionsNonStock array of non-stock product option assignments
+     * An array with active non-stock option values assigned to the product.
+     *
+     * Returned only when the `non_stock_variants_ipa` feature is enabled. Contains one entry
+     * per non-stock [option](#tag/Options) of the product option group that has at least one
+     * active value.
+     *
+     * @var ?array<ProductOptionsNonStockItem> $optionsNonStock
      */
-    #[JsonProperty('options_non_stock'), ArrayType([['string' => 'mixed']])]
+    #[JsonProperty('options_non_stock'), ArrayType([ProductOptionsNonStockItem::class])]
     public ?array $optionsNonStock;
 
     /**
@@ -387,7 +393,7 @@ class Product extends JsonSerializableType
      *   mainImage?: ?ProductMainImage,
      *   newproduct?: ?value-of<ProductNewproduct>,
      *   options?: ?array<int>,
-     *   optionsNonStock?: ?array<array<string, mixed>>,
+     *   optionsNonStock?: ?array<ProductOptionsNonStockItem>,
      *   otherPrice?: ?string,
      *   producerId?: ?string,
      *   productId?: ?string,
