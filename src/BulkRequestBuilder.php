@@ -78,7 +78,7 @@ final class BulkRequestBuilder
                 'Authorization' => 'Bearer ' . $this->token,
                 'Content-Type' => 'application/json',
             ],
-            'json' => $this->operations,
+            'body' => $this->operations,
         ]);
         $this->operations = [];
         $decoded = json_decode((string) $response->getBody(), true);
