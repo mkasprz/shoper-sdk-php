@@ -251,10 +251,10 @@ class Product extends JsonSerializableType
     public ?string $otherPrice;
 
     /**
-     * @var string $pkwiu PKWiU (product quantifier)
+     * @var ?string $pkwiu PKWiU (product quantifier)
      */
     #[JsonProperty('pkwiu')]
-    public string $pkwiu;
+    public ?string $pkwiu;
 
     /**
      * @var ?string $producerId [producer](#tag/Producers) identifier
@@ -359,7 +359,6 @@ class Product extends JsonSerializableType
      *   |int
      * ),
      *   code: string,
-     *   pkwiu: string,
      *   stock: ProductStock,
      *   translations: array<string, ProductTranslationsValue>,
      *   addDate?: ?string,
@@ -395,6 +394,7 @@ class Product extends JsonSerializableType
      *   options?: ?array<int>,
      *   optionsNonStock?: ?array<ProductOptionsNonStockItem>,
      *   otherPrice?: ?string,
+     *   pkwiu?: ?string,
      *   producerId?: ?string,
      *   productId?: ?string,
      *   promoPrice?: ?string,
@@ -448,7 +448,7 @@ class Product extends JsonSerializableType
         $this->options = $values['options'] ?? null;
         $this->optionsNonStock = $values['optionsNonStock'] ?? null;
         $this->otherPrice = $values['otherPrice'] ?? null;
-        $this->pkwiu = $values['pkwiu'];
+        $this->pkwiu = $values['pkwiu'] ?? null;
         $this->producerId = $values['producerId'] ?? null;
         $this->productId = $values['productId'] ?? null;
         $this->promoPrice = $values['promoPrice'] ?? null;

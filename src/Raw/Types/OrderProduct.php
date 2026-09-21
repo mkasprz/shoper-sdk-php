@@ -42,6 +42,17 @@ class OrderProduct extends JsonSerializableType
     public ?string $discountPerc;
 
     /**
+     * EAN code of the [product stock](#tag/ProductStocks) this line item points to. Read from the stock record at
+     * the moment of the request, so it reflects the current catalog value rather than a snapshot taken when the
+     * order was placed. Empty string when the line item is not linked to an existing stock - for example a free
+     * line item created without `product_id` and `stock_id`, or one whose product has since been deleted.
+     *
+     * @var ?string $ean
+     */
+    #[JsonProperty('ean')]
+    public ?string $ean;
+
+    /**
      * array of objects with values entered in particular [options](#tag/Options), type: text
      * (only for products with stocks)
      *
@@ -81,7 +92,11 @@ class OrderProduct extends JsonSerializableType
     public string $orderId;
 
     /**
-     * @var string $pkwiu PKWiU (product quantifier)
+     * PKWiU (product quantifier). Always returned, but it can be empty: the value is copied from the product when the
+     * line item is created with `product_id` or `stock_id` and no explicit `pkwiu` is supplied, and stays empty for a
+     * free line item created without either identifier.
+     *
+     * @var string $pkwiu
      */
     #[JsonProperty('pkwiu')]
     public string $pkwiu;
@@ -189,6 +204,7 @@ class OrderProduct extends JsonSerializableType
      *   deliveryTime?: ?string,
      *   deliveryTimeHours?: ?string,
      *   discountPerc?: ?string,
+     *   ean?: ?string,
      *   fileOptions?: ?array<OrderProductFileOptionsItem>,
      *   id?: ?string,
      *   loyalty?: ?OrderProductLoyalty,
@@ -215,6 +231,7 @@ class OrderProduct extends JsonSerializableType
         $this->deliveryTime = $values['deliveryTime'] ?? null;
         $this->deliveryTimeHours = $values['deliveryTimeHours'] ?? null;
         $this->discountPerc = $values['discountPerc'] ?? null;
+        $this->ean = $values['ean'] ?? null;
         $this->fileOptions = $values['fileOptions'] ?? null;
         $this->id = $values['id'] ?? null;
         $this->loyalty = $values['loyalty'] ?? null;

@@ -53,13 +53,13 @@ class OrderProductUpdate extends JsonSerializableType
     public ?string $option;
 
     /**
-     * @var ?int $orderId [order](#tag/Orders) identifier
+     * @var ?int $orderId [order](#tag/Orders) identifier. **Ignored on update** - a line item cannot be moved to another order.
      */
     #[JsonProperty('order_id')]
     public ?int $orderId;
 
     /**
-     * @var ?string $pkwiu PKWiU (product quantifier)
+     * @var ?string $pkwiu PKWiU (product quantifier), up to 20 characters. Optional - omitting it keeps the current value.
      */
     #[JsonProperty('pkwiu')]
     public ?string $pkwiu;
@@ -71,9 +71,8 @@ class OrderProductUpdate extends JsonSerializableType
     public ?float $price;
 
     /**
-     * [product](#tag/Products) identifier. Value <code>0</code> means the product has never existed
-     * in catalog and has been added in different way (eg. using API). Attention: it may point on non-existing
-     * or an invalid product. You need to add a main product first before you can add a product variant.
+     * [product](#tag/Products) identifier. **Ignored on update** - the catalog product behind an existing line item
+     * cannot be changed. Delete the line item and create a new one instead.
      *
      * @var ?int $productId
      */
@@ -81,7 +80,11 @@ class OrderProductUpdate extends JsonSerializableType
     public ?int $productId;
 
     /**
-     * @var ?float $quantity quantity - if warehouses is enabled field is read only
+     * quantity. Optional - omitting it keeps the current value. When the warehouse feature is enabled and the line
+     * item is distributed across warehouses, `quantity` must not be sent at all - update the `warehouses` object
+     * instead and the quantity is derived from it. Sending both is rejected.
+     *
+     * @var ?float $quantity
      */
     #[JsonProperty('quantity')]
     public ?float $quantity;
@@ -96,9 +99,8 @@ class OrderProductUpdate extends JsonSerializableType
     public ?bool $specialOfferPrice;
 
     /**
-     * [product stock](#tag/ProductStocks) identifier. Value <code>0</code> means the product has never existed
-     * in catalog and has been added in different way (eg. using API). Attention: it may point on non-existing
-     * or an invalid product. You don't need to add a main product, but you must add a product variant.
+     * [product stock](#tag/ProductStocks) identifier. **Ignored on update** - the product variant behind an existing
+     * line item cannot be changed. Delete the line item and create a new one instead.
      *
      * @var ?int $stockId
      */
