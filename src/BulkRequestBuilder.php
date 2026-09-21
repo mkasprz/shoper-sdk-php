@@ -11,6 +11,7 @@ final class BulkRequestBuilder
 {
     private const MAX_OPS = 25;
     private const VALID_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'PATCH'];
+    private const WEBAPI_URL_PREFIX = '/webapi/rest';
 
     private string $baseUrl;
     private string $token;
@@ -49,7 +50,7 @@ final class BulkRequestBuilder
                 sprintf('Invalid HTTP method "%s". Valid methods: %s', $method, implode(', ', self::VALID_METHODS))
             );
         }
-        $op = ['id' => $id, 'method' => $methodUpper, 'path' => $path];
+        $op = ['id' => $id, 'method' => $methodUpper, 'path' => self::WEBAPI_URL_PREFIX . $path];
         if ($body !== null) {
             $op['body'] = $body;
         }
@@ -73,7 +74,7 @@ final class BulkRequestBuilder
     public function execute(?HttpClient $http = null): array
     {
         $http ??= new HttpClient();
-        $response = $http->post($this->baseUrl . '/webapi/rest/bulk', [
+        $response = $http->post($this->baseUrl . self::WEBAPI_URL_PREFIX . '/bulk', [
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->token,
                 'Content-Type' => 'application/json',
