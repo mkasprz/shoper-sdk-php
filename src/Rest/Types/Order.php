@@ -100,7 +100,12 @@ class Order extends JsonSerializableType
     public ?string $deliveryDate;
 
     /**
-     * @var ?string $deliveryEmail Email address for delivery notifications.
+     * Technical e-mail address of the recipient provided by InPost Pay (`delivery.mail`) for orders placed via
+     * InPost Pay. It is always present in the response, but contains a value only when the order was placed via
+     * InPost Pay (for example to register the shipment); for every other order it is `null`. The value comes from
+     * the order's shipping data and cannot be set or changed via the API.
+     *
+     * @var ?string $deliveryEmail
      */
     #[JsonProperty('delivery_email')]
     public ?string $deliveryEmail;
